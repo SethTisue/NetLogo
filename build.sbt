@@ -84,6 +84,12 @@ libraryDependencies ++= Seq(
   "com.googlecode.json-simple" % "json-simple" % "1.1.1"
 )
 
+val allDepStrings = taskKey[String]("all dependencies")
+
+allDepStrings := {
+  (dependencyClasspath in Runtime).value.files.map(_.getPath).mkString("\n")
+}
+
 all <<= (baseDirectory, streams) map { (base, s) =>
   s.log.info("making resources/system/dict.txt and docs/dict folder")
   IO.delete(base / "docs" / "dict")

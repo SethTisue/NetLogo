@@ -25,7 +25,7 @@
   <key>CFBundleIconFile</key>
   <string>NetLogo.icns</string>
   <key>CFBundleIdentifier</key>
-  <string>org.nlogo.NetLogoDEVEL</string>
+  <string>org.nlogo.NetLogo</string>
   <key>CFBundleInfoDictionaryVersion</key>
   <string>6.0</string>
   <key>CFBundleName</key>
@@ -34,13 +34,13 @@
   <string>APPL</string>
   <key>CFBundleSignature</key>
   <string>nLo1</string>
-  <key>CFBundleVersion</key> <string>1.0</string>
+  <key>CFBundleVersion</key> <string>5.3-PREVIEW</string>
   <key>Java</key>
   <dict>
     <key>ClassPath</key>
-    <string>$APP_PACKAGE/../NetLogo.jar:/System/Library/Java</string>
+    <string>$APP_PACKAGE/../NetLogo.jar:$APP_PACKAGE/../lib/*:/System/Library/Java</string>
     <key>JVMVersion</key>
-    <string>1.5+</string>
+    <string>1.8+</string>
     <key>MainClass</key>
     <string>org.nlogo.app.App</string>
     <key>Properties</key>
@@ -51,7 +51,7 @@
       <string>true</string>
     </dict>
     <key>VMOptions</key>
-    <string>-Dapple.awt.graphics.UseQuartz=true -Djava.ext.dirs= -XX:+PrintJavaStackAtFatalState -XX:MaxPermSize=128m -Xmx1024m -Dfile.encoding=UTF-8</string>
+    <string>-Dapple.awt.graphics.UseQuartz=true -Xmx1024m -Dfile.encoding=UTF-8</string>
     <key>WorkingDirectory</key>
     <string>$APP_PACKAGE/..</string>
   </dict>

@@ -70,6 +70,7 @@ fi
     $XSS $XMX $XX \
     $ENCODING \
     $JAVA_OPTS \
+    -Dsbt.log.noformat=true \
     $HEADLESS \
     $TERMINAL \
     $USE_QUARTZ \

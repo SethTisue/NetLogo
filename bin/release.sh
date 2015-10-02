@@ -13,10 +13,10 @@ GREP=grep
 HDIUTIL=hdiutil
 IJ=bin/install4jc
 if [[ $OSTYPE = linux* ]]; then
-  JAVA=/usr/lib/jvm/java-6-sun/bin/java
+  JAVA=/usr/lib/jvm/java-8-sun/bin/java
 else
   # if not on Linux, assume Mac (should be the case for the real release)
-  JAVA=`/usr/libexec/java_home -F -v1.6*`/bin/java
+  JAVA=`/usr/libexec/java_home -F -v1.8*`/bin/java
 fi
 LN=ln
 MAKE=make
@@ -32,9 +32,11 @@ TAR=tar
 XARGS=xargs
 
 # other
-SCALA_JAR=$HOME/.sbt/boot/scala-2.9.2/lib/scala-library.jar
+SCALA_JAR=$HOME/.sbt/boot/scala-2.11.6/lib/scala-library.jar
 IJDIR="/Applications/install4j 5"
-VM=windows-x86-1.6.0_45_server
+VM=windows-x86-1.8.0_45_server
+
+ALL_DEPS=`JAVA_OPTS='-Dsbt.log.noformat=true' ./sbt 'show allDepStrings' 2> /dev/null | grep -v scala-library | grep jar | cut -d\  -f2-`
 
 # make sure we have proper versions of tools
 # ("brew install htmldoc"; or if you don't want to involve homebrew,
@@ -158,33 +160,11 @@ cd tmp/netlogo-$COMPRESSEDVERSION
 $CP -rp ../../docs .
 $CP -p ../../dist/readme.md .
 $CP -p ../../dist/netlogo_logging.xml .
-$CP -p ../../NetLogo.jar ../../HubNet.jar .
-$CP ../../NetLogoLite.jar .
-$PACK200 --modification-time=latest --effort=9 --strip-debug --no-keep-file-order --unknown-attribute=strip NetLogoLite.jar.pack.gz NetLogoLite.jar
+$CP -p ../../target/NetLogo.jar .
 
 # fill lib directory
 $MKDIR lib
-$CP -p \
-  ../../lib_managed/jars/javax.media/jmf/jmf-2.1.1e.jar \
-  ../../lib_managed/jars/asm/asm-all/asm-all-3.3.1.jar \
-  ../../lib_managed/bundles/log4j/log4j/log4j-1.2.16.jar \
-  ../../lib_managed/jars/org.picocontainer/picocontainer/picocontainer-2.13.6.jar \
-  ../../lib_managed/jars/org.parboiled/parboiled-core/parboiled-core-1.0.2.jar \
-  ../../lib_managed/jars/org.parboiled/parboiled-java/parboiled-java-1.0.2.jar \
-  ../../lib_managed/jars/org.pegdown/pegdown/pegdown-1.1.0.jar \
-  ../../lib_managed/jars/steveroy/mrjadapter/mrjadapter-1.2.jar \
-  ../../lib_managed/jars/org.jhotdraw/jhotdraw/jhotdraw-6.0b1.jar \
-  ../../lib_managed/jars/ch.randelshofer/quaqua/quaqua-7.3.4.jar \
-  ../../lib_managed/jars/ch.randelshofer/swing-layout/swing-layout-7.3.4.jar \
-  ../../lib_managed/jars/org.jogl/jogl/jogl-1.1.1.jar \
-  ../../lib_managed/jars/org.gluegen-rt/gluegen-rt/gluegen-rt-1.1.1.jar \
-  ../../lib_managed/bundles/com.googlecode.json-simple/json-simple/json-simple-1.1.1.jar \
-  ../../lib_managed/jars/commons-codec/commons-codec/commons-codec-1.6.jar \
-  ../../lib_managed/jars/commons-logging/commons-logging/commons-logging-1.1.1.jar \
-  ../../lib_managed/jars/org.apache.httpcomponents/httpclient/httpclient-4.2.jar \
-  ../../lib_managed/jars/org.apache.httpcomponents/httpcore/httpcore-4.2.jar \
-  ../../lib_managed/jars/org.apache.httpcomponents/httpmime/httpmime-4.2.jar \
-  lib
+$CP -p $ALL_DEPS lib
 $CP -p $SCALA_JAR lib/scala-library.jar
 
 echo "libs copied!"
@@ -203,6 +183,9 @@ $RM -rf extensions/*/{src,Makefile,manifest.txt,classes,tests.txt,README.md,buil
 #Extra NW/CSV extension stuff (see #620): FD 6/13/14
 $RM -rf extensions/nw/{lib_managed,models,test,extensions,timeit.nlogo}
 $RM -rf extensions/csv/{lib_managed,models,test,extensions}
+
+#Extra gogo stuff
+$RM -rf extensions/gogo/{daemon,extension}/target
 
 # Apple's license won't let us include this - ST 2/6/12
 $RM -f extensions/qtj/QTJava.jar
@@ -225,8 +208,19 @@ $LN -s ../../dist        # notarize script needs this
 $LN -s ../../resources   # and this
 $LN -s ../../scala       # and this
 $LN -s ../../bin         # and this
-../../models/bin/notarize.scala $REQUIRE_PREVIEWS || exit 1
+if [ $REQUIRE_PREVIEWS -eq 1 ]; then
+  find models -name \*.nlogo | while read modelfile ; do
+    echo $modelfile
+    echo ${modelfile/nlogo/png}
+    if [ ! -f "${modelfile/nlogo/png}" ] ; then
+      echo "$modelfile does not have a preview image"
+      exit 1
+    fi
+  done || exit 1
+fi
+
 $RM -f models/legal.txt
+$RM -rf models/{legal.txt,sbt,build.sbt,project,src,target}
 $RM dist resources scala bin
 
 # build the PDF with the proper version numbers inserted everywhere
