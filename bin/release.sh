@@ -128,19 +128,6 @@ do
   fi
 done
 
-# fail early if JLink.jar is missing
-if [ ! -f Mathematica-Link/Makefile ]; then
-  git submodule update --init Mathematica-Link
-fi
-if [ -f ~/nl.41/Mathematica\ Link/JLink.jar ]; then
-  cp ~/nl.41/Mathematica\ Link/JLink.jar Mathematica-Link
-fi
-if [ ! -f Mathematica-Link/JLink.jar ]; then
-  echo "Mathematica-Link/JLink.jar missing. copy it from a Mathematica installation (or the 4.1 branch, if you're a CCL'er)"
-  echo "(it's needed to compile the link, but we don't have a license to distribute it)"
-  exit 1
-fi
-
 # compile, build jars etc.
 cd extensions
 for FOO in *
@@ -200,10 +187,7 @@ $CP -p \
   lib
 $CP -p $SCALA_JAR lib/scala-library.jar
 
-# Mathematica link stuff
-$CP -rp ../../Mathematica-Link Mathematica\ Link
-(cd Mathematica\ Link; NETLOGO=.. $MAKE) || exit 1
-$RM Mathematica\ Link/JLink.jar
+echo "libs copied!"
 
 # stuff version number etc. into readme
 $PERL -pi -e "s/\@\@\@VERSION\@\@\@/$VERSION/g" readme.md
@@ -344,7 +328,6 @@ $CP -r ../../lib/Linux-x86 lib/Linux-x86
 $CP -p ../../dist/netlogo.sh .
 $CP -p ../../dist/netlogo-headless.sh .
 $CP -p ../../dist/netlogo-3D.sh .
-$CP -p ../../dist/hubnet.sh .
 $CP -p ../../dist/icon.ico .
 
 # blow away version control and Mac junk
@@ -384,25 +367,20 @@ $RM icon.ico
 $RM netlogo.sh
 $RM netlogo-headless.sh
 $RM netlogo-3D.sh
-$RM hubnet.sh
 
 # add in Mac-only stuff
 $CP -r ../../lib/Mac\ OS\ X/ lib/Mac\ OS\ X/
 $CP -rp ../../dist/NetLogo.app .
-$CP -rp ../../dist/HubNet\ Client.app .
 $PERL -pi -e "s/org.nlogo.NetLogoDEVEL/org.nlogo.NetLogo/" NetLogo.app/Contents/Info.plist
 $PERL -pi -e "s@<key>CFBundleVersion</key> <string>1.0</string>@<key>CFBundleVersion</key> <string>$VERSION</string>@" NetLogo.app/Contents/Info.plist
 $CP -rp ./NetLogo.app ./NetLogo\ 3D.app
 $PERL -pi -e "s/org.nlogo.NetLogo/org.nlogo.NetLogo3D/" NetLogo\ 3D.app/Contents/Info.plist
 $PERL -pi -e "s@<key>CFBundleTypeExtensions</key> <array> <string>nlogo</string> </array>@<key>CFBundleTypeExtensions</key> <array> <string>nlogo3d</string> </array>@" NetLogo\ 3D.app/Contents/Info.plist
 $PERL -pi -e "s/-Dapple.awt.graphics.UseQuartz=true/-Dapple.awt.graphics.UseQuartz=true -Dorg.nlogo.is3d=true/" NetLogo\ 3D.app/Contents/Info.plist
-$PERL -pi -e "s/org.nlogo.HubNetClientDEVEL/org.nlogo.HubNetClient/" HubNet\ Client.app/Contents/Info.plist
-$PERL -pi -e "s@<key>CFBundleVersion</key> <string>1.0</string>@<key>CFBundleVersion</key> <string>$VERSION</string>@" HubNet\ Client.app/Contents/Info.plist
 $CP -rp NetLogo.app NetLogo\ Logging.app
 $PERL -pi -e  "s@<string>org.nlogo.app.App</string>@<string>org.nlogo.app.App</string> <key>Arguments</key> <string>--logging netlogo_logging.xml</string>@" NetLogo\ Logging.app/Contents/Info.plist
 $MV NetLogo.app NetLogo\ "$VERSION".app
 $MV NetLogo\ Logging.app NetLogo\ Logging\ "$VERSION".app
-$MV HubNet\ Client.app HubNet\ Client\ "$VERSION".app
 $MV NetLogo\ 3D.app NetLogo\ 3D\ "$VERSION"\.app
 
 # blow away version control and Mac junk again
@@ -475,7 +453,7 @@ fi
 
 # make directory with web pages and so on
 cd ..
-$CP -p netlogo-$COMPRESSEDVERSION/{NetLogo,NetLogoLite}.jar netlogo-$COMPRESSEDVERSION/NetLogoLite.jar.pack.gz $COMPRESSEDVERSION
+$CP -p netlogo-$COMPRESSEDVERSION/NetLogo.jar $COMPRESSEDVERSION
 $CP -p ../target/NetLogo-tests.jar $COMPRESSEDVERSION
 $CP -rp netlogo-$COMPRESSEDVERSION/docs $COMPRESSEDVERSION
 $CP -rp netlogo-$COMPRESSEDVERSION/models $COMPRESSEDVERSION
@@ -487,15 +465,6 @@ $CP -p ../dist/index.html $COMPRESSEDVERSION
 $CP -p ../dist/title.jpg $COMPRESSEDVERSION
 $CP -p ../dist/donate.png $COMPRESSEDVERSION
 $CP -p ../dist/os-*.gif $COMPRESSEDVERSION
-$CP -rp ../models/test/applet $COMPRESSEDVERSION
-$CP $COMPRESSEDVERSION/NetLogoLite.jar $COMPRESSEDVERSION/NetLogoLite.jar.pack.gz $COMPRESSEDVERSION/applet
-$CP ../HubNet.jar $COMPRESSEDVERSION/applet
-$CP -rp netlogo-$COMPRESSEDVERSION/extensions/{sound,matrix,table,bitmap,gis} $COMPRESSEDVERSION/applet
-$FIND $COMPRESSEDVERSION/applet \( -name .DS_Store -or -name .gitignore -or -path \*/.git \) -print0 \
-  | $XARGS -0 $RM -rf
-$RM -rf $COMPRESSEDVERSION/applet/*/classes
-$CP -rp ../models/Code\ Examples/GIS/data $COMPRESSEDVERSION/applet
-$CP -p ../Mathematica-Link/NetLogo-Mathematica\ Tutorial.pdf $COMPRESSEDVERSION/docs
 $CP -rp ../docs/scaladoc $COMPRESSEDVERSION/docs
 
 # stuff version number and date into web page
