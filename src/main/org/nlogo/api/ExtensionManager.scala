@@ -76,10 +76,6 @@ trait ExtensionManager {
   @throws(classOf[CompilerException])
   def importExtension(jarPath: String, errors: ErrorSource)
 
-  def resolvePath(path: String): String
-
-  def resolvePathAsURL(path: String): String
-
   def dumpExtensions: String
 
   def dumpExtensionPrimitives(): String
