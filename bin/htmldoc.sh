@@ -23,7 +23,6 @@ htmldoc \
   infotab.html \
   programming.html \
   transition.html \
-  applet.html \
   shapes.html \
   behaviorspace.html \
   systemdynamics.html \
