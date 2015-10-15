@@ -11,7 +11,7 @@ package org.nlogo.api;
  * <pre>
  * public class FibonacciExtension extends org.nlogo.api.DefaultClassManager
  * {
- *     public void load(org.nlogo.api.PrimitiveManager primManager)
+ *     public void load(org.nlogo.core.PrimitiveManager primManager)
  *     {
  *         primManager.addPrimitive("first-n-fibs", new Fibonacci());
  *     }
@@ -19,6 +19,9 @@ package org.nlogo.api;
  * </pre>
  */
 
+import org.nlogo.core.Primitive
+import org.nlogo.core.ExtensionObject
+import org.nlogo.core.ExtensionManager
 import java.util.{ List => JList }
 
 trait ClassManager {

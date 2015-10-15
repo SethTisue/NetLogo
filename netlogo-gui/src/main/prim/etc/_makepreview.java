@@ -12,7 +12,7 @@ import org.nlogo.nvm.Procedure;
 public final strictfp class _makepreview
     extends org.nlogo.nvm.Command {
   @Override
-  public Syntax syntax() {
+  public org.nlogo.core.Syntax syntax() {
     return Syntax.commandSyntax("O---", false);
   }
 

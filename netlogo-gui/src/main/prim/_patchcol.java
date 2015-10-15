@@ -29,7 +29,7 @@ public final strictfp class _patchcol
   }
 
   @Override
-  public Syntax syntax() {
+  public org.nlogo.core.Syntax syntax() {
     int[] right = {Syntax.NumberType()};
     int ret = Syntax.PatchsetType();
     return Syntax.reporterSyntax(right, ret);

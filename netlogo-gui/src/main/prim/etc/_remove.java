@@ -60,7 +60,7 @@ public final strictfp class _remove
   }
 
   @Override
-  public Syntax syntax() {
+  public org.nlogo.core.Syntax syntax() {
     int[] right = {Syntax.WildcardType(),
         Syntax.ListType() | Syntax.StringType()};
     int ret = Syntax.ListType() | Syntax.StringType();

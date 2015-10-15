@@ -81,8 +81,8 @@ class ExpressionParserTests extends FunSuite {
       compile(input, is3D)
     }
     assertResult(message)(e.getMessage)
-    assertResult(start + PREAMBLE.length())(e.startPos)
-    assertResult(end + PREAMBLE.length())(e.endPos)
+    assertResult(start + PREAMBLE.length())(e.start)
+    assertResult(end + PREAMBLE.length())(e.end)
   }
 
   /// now, the actual tests

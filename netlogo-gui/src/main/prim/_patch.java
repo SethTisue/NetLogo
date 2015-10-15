@@ -11,7 +11,7 @@ import org.nlogo.nvm.Reporter;
 public final strictfp class _patch
     extends Reporter {
   @Override
-  public Syntax syntax() {
+  public org.nlogo.core.Syntax syntax() {
     int[] right;
     right = new int[]{Syntax.NumberType(),
         Syntax.NumberType()};

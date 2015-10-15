@@ -22,7 +22,7 @@ public final strictfp class _outlinkto
   }
 
   @Override
-  public Syntax syntax() {
+  public org.nlogo.core.Syntax syntax() {
     int[] right = {Syntax.AgentType()};
     int ret = Syntax.AgentType();
     return Syntax.reporterSyntax(right, ret, "-T--");

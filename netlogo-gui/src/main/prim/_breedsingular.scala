@@ -7,7 +7,7 @@ import org.nlogo.api.{ Nobody, Syntax }
 import org.nlogo.nvm.{ Context, EngineException, Reporter }
 
 class _breedsingular(breedName: String) extends Reporter {
-  override def syntax: Syntax =
+  override def syntax: org.nlogo.core.Syntax =
     Syntax.reporterSyntax(Array[Int](Syntax.NumberType), Syntax.TurtleType | Syntax.NobodyType)
 
   override def toString: String = s"${super.toString}:$breedName"

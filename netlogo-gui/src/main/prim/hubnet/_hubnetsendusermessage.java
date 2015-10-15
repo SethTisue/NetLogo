@@ -48,7 +48,7 @@ public final strictfp class _hubnetsendusermessage
   }
 
   @Override
-  public Syntax syntax() {
+  public org.nlogo.core.Syntax syntax() {
     int[] right = {Syntax.StringType() | Syntax.ListType(), Syntax.WildcardType()};
     return Syntax.commandSyntax(right);
   }

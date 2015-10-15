@@ -23,7 +23,7 @@ public final strictfp class _subject
   }
 
   @Override
-  public Syntax syntax() {
+  public org.nlogo.core.Syntax syntax() {
     return Syntax.reporterSyntax(Syntax.AgentType());
   }
 }

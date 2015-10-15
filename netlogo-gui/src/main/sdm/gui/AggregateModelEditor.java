@@ -12,7 +12,7 @@ import org.jhotdraw.util.UndoManager;
 import org.nlogo.api.CompilerException;
 import org.nlogo.api.CompilerServices;
 import org.nlogo.api.I18N;
-import org.nlogo.api.TokenType;
+import org.nlogo.core.TokenType;
 import org.nlogo.sdm.Model;
 import org.nlogo.window.EditDialogFactoryInterface;
 

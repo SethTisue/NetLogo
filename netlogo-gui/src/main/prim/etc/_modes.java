@@ -56,7 +56,7 @@ public final strictfp class _modes
   }
 
   @Override
-  public Syntax syntax() {
+  public org.nlogo.core.Syntax syntax() {
     int[] right = {Syntax.ListType()};
     int ret = Syntax.ListType();
     return Syntax.reporterSyntax(right, ret);

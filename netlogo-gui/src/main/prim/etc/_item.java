@@ -45,7 +45,7 @@ public final strictfp class _item
   }
 
   @Override
-  public Syntax syntax() {
+  public org.nlogo.core.Syntax syntax() {
     int[] right = {Syntax.NumberType(),
         Syntax.ListType() | Syntax.StringType()};
     int ret = Syntax.WildcardType();

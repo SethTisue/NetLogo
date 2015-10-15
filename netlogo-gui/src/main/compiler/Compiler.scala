@@ -2,9 +2,13 @@
 
 package org.nlogo.compiler
 
-import org.nlogo.api.{ CompilerException, ExtensionManager, NumberParser, Program, Token,
-                       TokenizerInterface, TokenReaderInterface, TokenType, TokenMapperInterface, World }
-import org.nlogo.nvm.{ CompilerInterface, CompilerResults, CompilationEnvironment, Procedure, Workspace }
+import org.nlogo.api.{ CompilerException, NumberParser, Program, TokenizerInterface,
+                        TokenReaderInterface, TokenMapperInterface, World }
+import org.nlogo.core.Token
+import org.nlogo.core.TokenType
+import org.nlogo.nvm.{ CompilerInterface, CompilerResults, Procedure, Workspace }
+import org.nlogo.core.CompilationEnvironment
+import org.nlogo.core.ExtensionManager
 import org.nlogo.util.Femto
 
 // This is intended to be called from Java as well as Scala, so @throws declarations are included.
@@ -154,8 +158,8 @@ object Compiler extends CompilerInterface {
       val tokens = identifierParser.process(results.tokens(proc).iterator, proc)
       tokens
         .tail  // skip _report
-        .map(_.tyype)
-        .dropWhile(_ == TokenType.OPEN_PAREN)
+        .map(_.tpe)
+        .dropWhile(_ == TokenType.OpenParen)
         .headOption
         .exists(reporterTokenTypes)
     }
@@ -163,7 +167,7 @@ object Compiler extends CompilerInterface {
 
   private val reporterTokenTypes: Set[TokenType] = {
     import TokenType._
-    Set(OPEN_BRACKET, CONSTANT, IDENT, REPORTER, VARIABLE)
+    Set(OpenBracket, Literal, Extension, Reporter, Ident)
   }
 
   // used by the indenter. we always use the 2D tokenizer since it doesn't matter in this context

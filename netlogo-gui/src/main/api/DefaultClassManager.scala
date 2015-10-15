@@ -8,6 +8,9 @@ package org.nlogo.api
  * @see ClassManager
  */
 
+import org.nlogo.core.Primitive
+import org.nlogo.core.ExtensionObject
+import org.nlogo.core.ExtensionManager
 import java.util.{ List => JList }
 
 abstract class DefaultClassManager extends ClassManager {

@@ -21,7 +21,7 @@ public final strictfp class _patchvariable
   }
 
   @Override
-  public Syntax syntax() {
+  public org.nlogo.core.Syntax syntax() {
     return Syntax.reporterSyntax
         (Syntax.WildcardType() | Syntax.ReferenceType(),
             "-TP-");

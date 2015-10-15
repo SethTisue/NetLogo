@@ -89,7 +89,7 @@ public final strictfp class _member
   }
 
   @Override
-  public Syntax syntax() {
+  public org.nlogo.core.Syntax syntax() {
     int[] right = {Syntax.WildcardType(),
         Syntax.ListType() | Syntax.StringType() | Syntax.AgentsetType()};
     int ret = Syntax.BooleanType();

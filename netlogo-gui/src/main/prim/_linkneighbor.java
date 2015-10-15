@@ -22,7 +22,7 @@ public final strictfp class _linkneighbor extends Reporter {
   }
 
   @Override
-  public Syntax syntax() {
+  public org.nlogo.core.Syntax syntax() {
     return Syntax.reporterSyntax
         (new int[]{Syntax.AgentType()},
             Syntax.BooleanType(), "-T--");

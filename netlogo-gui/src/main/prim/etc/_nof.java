@@ -71,7 +71,7 @@ public final strictfp class _nof
   }
 
   @Override
-  public Syntax syntax() {
+  public org.nlogo.core.Syntax syntax() {
     return Syntax.reporterSyntax
         (new int[]{Syntax.NumberType(),
             Syntax.AgentsetType() | Syntax.ListType()},

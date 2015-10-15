@@ -2,6 +2,8 @@
 
 package org.nlogo.api
 
+import org.nlogo.core.Token
+
 trait CompilerServices {
   def isConstant(s: String): Boolean
   @throws(classOf[CompilerException])

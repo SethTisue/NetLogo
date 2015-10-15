@@ -4,7 +4,8 @@ package org.nlogo.app
 
 import org.nlogo.agent.{Agent, AgentSet, Observer, Turtle, Patch, Link}
 import org.nlogo.window.{EditorColorizer, Widget}
-import org.nlogo.api.{I18N, AgentVariables, Dump, Nobody, TokenType}
+import org.nlogo.api.{I18N, AgentVariables, Dump, Nobody}
+import org.nlogo.core.TokenType
 import collection.JavaConverters._
 
 class AgentMonitorEditor(parent: AgentMonitor) extends javax.swing.JPanel

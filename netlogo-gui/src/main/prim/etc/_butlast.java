@@ -14,7 +14,7 @@ public final strictfp class _butlast
     extends Reporter
     implements org.nlogo.nvm.Pure {
   @Override
-  public Syntax syntax() {
+  public org.nlogo.core.Syntax syntax() {
     int[] right = {Syntax.ListType() | Syntax.StringType()};
     int ret = Syntax.ListType() | Syntax.StringType();
     return Syntax.reporterSyntax(right, ret);
@@ -38,7 +38,7 @@ public final strictfp class _butlast
       String string = (String) arg0;
       if (string.length() == 0) {
         throw new EngineException(context, this,
-            I18N.errorsJ().getN("org.nlogo.prim.etc.$common.emptyStringInput", token().name()));
+            I18N.errorsJ().getN("org.nlogo.prim.etc.$common.emptyStringInput", token().text()));
       }
       return string.substring(0, string.length() - 1);
     } else {
@@ -51,7 +51,7 @@ public final strictfp class _butlast
       throws LogoException {
     if (arg0.length() == 0) {
       throw new EngineException(context, this,
-          I18N.errorsJ().getN("org.nlogo.prim.etc.$common.emptyStringInput", token().name()));
+          I18N.errorsJ().getN("org.nlogo.prim.etc.$common.emptyStringInput", token().text()));
     }
     return arg0.substring(0, arg0.length() - 1);
   }

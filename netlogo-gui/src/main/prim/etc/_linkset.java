@@ -20,7 +20,7 @@ import java.util.Set;
 public final strictfp class _linkset
     extends Reporter {
   @Override
-  public Syntax syntax() {
+  public org.nlogo.core.Syntax syntax() {
     int[] right = {Syntax.RepeatableType() | Syntax.LinkType()
         | Syntax.LinksetType() | Syntax.NobodyType()
         | Syntax.ListType()};

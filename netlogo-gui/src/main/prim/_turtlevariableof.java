@@ -65,7 +65,7 @@ public final strictfp class _turtlevariableof
   }
 
   @Override
-  public Syntax syntax() {
+  public org.nlogo.core.Syntax syntax() {
     int[] right = {Syntax.TurtleType() | Syntax.TurtlesetType()};
     int ret = Syntax.WildcardType();
     return Syntax.reporterSyntax(right, ret);

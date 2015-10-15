@@ -12,7 +12,7 @@ import org.nlogo.nvm.Reporter;
 public final strictfp class _patchat
     extends Reporter {
   @Override
-  public Syntax syntax() {
+  public org.nlogo.core.Syntax syntax() {
     int[] right = {Syntax.NumberType(),
         Syntax.NumberType()};
     int ret = Syntax.PatchType();

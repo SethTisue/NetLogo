@@ -1,11 +1,15 @@
 // (C) Uri Wilensky. https://github.com/NetLogo/NetLogo
+//
 package org.nlogo.workspace
 
 import java.net.URL
 
-import org.nlogo.api.{ ClassManager, CompilerException, Dump, ErrorSource,
-  ExtensionException, ExtensionManager => APIExtensionManager, ExtensionObject,
-  ImportErrorHandler, Primitive, Reporter }
+import org.nlogo.api.{ ClassManager, CompilerException, Dump, ExtensionException, ImportErrorHandler, Reporter }
+import org.nlogo.core.ErrorSource
+import org.nlogo.core.Primitive
+import org.nlogo.core.ExtensionObject
+
+import org.nlogo.nvm.{ ExtensionManager => NvmExtensionManager }
 
 import java.lang.{ ClassLoader, Iterable => JIterable }
 import java.io.{ IOException, PrintWriter }
@@ -102,7 +106,7 @@ object ExtensionManager {
 
 import ExtensionManager._
 
-class ExtensionManager(val workspace: ExtendableWorkspace, loader: ExtensionLoader) extends APIExtensionManager {
+class ExtensionManager(val workspace: ExtendableWorkspace, loader: ExtensionLoader) extends NvmExtensionManager {
   import ExtensionManagerException._
 
   private var loaders  = Seq[ExtensionLoader](loader)

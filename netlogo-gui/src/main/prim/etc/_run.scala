@@ -19,7 +19,7 @@ class _run extends Command {
       case s: String =>
         if(args.size > 1)
           throw new EngineException(context, this,
-            token.name + " doesn't accept further inputs if the first is a string")
+            token.text + " doesn't accept further inputs if the first is a string")
         try {
           val procedure = workspace.compileForRun(s, context, false)
           // the procedure returned by compileForRun is executed without switching Contexts, only
@@ -50,7 +50,7 @@ class _run extends Command {
           context.ip = next
         }
         catch {
-          case NonLocalExit if context.activation.procedure.tyype == Procedure.Type.COMMAND =>
+          case NonLocalExit if ! context.activation.procedure.isReporter =>
             context.stop()
         }
       case obj =>

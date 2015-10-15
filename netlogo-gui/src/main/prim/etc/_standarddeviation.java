@@ -16,7 +16,7 @@ import java.util.Iterator;
 
 public final strictfp class _standarddeviation extends Reporter implements Pure {
   @Override
-  public Syntax syntax() {
+  public org.nlogo.core.Syntax syntax() {
     int[] right = {Syntax.ListType()};
     return Syntax.reporterSyntax(right, Syntax.NumberType());
   }

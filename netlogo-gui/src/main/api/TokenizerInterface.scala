@@ -2,6 +2,9 @@
 
 package org.nlogo.api
 
+import org.nlogo.core.Token
+import org.nlogo.core.ExtensionManager
+
 trait TokenizerInterface {
   def tokenizeRobustly(source: String): Seq[Token]
   def tokenizeAllowingRemovedPrims(source: String): Seq[Token]

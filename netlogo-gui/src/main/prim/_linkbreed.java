@@ -26,7 +26,7 @@ public final strictfp class _linkbreed
   }
 
   @Override
-  public Syntax syntax() {
+  public org.nlogo.core.Syntax syntax() {
     return Syntax.reporterSyntax(Syntax.LinksetType());
   }
 

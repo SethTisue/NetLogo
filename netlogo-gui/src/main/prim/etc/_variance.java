@@ -16,7 +16,7 @@ import java.util.Iterator;
 
 public final strictfp class _variance extends Reporter implements Pure {
   @Override
-  public Syntax syntax() {
+  public org.nlogo.core.Syntax syntax() {
     return Syntax.reporterSyntax
         (new int[]{Syntax.ListType()},
             Syntax.NumberType());

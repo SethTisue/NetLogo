@@ -3,7 +3,9 @@
 package org.nlogo.compiler
 
 import org.scalatest.FunSuite
-import org.nlogo.api.{ DummyExtensionManager, Program, Token, TokenType }
+import org.nlogo.api.{ DummyExtensionManager, Program}
+import org.nlogo.core.Token
+import org.nlogo.core.TokenType
 import org.nlogo.nvm.Procedure
 
 class IdentifierParserTests extends FunSuite {
@@ -22,18 +24,18 @@ class IdentifierParserTests extends FunSuite {
     new IdentifierParser(program, java.util.Collections.emptyMap[String, Procedure],
       results.procedures, false)
       .process(results.tokens(procedure).iterator, procedure)
-      .iterator.takeWhile(_.tyype != TokenType.EOF)
+      .iterator.takeWhile(_.tpe != TokenType.Eof)
   }
 
   test("empty") {
     assertResult("")(compile("").mkString)
   }
   test("interface global") {
-    assertResult("Token(X,REPORTER,_observervariable:0)")(
+    assertResult("Token(X,Reporter,_observervariable:0)")(
       compile("print x").drop(1).mkString)
   }
   test("let") {
-    assertResult("Token(let,COMMAND,_let)" + "Token(Y,REPORTER,_letvariable(Y))" + "Token(5,CONSTANT,5.0)")(
+    assertResult("Token(let,Command,_let)" + "Token(Y,Reporter,_letvariable(Y))" + "Token(5,Literal,5.0)")(
       compile("let y 5").mkString)
   }
 

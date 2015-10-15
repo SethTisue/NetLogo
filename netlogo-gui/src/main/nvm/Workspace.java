@@ -2,6 +2,7 @@
 
 package org.nlogo.nvm;
 
+import org.nlogo.core.CompilationEnvironment;
 import scala.collection.Seq;
 import scala.Tuple2;
 
@@ -66,7 +67,7 @@ public interface Workspace
 
   void addJobFromJobThread(Job job);
 
-  org.nlogo.api.ExtensionManager getExtensionManager();
+  ExtensionManager getExtensionManager();
 
   CompilationEnvironment getCompilationEnvironment();
 

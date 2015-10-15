@@ -63,7 +63,7 @@ abstract class AbstractWorkspaceScala(private val _world: World, hubNetManagerFa
     import java.io.{ File => JFile }
     import java.net.MalformedURLException
 
-    new org.nlogo.nvm.CompilationEnvironment {
+    new org.nlogo.core.CompilationEnvironment {
       def getSource(filename: String): String = AbstractWorkspaceScala.this.getSource(filename)
       def profilingEnabled: Boolean = AbstractWorkspaceScala.this.profilingEnabled
       def resolvePath(path: String): String = {

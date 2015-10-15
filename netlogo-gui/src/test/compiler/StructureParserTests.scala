@@ -5,7 +5,8 @@ package org.nlogo.compiler
 import org.scalatest.FunSuite
 
 import org.nlogo.api.{ CompilerException, DummyExtensionManager, Program }
-import org.nlogo.nvm.{ DummyCompilationEnvironment, Procedure }
+import org.nlogo.core.DummyCompilationEnvironment
+import org.nlogo.nvm.Procedure
 
 class StructureParserTests extends FunSuite {
   // private so StructureParser.Results doesn't escape compiler package

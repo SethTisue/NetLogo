@@ -17,7 +17,7 @@ import org.nlogo.nvm.Reporter;
 public final strictfp class _notequal
     extends Reporter implements Pure {
   @Override
-  public Syntax syntax() {
+  public org.nlogo.core.Syntax syntax() {
     int left = Syntax.WildcardType();
     int[] right = {Syntax.WildcardType()};
     int ret = Syntax.BooleanType();

@@ -40,7 +40,7 @@ public final strictfp class _oneof
   }
 
   @Override
-  public Syntax syntax() {
+  public org.nlogo.core.Syntax syntax() {
     int[] right = {Syntax.AgentsetType() | Syntax.ListType()};
     int ret = Syntax.WildcardType();
     return Syntax.reporterSyntax(right, ret);

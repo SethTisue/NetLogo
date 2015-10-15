@@ -44,7 +44,7 @@ public final strictfp class _position
   }
 
   @Override
-  public Syntax syntax() {
+  public org.nlogo.core.Syntax syntax() {
     int[] right = {Syntax.WildcardType(),
         Syntax.ListType() | Syntax.StringType()};
     int ret = Syntax.NumberType() | Syntax.BooleanType();

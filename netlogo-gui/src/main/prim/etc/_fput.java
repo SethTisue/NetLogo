@@ -11,7 +11,7 @@ public final strictfp class _fput
     extends Reporter
     implements org.nlogo.nvm.Pure {
   @Override
-  public Syntax syntax() {
+  public org.nlogo.core.Syntax syntax() {
     int[] right = {Syntax.WildcardType(),
         Syntax.ListType()};
     int ret = Syntax.ListType();

@@ -4,7 +4,7 @@ package org.nlogo.sdm.gui;
 
 import org.nlogo.api.CompilerException;
 import org.nlogo.api.I18N;
-import org.nlogo.api.TokenType;
+import org.nlogo.core.TokenType;
 
 strictfp class AggregateTabs
     extends javax.swing.JTabbedPane

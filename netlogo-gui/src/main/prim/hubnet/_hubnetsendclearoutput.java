@@ -47,7 +47,7 @@ public final strictfp class _hubnetsendclearoutput
   }
 
   @Override
-  public Syntax syntax() {
+  public org.nlogo.core.Syntax syntax() {
     int[] right = {Syntax.StringType() | Syntax.ListType()};
     return Syntax.commandSyntax(right);
   }

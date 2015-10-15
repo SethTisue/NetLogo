@@ -16,7 +16,7 @@ import org.nlogo.nvm.EngineException;
 public final strictfp class _diffuse
     extends Command {
   @Override
-  public Syntax syntax() {
+  public org.nlogo.core.Syntax syntax() {
     return Syntax.commandSyntax
         (new int[]{Syntax.ReferenceType(), Syntax.NumberType()},
             "O---", true);

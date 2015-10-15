@@ -22,7 +22,7 @@ public final strictfp class _link
   }
 
   @Override
-  public Syntax syntax() {
+  public org.nlogo.core.Syntax syntax() {
     return Syntax.reporterSyntax
         (new int[]{Syntax.NumberType(), Syntax.NumberType()},
             Syntax.LinkType() | Syntax.NobodyType());

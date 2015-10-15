@@ -19,7 +19,7 @@ public strictfp class EditorAreaErrorLabel
 
     if (compilerError instanceof CompilerException) {
       CompilerException compilerEx = (CompilerException) compilerError;
-      editorArea.select(compilerEx.startPos() - offset, compilerEx.endPos() - offset);
+      editorArea.select(compilerEx.start() - offset, compilerEx.end() - offset);
       editorArea.setSelection(false);
       editorArea.requestFocus();
     } else {

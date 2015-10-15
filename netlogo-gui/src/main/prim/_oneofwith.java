@@ -17,7 +17,7 @@ public final strictfp class _oneofwith
     extends Reporter {
 
   @Override
-  public Syntax syntax() {
+  public org.nlogo.core.Syntax syntax() {
     return Syntax.reporterSyntax
         (new int[]{Syntax.AgentsetType(), Syntax.BooleanBlockType()},
          Syntax.AgentType() | Syntax.NobodyType(), "OTPL", "?");

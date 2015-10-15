@@ -26,7 +26,7 @@ public final strictfp class _empty
   }
 
   @Override
-  public Syntax syntax() {
+  public org.nlogo.core.Syntax syntax() {
     int[] right = {Syntax.ListType() | Syntax.StringType()};
     int ret = Syntax.BooleanType();
     return Syntax.reporterSyntax(right, ret);

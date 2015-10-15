@@ -13,7 +13,7 @@ import org.nlogo.nvm.Reporter;
 public final strictfp class _patchhereinternal
     extends Reporter {
   @Override
-  public Syntax syntax() {
+  public org.nlogo.core.Syntax syntax() {
     return Syntax.reporterSyntax
         (Syntax.PatchType(), "-TP-");
   }

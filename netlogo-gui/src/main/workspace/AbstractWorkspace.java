@@ -9,6 +9,8 @@ import java.util.Map;
 import java.util.WeakHashMap;
 import org.nlogo.agent.Agent;
 import org.nlogo.api.*;
+import org.nlogo.core.Token;
+import org.nlogo.core.TokenType;
 import org.nlogo.agent.Importer;
 import org.nlogo.nvm.Activation;
 import org.nlogo.nvm.Command;
@@ -114,7 +116,7 @@ public abstract strictfp class AbstractWorkspace
     extensionManager = new ExtensionManager(this, new JarLoader(this));
   }
 
-  public org.nlogo.api.ExtensionManager getExtensionManager() {
+  public org.nlogo.workspace.ExtensionManager getExtensionManager() {
     return extensionManager;
   }
 
@@ -405,7 +407,7 @@ public abstract strictfp class AbstractWorkspace
   public Procedure compileForRun(String source, org.nlogo.nvm.Context context,
                                  boolean reporter)
       throws CompilerException {
-    String key = source + "@" + context.activation.procedure.args.size() +
+    String key = source + "@" + context.activation.procedure.args().size() +
         "@" + context.agentBit;
     Procedure proc = codeBits.get(key);
     if (proc == null) {

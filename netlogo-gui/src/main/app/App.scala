@@ -4,6 +4,7 @@ package org.nlogo.app
 
 import org.nlogo.agent.{Agent, World3D, World}
 import org.nlogo.api._
+import org.nlogo.core.Token
 import org.nlogo.awt.UserCancelException
 import org.nlogo.log.Logger
 import org.nlogo.nvm.{CompilerInterface, Workspace, WorkspaceFactory}

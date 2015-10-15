@@ -12,7 +12,7 @@ import org.nlogo.nvm.Reporter;
 
 public final strictfp class _turtle extends Reporter {
   @Override
-  public Syntax syntax() {
+  public org.nlogo.core.Syntax syntax() {
     return Syntax.reporterSyntax
         (new int[]{Syntax.NumberType()},
             Syntax.TurtleType() | Syntax.NobodyType());

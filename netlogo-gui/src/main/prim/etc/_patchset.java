@@ -21,7 +21,7 @@ import java.util.Set;
 public final strictfp class _patchset
     extends Reporter {
   @Override
-  public Syntax syntax() {
+  public org.nlogo.core.Syntax syntax() {
     int[] right = {Syntax.RepeatableType() | Syntax.PatchType()
         | Syntax.PatchsetType() | Syntax.NobodyType()
         | Syntax.ListType()};

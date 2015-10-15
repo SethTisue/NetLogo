@@ -12,7 +12,7 @@ import org.nlogo.nvm.Reporter;
 public final strictfp class _rgb
     extends Reporter {
   @Override
-  public Syntax syntax() {
+  public org.nlogo.core.Syntax syntax() {
     int[] right = {Syntax.NumberType(), Syntax.NumberType(), Syntax.NumberType()};
     int ret = Syntax.ListType();
     return Syntax.reporterSyntax(right, ret);

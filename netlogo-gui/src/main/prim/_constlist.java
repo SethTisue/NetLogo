@@ -17,7 +17,7 @@ public final strictfp class _constlist
   }
 
   @Override
-  public Syntax syntax() {
+  public org.nlogo.core.Syntax syntax() {
     return Syntax.reporterSyntax(Syntax.ListType());
   }
 

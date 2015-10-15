@@ -22,7 +22,7 @@ public final strictfp class _linkwith
   }
 
   @Override
-  public Syntax syntax() {
+  public org.nlogo.core.Syntax syntax() {
     int[] right = {Syntax.AgentType()};
     int ret = Syntax.LinkType();
     return Syntax.reporterSyntax(right, ret, "-T--");

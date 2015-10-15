@@ -7,6 +7,7 @@ import org.nlogo.agent.ArrayAgentSet
 import org.nlogo.agent.{Agent, AgentSet, Observer, Turtle, Patch, Link}
 import org.nlogo.api.{CompilerException, JobOwner, LogoException, ReporterLogoThunk, CommandLogoThunk}
 import org.nlogo.nvm.{ExclusiveJob, Activation, Context, Procedure}
+import scala.collection.immutable.Vector
 
 class Evaluator(workspace: AbstractWorkspace) {
 
@@ -144,7 +145,7 @@ class Evaluator(workspace: AbstractWorkspace) {
     callingProcedure: Procedure, reporter: Boolean): Procedure = {
 
     val vars =
-      if (callingProcedure == null) new ArrayList[String]()
+      if (callingProcedure == null) Vector[String]()
       else callingProcedure.args
     val agentTypeHint = Evaluator.agentTypeHint(agentClass)
 
@@ -154,10 +155,10 @@ class Evaluator(workspace: AbstractWorkspace) {
       // "to-report foo report 3 die end" is syntactically valid but
       // "to-report foo report (3 die) end" isn't. - ST 11/12/09
       "to-report __runresult " +
-        vars.toString.replace(',', ' ') + " " +
+        vars.mkString(" ") + " " +
         agentTypeHint + " report ( " + source + " \n) __done end"
     else
-      "to __run " + vars.toString.replace(',', ' ') + " " + agentTypeHint + " " + source + "\nend"
+      "to __run " + vars.mkString(" ") + " " + agentTypeHint + " " + source + "\nend"
     val results = workspace.compiler.compileMoreCode(
       wrappedSource,
       Some(if(reporter) "runresult" else "run"),

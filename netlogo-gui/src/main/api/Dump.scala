@@ -2,6 +2,7 @@
 
 package org.nlogo.api
 
+import org.nlogo.core.ExtensionObject
 import collection.JavaConverters._
 
 object Dump {

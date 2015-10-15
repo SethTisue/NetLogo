@@ -2,6 +2,7 @@
 
 package org.nlogo.nvm
 
+import org.nlogo.core.{ CompilationEnvironment, DummyCompilationEnvironment }
 import org.nlogo.api.{ CompilerServices, Program }
 
 // We use this in contexts where we want to do compiler stuff (not full compilation) like

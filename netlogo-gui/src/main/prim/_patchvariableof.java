@@ -65,7 +65,7 @@ public final strictfp class _patchvariableof
   }
 
   @Override
-  public Syntax syntax() {
+  public org.nlogo.core.Syntax syntax() {
     int[] right = {Syntax.TurtleType() | Syntax.PatchType()
         | Syntax.TurtlesetType() | Syntax.PatchsetType()};
     int ret = Syntax.WildcardType();

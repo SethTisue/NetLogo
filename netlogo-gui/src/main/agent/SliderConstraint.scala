@@ -13,7 +13,7 @@ object SliderConstraint {
 
   trait SliderConstraintException extends Exception { val spec: Spec }
   class ConstraintCompilerException(val spec: Spec, ex: CompilerException) extends
-    CompilerException(ex.getMessage, ex.startPos, ex.endPos, ex.fileName) with SliderConstraintException
+    CompilerException(ex.getMessage, ex.start, ex.end, ex.fileName) with SliderConstraintException
   class ConstraintRuntimeException(val spec:Spec, message: String) extends
     RuntimeException("Constraint runtime error for " + spec.displayName + ": " + message) with SliderConstraintException
 

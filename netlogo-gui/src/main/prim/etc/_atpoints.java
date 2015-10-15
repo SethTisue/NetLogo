@@ -165,7 +165,7 @@ public final strictfp class _atpoints
   }
 
   @Override
-  public Syntax syntax() {
+  public org.nlogo.core.Syntax syntax() {
     int left = Syntax.TurtlesetType() | Syntax.PatchsetType();
     int[] right = {Syntax.ListType()};
     int ret = Syntax.AgentsetType();

@@ -13,7 +13,7 @@ public final strictfp class _linkbreedvariable
   public String name;
 
   @Override
-  public Syntax syntax() {
+  public org.nlogo.core.Syntax syntax() {
     return Syntax.reporterSyntax
         (Syntax.WildcardType() | Syntax.ReferenceType(),
             "---L");

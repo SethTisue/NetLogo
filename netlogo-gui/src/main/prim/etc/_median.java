@@ -48,7 +48,7 @@ public final strictfp class _median
   }
 
   @Override
-  public Syntax syntax() {
+  public org.nlogo.core.Syntax syntax() {
     return Syntax.reporterSyntax
         (new int[]{Syntax.ListType()},
             Syntax.NumberType());

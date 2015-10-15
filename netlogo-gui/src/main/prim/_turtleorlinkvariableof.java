@@ -62,7 +62,7 @@ public final strictfp class _turtleorlinkvariableof
   }
 
   @Override
-  public Syntax syntax() {
+  public org.nlogo.core.Syntax syntax() {
     int[] right = {Syntax.LinkType() | Syntax.LinksetType() | Syntax.TurtleType() | Syntax.TurtlesetType()};
     int ret = Syntax.WildcardType();
     return Syntax.reporterSyntax(right, ret);

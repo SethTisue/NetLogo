@@ -110,12 +110,12 @@ public strictfp class CompilerManager
                   workspace.getExtensionManager(), workspace.getCompilationEnvironment());
       workspace.setProcedures(results.proceduresMap());
       for (Procedure procedure : workspace.getProcedures().values()) {
-        if (procedure.fileName.equals("")) {
-          procedure.setOwner(proceduresInterface);
-        } else if (procedure.fileName.equals("aggregate")) {
-          procedure.setOwner(workspace.aggregateManager());
+        if (procedure.filename().equals("")) {
+          procedure.owner_$eq(proceduresInterface);
+        } else if (procedure.filename().equals("aggregate")) {
+          procedure.owner_$eq(workspace.aggregateManager());
         } else {
-          procedure.setOwner(new ExternalFileInterface(procedure.fileName));
+          procedure.owner_$eq(new ExternalFileInterface(procedure.filename()));
         }
       }
       workspace.init();
@@ -180,7 +180,7 @@ public strictfp class CompilerManager
 
       if (!results.procedures().isEmpty()) {
         results.head().init(workspace);
-        results.head().setOwner(owner);
+        results.head().owner_$eq(owner);
         new org.nlogo.window.Events.CompiledEvent
             (owner, workspace.world.program(), results.head(), null).raise(this);
       }
@@ -236,7 +236,7 @@ public strictfp class CompilerManager
                 (owner.source(), scala.Some.apply(owner.classDisplayName()), workspace.world.program(),
                     workspace.getProcedures(), workspace.getExtensionManager(), workspace.getCompilationEnvironment());
         results.head().init(workspace);
-        results.head().setOwner(owner);
+        results.head().owner_$eq(owner);
         new org.nlogo.window.Events.CompiledEvent
             (owner, workspace.world.program(), results.head(), null).raise(this);
       } catch (CompilerException error) {

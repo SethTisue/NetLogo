@@ -65,7 +65,7 @@ public final strictfp class _linkvariableof
   }
 
   @Override
-  public Syntax syntax() {
+  public org.nlogo.core.Syntax syntax() {
     int[] right = {Syntax.LinkType() | Syntax.LinksetType()};
     int ret = Syntax.WildcardType();
     return Syntax.reporterSyntax(right, ret);
