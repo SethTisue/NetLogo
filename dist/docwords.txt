@@ -19,8 +19,6 @@ AnyRef
 App
 App's
 AppData
-Applet
-Applets
 Arduino
 Arnan
 ArrayBlockingQueue
@@ -233,7 +231,6 @@ NetLogo
 NetLogo's
 NetLogoLab
 NetLogoListener
-NetLogoLite
 Neumann
 NonCommercial
 Nonlocal
@@ -268,7 +265,6 @@ Polysynth
 Predation's
 PrimitiveManager
 PrintWriter
-ProGuard
 ProbLab
 QTCap
 QTJ
@@ -401,8 +397,6 @@ amongst
 api
 app
 appender
-applet
-applets
 args
 argv
 artisticlicense
