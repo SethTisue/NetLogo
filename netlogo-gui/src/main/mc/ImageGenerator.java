@@ -2,7 +2,7 @@
 
 package org.nlogo.mc;
 
-import org.nlogo.api.CompilerException;
+import org.nlogo.core.CompilerException;
 import org.nlogo.api.Observer;
 import org.nlogo.api.SimpleJobOwner;
 import org.nlogo.nvm.Workspace;

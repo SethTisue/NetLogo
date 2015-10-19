@@ -2,7 +2,8 @@
 
 package org.nlogo.prim.file
 
-import org.nlogo.api.{ CompilerException, FileMode, Syntax }
+import org.nlogo.api.{ FileMode, Syntax }
+import org.nlogo.core.CompilerException
 import org.nlogo.nvm.{ Command, Context, EngineException, Reporter, Workspace }
 import java.io.IOException
 

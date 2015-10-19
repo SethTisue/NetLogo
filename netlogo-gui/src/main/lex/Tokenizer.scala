@@ -2,7 +2,8 @@
 
 package org.nlogo.lex
 
-import org.nlogo.api.{ CompilerException, TokenizerInterface }
+import org.nlogo.api.{ TokenizerInterface }
+import org.nlogo.core.CompilerException
 import org.nlogo.core.Token
 import org.nlogo.core.TokenType
 import org.nlogo.core.ExtensionManager

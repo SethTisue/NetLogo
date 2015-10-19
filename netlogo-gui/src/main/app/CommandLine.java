@@ -3,7 +3,7 @@
 package org.nlogo.app;
 
 import org.nlogo.agent.Agent;
-import org.nlogo.api.CompilerException;
+import org.nlogo.core.CompilerException;
 import org.nlogo.api.I18N;
 import org.nlogo.core.TokenType;
 import org.nlogo.window.EditorColorizer;

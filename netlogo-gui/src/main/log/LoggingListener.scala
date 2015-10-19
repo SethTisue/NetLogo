@@ -2,7 +2,8 @@
 
 package org.nlogo.log
 
-import org.nlogo.api.{ CompilerException, NetLogoListener }
+import org.nlogo.api.{ NetLogoListener }
+import org.nlogo.core.CompilerException
 import Logger._
 
 trait LoggingListener extends NetLogoListener {

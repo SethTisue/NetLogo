@@ -2,7 +2,8 @@
 
 package org.nlogo.lex
 
-import org.nlogo.api.{ CompilerException, File, FileMode, TokenizerInterface, TokenReaderInterface }
+import org.nlogo.api.{ File, FileMode, TokenizerInterface, TokenReaderInterface }
+import org.nlogo.core.CompilerException
 import org.nlogo.core.Token
 import org.nlogo.core.TokenType
 import java.io.IOException

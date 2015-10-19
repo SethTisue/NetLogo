@@ -3,7 +3,8 @@
 package org.nlogo.compiler
 
 import org.scalatest.FunSuite
-import org.nlogo.api.{ CompilerException, DummyExtensionManager, Program }
+import org.nlogo.api.{ DummyExtensionManager, Program }
+import org.nlogo.core.CompilerException
 import org.nlogo.nvm.Procedure
 
 // Normally we don't bother declaring stuff in test classes private, but sometimes (as a few times

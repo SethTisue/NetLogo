@@ -8,7 +8,7 @@ import scala.Tuple2;
 
 import org.nlogo.agent.Agent;
 import org.nlogo.api.CommandRunnable;
-import org.nlogo.api.CompilerException;
+import org.nlogo.core.CompilerException;
 import org.nlogo.api.CompilerServices;
 import org.nlogo.api.HubNetInterface;
 import org.nlogo.api.ImporterUser;

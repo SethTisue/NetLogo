@@ -5,7 +5,8 @@ package org.nlogo.lite
 import java.util.{ ArrayList, List => JList }
 import org.nlogo.window.{ Event, Widget, ButtonWidget, PlotWidget }
 import java.util.StringTokenizer
-import org.nlogo.api.{ CompilerException, Version }
+import org.nlogo.api.{ Version }
+import org.nlogo.core.CompilerException
 import org.nlogo.log.Logger
 import org.apache.log4j.xml.DOMConfigurator
 import collection.JavaConverters._

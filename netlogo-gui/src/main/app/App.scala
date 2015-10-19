@@ -4,6 +4,7 @@ package org.nlogo.app
 
 import org.nlogo.agent.{Agent, World3D, World}
 import org.nlogo.api._
+import org.nlogo.core.CompilerException
 import org.nlogo.core.Token
 import org.nlogo.awt.UserCancelException
 import org.nlogo.log.Logger
@@ -832,7 +833,7 @@ class App extends
    * queue thread or while that thread is blocked.
    * It is an error to do so.
    * @param source The command or commands to run
-   * @throws org.nlogo.api.CompilerException if the code fails to compile
+   * @throws org.nlogo.core.CompilerException if the code fails to compile
    * @throws IllegalStateException if called from the AWT event queue thread
    * @see #commandLater
    */
@@ -847,7 +848,7 @@ class App extends
    * without waiting for the commands to finish.
    * <p>This method may be called from <em>any</em> thread.
    * @param source The command or commands to run
-   * @throws org.nlogo.api.CompilerException if the code fails to compile
+   * @throws org.nlogo.core.CompilerException if the code fails to compile
    * @see #command
    */
   @throws(classOf[CompilerException])
@@ -864,7 +865,7 @@ class App extends
    * @return the result reported; may be of type java.lang.Integer, java.lang.Double,
    *         java.lang.Boolean, java.lang.String, {@link org.nlogo.api.LogoList},
    *         {@link org.nlogo.api.Agent}, AgentSet, or Nobody
-   * @throws org.nlogo.api.CompilerException if the code fails to compile
+   * @throws org.nlogo.core.CompilerException if the code fails to compile
    * @throws IllegalStateException if called from the AWT event queue thread
    */
   @throws(classOf[CompilerException])

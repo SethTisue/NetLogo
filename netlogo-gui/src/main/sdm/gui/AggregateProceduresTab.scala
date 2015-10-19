@@ -2,7 +2,7 @@
 
 package org.nlogo.sdm.gui
 
-import org.nlogo.api.{CompilerException}
+import org.nlogo.core.CompilerException
 import org.nlogo.core.TokenType
 import org.nlogo.editor.Colorizer
 

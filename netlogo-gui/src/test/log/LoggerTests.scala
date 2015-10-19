@@ -4,7 +4,7 @@ package org.nlogo.log
 
 import org.scalatest.FunSuite
 import org.apache.log4j.xml.DOMConfigurator
-import org.nlogo.api.CompilerException
+import org.nlogo.core.CompilerException
 
 class LoggerTests extends FunSuite {
   org.apache.log4j.helpers.LogLog.setQuietMode(true)

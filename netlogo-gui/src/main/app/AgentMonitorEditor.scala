@@ -383,7 +383,7 @@ with org.nlogo.window.Events.JobRemovedEvent.Handler
         lastTextBeforeUserChangedAnything = editor.getText()
         editor.selectAll
         return
-      case e: org.nlogo.api.CompilerException =>
+      case e: org.nlogo.core.CompilerException =>
         editor.setText(get)
         lastTextBeforeUserChangedAnything = editor.getText()
         editor.selectAll()
@@ -396,7 +396,7 @@ with org.nlogo.window.Events.JobRemovedEvent.Handler
     editor.selectAll()
   }
 
-  @throws(classOf[org.nlogo.api.CompilerException])
+  @throws(classOf[org.nlogo.core.CompilerException])
   @throws(classOf[org.nlogo.api.AgentException])
   private def parseTurtleOrDouble(text: String): Turtle = {
     val obj = workspace.compiler.readFromString(

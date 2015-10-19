@@ -4,7 +4,8 @@ package org.nlogo.lab.gui
 
 import org.nlogo.lab.{EnumeratedValueSet,Protocol,SteppedValueSet,ValueSet}
 import java.awt.{GridBagConstraints,Window}
-import org.nlogo.api.{I18N, Dump, CompilerException, CompilerServices, Editable, LogoList, Property}
+import org.nlogo.api.{I18N, Dump, CompilerServices, Editable, LogoList, Property}
+import org.nlogo.core.CompilerException
 import collection.JavaConverters._
 
 // normally we'd be package-private but the org.nlogo.properties stuff requires we be public - ST 2/25/09

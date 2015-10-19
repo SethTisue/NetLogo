@@ -2,7 +2,7 @@
 
 package org.nlogo.window;
 
-import org.nlogo.api.CompilerException;
+import org.nlogo.core.CompilerException;
 
 public strictfp class EditorAreaErrorLabel
     extends ErrorLabel {

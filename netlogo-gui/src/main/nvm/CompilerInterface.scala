@@ -3,7 +3,8 @@
 package org.nlogo.nvm
 
 import org.nlogo.core.CompilationEnvironment
-import org.nlogo.api.{Program, World, CompilerException}
+import org.nlogo.api.{Program, World}
+import org.nlogo.core.CompilerException
 import org.nlogo.core.Token
 import org.nlogo.core.{ ExtensionManager => CoreExtensionManager }
 

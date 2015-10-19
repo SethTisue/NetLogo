@@ -24,6 +24,8 @@ private object CompilerMain {
               oldProcedures: java.util.Map[String, Procedure],
               extensionManager: ExtensionManager, compilationEnv: CompilationEnvironment): Seq[Procedure] = {
 
+    val oldProgram = program.toCoreProgram
+
     implicit val tokenizer = if(program.is3D) Compiler.Tokenizer3D else Compiler.Tokenizer2D
     val structureResults = new StructureParser(tokenizer.tokenize(source), // tokenize
                                                displayName, program, oldProcedures, extensionManager, compilationEnv)
@@ -39,13 +41,10 @@ private object CompilerMain {
       defs ++= new ExpressionParser(procedure, taskNumbers).parse(tokens) // parse
     }
 
-    /*
     val oldProceduresListMap =
       ListMap[String, FrontEndProcedure](oldProcedures.toSeq: _*)
-    val oldProgram = org.nlogo.core.Program.empty
     val (topLevelDefs, feStructureResults) =
       frontEnd.frontEnd(source, displayName, oldProgram, subprogram, oldProceduresListMap, extensionManager)
-    */
 
     // StructureParser found the top level Procedures for us.  ExpressionParser
     // finds command tasks and makes Procedures out of them, too.  the remaining

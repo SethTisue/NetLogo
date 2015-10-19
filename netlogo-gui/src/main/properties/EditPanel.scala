@@ -6,7 +6,8 @@ import org.nlogo.editor.Colorizer
 import org.nlogo.window.WidgetWrapperInterface
 import javax.swing.{JPanel, JLabel}
 import java.awt.{Component, Insets, GridBagConstraints, Dimension, GridBagLayout, BorderLayout}
-import org.nlogo.api.{I18N, CompilerException, CompilerServices, Editable, LogoList, Property}
+import org.nlogo.api.{I18N, CompilerServices, Editable, LogoList, Property}
+import org.nlogo.core.CompilerException
 import org.nlogo.core.TokenType
 import scala.reflect.ClassTag
 // This is the contents of an EditDialog, except for the buttons at the bottom (OK/Apply/Cancel).

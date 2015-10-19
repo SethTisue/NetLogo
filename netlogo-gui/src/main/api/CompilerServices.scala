@@ -2,6 +2,7 @@
 
 package org.nlogo.api
 
+import org.nlogo.core.CompilerException
 import org.nlogo.core.Token
 
 trait CompilerServices {

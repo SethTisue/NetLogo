@@ -8,6 +8,7 @@ package org.nlogo.api
  * @see ClassManager
  */
 
+import org.nlogo.core.CompilerException
 import org.nlogo.core.Primitive
 import org.nlogo.core.ExtensionObject
 import org.nlogo.core.ExtensionManager

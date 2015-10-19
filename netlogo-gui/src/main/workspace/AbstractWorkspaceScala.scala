@@ -3,7 +3,8 @@
 package org.nlogo.workspace
 
 import org.nlogo.agent.{World, Agent, Observer, AbstractExporter, AgentSet, ArrayAgentSet}
-import org.nlogo.api.{PlotInterface, Dump, CommandLogoThunk, ReporterLogoThunk, CompilerException, JobOwner, SimpleJobOwner}
+import org.nlogo.api.{PlotInterface, Dump, CommandLogoThunk, ReporterLogoThunk, JobOwner, SimpleJobOwner}
+import org.nlogo.core.CompilerException
 import org.nlogo.nvm.{Instruction, EngineException, Context, Procedure}
 import org.nlogo.plot.{ PlotExporter, PlotManager }
 import org.nlogo.workspace.AbstractWorkspace.HubNetManagerFactory

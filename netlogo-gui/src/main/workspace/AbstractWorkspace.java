@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.WeakHashMap;
 import org.nlogo.agent.Agent;
 import org.nlogo.api.*;
+import org.nlogo.core.CompilerException;
 import org.nlogo.core.Token;
 import org.nlogo.core.TokenType;
 import org.nlogo.agent.Importer;

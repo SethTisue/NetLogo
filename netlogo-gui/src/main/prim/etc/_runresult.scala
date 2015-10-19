@@ -2,7 +2,8 @@
 
 package org.nlogo.prim.etc
 
-import org.nlogo.api.{ CompilerException, LogoException, Syntax }
+import org.nlogo.api.{ LogoException, Syntax }
+import org.nlogo.core.CompilerException
 import org.nlogo.nvm.{ Activation, ArgumentTypeException, Context, EngineException, Reporter, ReporterTask }
 
 class _runresult extends Reporter {

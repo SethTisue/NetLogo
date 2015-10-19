@@ -4,7 +4,8 @@ package org.nlogo.workspace
 
 import java.net.URL
 
-import org.nlogo.api.{ ClassManager, CompilerException, Dump, ExtensionException, ImportErrorHandler, Reporter }
+import org.nlogo.api.{ ClassManager, Dump, ExtensionException, ImportErrorHandler, Reporter }
+import org.nlogo.core.CompilerException
 import org.nlogo.core.ErrorSource
 import org.nlogo.core.Primitive
 import org.nlogo.core.ExtensionObject

@@ -4,7 +4,8 @@ package org.nlogo.lite
 
 import java.util.{ ArrayList, List => JList }
 import org.nlogo.agent.{ Observer, World, World3D }
-import org.nlogo.api.{ CompilerException, LogoException, ModelSection, ModelType, Version, SimpleJobOwner }
+import org.nlogo.api.{ LogoException, ModelSection, ModelType, Version, SimpleJobOwner }
+import org.nlogo.core.CompilerException
 import org.nlogo.window.{ Event, AppletAdPanel, CompilerManager, InterfacePanelLite, InvalidVersionException,
                           ModelLoader, NetLogoListenerManager, RuntimeErrorDialog }
 import org.nlogo.window.Events.{ CompiledEvent, LoadSectionEvent }
@@ -126,7 +127,7 @@ with Event.LinkParent {
    * It is an error to do so.
    *
    * @param source The command or commands to run
-   * @throws org.nlogo.api.CompilerException
+   * @throws org.nlogo.core.CompilerException
    *                               if the code fails to compile
    * @throws IllegalStateException if called from the AWT event queue thread
    * @see #commandLater
@@ -143,7 +144,7 @@ with Event.LinkParent {
    * <p>This method may be called from <em>any</em> thread.
    *
    * @param source The command or commands to run
-   * @throws org.nlogo.api.CompilerException
+   * @throws org.nlogo.core.CompilerException
    *          if the code fails to compile
    * @see #command
    */
@@ -162,7 +163,7 @@ with Event.LinkParent {
    * @return the result reported; may be of type java.lang.Integer, java.lang.Double,
    *         java.lang.Boolean, java.lang.String, {@link org.nlogo.api.LogoList},
    *         {@link org.nlogo.api.Agent}, AgentSet, or Nobody
-   * @throws org.nlogo.api.CompilerException
+   * @throws org.nlogo.core.CompilerException
    *                               if the code fails to compile
    * @throws IllegalStateException if called from the AWT event queue thread
    */

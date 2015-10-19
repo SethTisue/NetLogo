@@ -3,7 +3,7 @@
 package org.nlogo.nvm;
 
 import org.nlogo.agent.World;
-import org.nlogo.api.CompilerException;
+import org.nlogo.core.CompilerException;
 import org.nlogo.api.File;
 import org.nlogo.api.FileMode;
 

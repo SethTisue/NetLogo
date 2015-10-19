@@ -11,7 +11,7 @@ import org.nlogo.agent.BooleanConstraint;
 import org.nlogo.agent.Observer;
 import org.nlogo.agent.SliderConstraint;
 import org.nlogo.api.CommandRunnable;
-import org.nlogo.api.CompilerException;
+import org.nlogo.core.CompilerException;
 import org.nlogo.api.I18N;
 import org.nlogo.api.LogoException;
 import org.nlogo.api.ModelSectionJ;

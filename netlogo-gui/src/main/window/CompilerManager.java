@@ -2,7 +2,7 @@
 
 package org.nlogo.window;
 
-import org.nlogo.api.CompilerException;
+import org.nlogo.core.CompilerException;
 import org.nlogo.api.JobOwner;
 import org.nlogo.api.Program;
 import org.nlogo.nvm.CompilerResults;
@@ -132,17 +132,17 @@ public strictfp class CompilerManager
             (proceduresInterface, null, null, error)
             .raise(this);
       }
-      if (error.fileName().equals("")) {
+      if (error.filename().equals("")) {
         new org.nlogo.window.Events.CompiledEvent
             (proceduresInterface, null, null, error)
             .raise(this);
-      } else if (error.fileName().equals("aggregate")) {
+      } else if (error.filename().equals("aggregate")) {
         new org.nlogo.window.Events.CompiledEvent
             (workspace.aggregateManager(), null, null, error)
             .raise(this);
       } else {
         new org.nlogo.window.Events.CompiledEvent
-            (new ExternalFileInterface(error.fileName()), null, null, error)
+            (new ExternalFileInterface(error.filename()), null, null, error)
             .raise(this);
       }
       return false;

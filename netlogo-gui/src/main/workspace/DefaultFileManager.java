@@ -2,7 +2,7 @@
 
 package org.nlogo.workspace;
 
-import org.nlogo.api.CompilerException;
+import org.nlogo.core.CompilerException;
 import org.nlogo.api.I18N;
 
 import java.util.ArrayList;

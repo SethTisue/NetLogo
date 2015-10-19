@@ -2,7 +2,8 @@
 
 package org.nlogo.compiler
 
-import org.nlogo.api.{ CompilerException, TokenizerInterface, VersionHistory }
+import org.nlogo.api.{ TokenizerInterface, VersionHistory }
+import org.nlogo.core.CompilerException
 import org.nlogo.nvm.Workspace
 import org.nlogo.prim._constdouble
 

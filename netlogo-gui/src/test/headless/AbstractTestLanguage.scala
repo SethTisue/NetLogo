@@ -4,7 +4,8 @@ package org.nlogo.headless
 
 import org.scalatest.Assertions
 import org.nlogo.agent.{Agent, Observer}
-import org.nlogo.api.{Equality, CompilerException, JobOwner, LogoException, Version, WorldDimensions, WorldDimensions3D}
+import org.nlogo.api.{Equality, JobOwner, LogoException, Version, WorldDimensions, WorldDimensions3D}
+import org.nlogo.core.CompilerException
 import org.nlogo.nvm.CompilerInterface
 import org.nlogo.util.Femto
 
