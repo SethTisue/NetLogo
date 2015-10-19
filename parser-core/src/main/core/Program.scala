@@ -10,6 +10,9 @@ object Program {
       turtlesOwn = AgentVariables.getImplicitTurtleVariables,
       patchesOwn = AgentVariables.getImplicitPatchVariables,
       linksOwn = AgentVariables.getImplicitLinkVariables)
+
+  def fromDialect(dialect: Dialect) =
+    empty().copy(dialect = dialect)
 }
 
 // breeds are ListMaps so the z-order in Renderer can match the definition order
