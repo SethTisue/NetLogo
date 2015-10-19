@@ -175,7 +175,8 @@ lazy val parserSettings: Seq[Setting[_]] = Seq(
 )
 
 lazy val sharedResources = (project in file ("shared")).
-  settings(commonSettings: _*)
+  settings(commonSettings: _*).
+  settings(unmanagedResourceDirectories in Compile += baseDirectory.value / "resources" / "main")
 
 // this project exists only to allow parser-core to be scalastyled
 lazy val parserCore = (project in file("parser-core")).
