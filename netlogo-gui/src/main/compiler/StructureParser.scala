@@ -5,6 +5,7 @@ package org.nlogo.compiler
 import CompilerExceptionThrowers.{ cAssert, exception }
 import org.nlogo.agent.{ Agent, Link, Turtle }
 import org.nlogo.api.{ Let, TokenizerInterface}
+import org.nlogo.core.Breed
 import org.nlogo.core.Program
 import org.nlogo.core.ErrorSource
 import org.nlogo.core.Token
@@ -19,7 +20,8 @@ import scala.collection.JavaConversions._
 private object StructureParser {
 
   class Results(val procedures: java.util.Map[String, Procedure],
-                val tokens: Map[Procedure, Iterable[Token]])
+                val tokens: Map[Procedure, Iterable[Token]],
+                val program: Program)
 
   def resolvePath(filename: String, path: String): String = {
     val pathFile = new java.io.File(path)
@@ -67,7 +69,7 @@ private object StructureParser {
 private class StructureParser(
   originalTokens: Seq[Token],
   displayName: Option[String],
-  program: Program,
+  var program: Program,
   oldProcedures: java.util.Map[String, Procedure],
   extensionManager: ExtensionManager,
   compilationEnv: CompilationEnvironment)
@@ -129,10 +131,8 @@ private class StructureParser(
           finally { cAssert(breedList.size == 1 || breedList.size == 2,
                             "breed only takes 1 or 2 inputs",token) }
           val breedName = breedList.get(0)
-          program.breeds.put(breedName, breedName) // will replace with agentset at realloc time
-          program.breedsOwn.put(breedName, new java.util.ArrayList[String])
-          if(breedList.size == 2)
-            program.breedsSingular.put(breedList.get(1), breedName)
+          val breedSingular = if (breedList.size == 2) breedList.get(1) else scala.util.Random.nextString(25)
+          program = program.copy(breeds = program.breeds + (breedName -> Breed(breedName, breedSingular)))
         }
         else {
           cAssert(token.tpe == TokenType.Keyword,"Expected keyword",token)
@@ -145,35 +145,40 @@ private class StructureParser(
             parseVarList(breedList, null, null)
             cAssert(breedList.size == 2, keyword + " only takes 2 inputs", token)
             val breedName = breedList.get(0)
-            // will replace with agentset at realloc time
-            program.linkBreeds.put(breedName, keyword)
-            program.linkBreedsOwn.put(breedName, new java.util.ArrayList[String])
-            if(breedList.size == 2)
-              program.linkBreedsSingular.put(breedList.get(1), breedName)
+            val breedSingular = if (breedList.size == 2) breedList.get(1) else scala.util.Random.nextString(25)
+            program = program.copy(linkBreeds = program.linkBreeds + (breedName -> Breed(breedName, breedSingular, isLinkBreed = true, isDirected = keyword == "DIRECTED-LINK-BREED")))
           }
           else if(keyword == "TURTLES-OWN") {
             cAssert(!haveTurtlesOwn,"Redeclaration of TURTLES-OWN",token)
             tokenBuffer.next()
             haveTurtlesOwn = true
-            parseVarList(program.turtlesOwn, null, null)
+            val turtlesOwnList = new java.util.ArrayList[String]
+            parseVarList(turtlesOwnList, null, null)
+            program = program.copy(turtlesOwn = program.turtlesOwn ++ turtlesOwnList)
           }
           else if(keyword == "LINKS-OWN") {
             cAssert(!haveLinksOwn,"Redeclaration of LINKS-OWN",token)
             tokenBuffer.next()
             haveLinksOwn = true
-            parseVarList(program.linksOwn, null, null)
+            val linksOwnList = new java.util.ArrayList[String]
+            parseVarList(linksOwnList, null, null)
+            program = program.copy(linksOwn = program.linksOwn ++ linksOwnList)
           }
           else if(keyword == "PATCHES-OWN") {
             cAssert( !havePatchesOwn,"Redeclaration of PATCHES-OWN",token)
             tokenBuffer.next()
             havePatchesOwn = true
-            parseVarList( program.patchesOwn, null, null)
+            val patchesOwnList = new java.util.ArrayList[String]
+            parseVarList(patchesOwnList, null, null)
+            program = program.copy(patchesOwn = program.patchesOwn ++ patchesOwnList)
           }
           else if(keyword == "GLOBALS") {
             cAssert(!haveGlobals,"Redeclaration of GLOBALS",token)
             tokenBuffer.next()
             haveGlobals = true
-            parseVarList(program.globals, null, null)
+            val globalsList = new java.util.ArrayList[String]
+            parseVarList(globalsList, null, null)
+            program = program.copy(userGlobals = program.userGlobals ++ globalsList)
           }
           else if(keyword.endsWith("-OWN")) {
             val breedName = keyword.substring(0, keyword.length - 4)
@@ -181,23 +186,27 @@ private class StructureParser(
                     "There is no breed named " + breedName,token)
             tokenBuffer.next()
             var linkbreed = false
-            if(program.breedsOwn.containsKey(breedName)) {
-              cAssert(program.breedsOwn.get(breedName).isEmpty,
+            if(program.breeds.values.flatMap(_.owns).contains(breedName)) {
+              cAssert(program.breeds(breedName).owns.isEmpty,
                       "Redeclaration of " + keyword, token)
             }
-            else if(program.linkBreedsOwn.containsKey(breedName)) {
-              cAssert(program.linkBreedsOwn.get(breedName).isEmpty,
+            else if(program.linkBreeds.containsKey(breedName)) {
+              cAssert(program.linkBreeds(breedName).owns.isEmpty,
                       "Redeclaration of " + keyword, token)
               linkbreed = true
             }
             val vars = new java.util.ArrayList[String]
             if(linkbreed) {
               parseVarList(vars, classOf[Link], null)
-              program.linkBreedsOwn.put(breedName, vars)
+              val oldLinkBreed = program.linkBreeds(breedName)
+              val newLinkBreed = oldLinkBreed.copy(owns = vars)
+              program = program.copy(linkBreeds = program.linkBreeds.updated(breedName, newLinkBreed))
             }
             else {
               parseVarList(vars, classOf[Turtle], null)
-              program.breedsOwn.put(breedName, vars)
+              val oldBreed = program.breeds(breedName)
+              val newBreed = oldBreed.copy(owns = vars)
+              program = program.copy(breeds = program.breeds.updated(breedName, newBreed))
             }
           }
           else if(keyword == "EXTENSIONS")
@@ -246,7 +255,7 @@ private class StructureParser(
     }
     if(!subprogram)
       extensionManager.finishFullCompilation()
-    new StructureParser.Results(newProcedures, tokensMap.toMap)
+    new StructureParser.Results(newProcedures, tokensMap.toMap, program)
   }
   // replaces an identifier token with its imported implementation, if necessary
   private def processTokenWithExtensionManager(token: Token): Token = {
@@ -397,21 +406,13 @@ private class StructureParser(
   }
   private def checkName(varName: String, token: Token, owningAgentClass: Class[_ <: Agent], procedure: Procedure) {
     if(owningAgentClass == null || owningAgentClass == classOf[Link]) {
-      val keys = program.breedsOwn.keySet.iterator()
-      while(keys.hasNext) {
-        val breedName = keys.next()
-        val breedOwns = program.breedsOwn.get(breedName)
-        cAssert(!breedOwns.contains(varName),
-                "You already defined " + varName + " as a " + breedName + " variable", token)
+      program.breeds.values.find(_.owns.contains(varName)).foreach { breed =>
+        exception("You already defined " + varName + " as a " + breed.name + " variable", token)
       }
     }
     if(owningAgentClass == null || owningAgentClass == classOf[Turtle]) {
-      val keys = program.linkBreedsOwn.keySet.iterator()
-      while(keys.hasNext) {
-        val breedName = keys.next()
-        val breedOwns = program.linkBreedsOwn.get(breedName)
-        cAssert(!breedOwns.contains(varName),
-                "You already defined " + varName + " as a " + breedName + " variable", token)
+      program.linkBreeds.values.find(_.owns.contains(varName)).foreach { breed =>
+        exception("You already defined " + varName + " as a " + breed.name + " variable", token)
       }
     }
     cAssert(!program.turtlesOwn.contains(varName),

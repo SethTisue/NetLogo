@@ -103,7 +103,7 @@ with org.nlogo.window.Events.JobRemovedEvent.Handler
     parent.agentClass match {
       case T if AgentVariables.isSpecialTurtleVariable(index) =>
         TURTLE_WHO
-      case P if AgentVariables.isSpecialPatchVariable(index, workspace.world.program.is3D) =>
+      case P if AgentVariables.isSpecialPatchVariable(index, workspace.world.program.dialect.is3D) =>
         PXCOR_OR_PYCOR
       case L if AgentVariables.isSpecialLinkVariable(index) =>
         LINK_WHO
@@ -401,7 +401,7 @@ with org.nlogo.window.Events.JobRemovedEvent.Handler
   private def parseTurtleOrDouble(text: String): Turtle = {
     val obj = workspace.compiler.readFromString(
       text, workspace.world, workspace.getExtensionManager,
-      workspace.world.program.is3D)
+      workspace.world.program.dialect.is3D)
     obj match {
       case t: Turtle =>
         t

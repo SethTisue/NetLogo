@@ -726,7 +726,7 @@ public abstract strictfp class GUIWorkspace // can't be both abstract and strict
     if (glView != null) {
       glView.close();
     }
-    if (world.program().is3D()) {
+    if (world.program().dialect().is3D()) {
       open3DView();
     }
 

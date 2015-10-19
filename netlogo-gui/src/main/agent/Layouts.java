@@ -68,7 +68,7 @@ public final strictfp class Layouts {
                             double spr, double len, double rep,
                             org.nlogo.util.MersenneTwisterFast random) {
     World world = nodeset.world();
-    if (world.program().is3D()) {
+    if (world.program().dialect().is3D()) {
       spring3D(nodeset, linkset, spr, len, rep, random);
     } else {
       spring2D(nodeset, linkset, spr, len, rep, random);

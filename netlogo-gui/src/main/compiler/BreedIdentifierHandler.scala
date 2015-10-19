@@ -4,6 +4,7 @@ package org.nlogo.compiler
 import org.nlogo.agent.AgentSet
 
 import org.nlogo.core.Program
+import org.nlogo.core.Breed
 import org.nlogo.core.Token
 import org.nlogo.core.TokenType
 import org.nlogo.nvm.Instruction
@@ -14,22 +15,20 @@ private object BreedIdentifierHandler {
   import TokenType.Command
   import TokenType.Reporter
   def process(token:Token,program:Program):Option[Token] = {
-    val handlers = if(program.is3D) handlers3D else handlers2D
+    val handlers = if(program.dialect.is3D) handlers3D else handlers2D
     handlers.toStream.flatMap(_.process(token,program)).headOption
   }
   def turtle(patternString:String,tokenType:TokenType,singular:Boolean,primClass:Class[_ <: Instruction]) =
     new Helper(patternString,tokenType,singular,primClass,
-               _.breeds, _.breedsSingular, (obj:AnyRef) => true)
+               _.breeds, _.breeds.map(t => t._2.singular -> t._2).toMap, (obj:Breed) => true)
   def directedLink(patternString:String,tokenType:TokenType,singular:Boolean,primClass:Class[_ <: Instruction]) =
     new Helper(patternString,tokenType,singular,primClass,
-               _.linkBreeds, _.linkBreedsSingular,
-               { case a:AgentSet => a.isDirected
-                case s:String => s == "DIRECTED-LINK-BREED" } )
+               _.linkBreeds, _.linkBreeds.map(l => l._2.singular -> l._2).toMap,
+               (b: Breed) => b.isDirected)
   def undirectedLink(patternString:String,tokenType:TokenType,singular:Boolean,primClass:Class[_ <: Instruction]) =
     new Helper(patternString,tokenType,singular,primClass,
-               _.linkBreeds, _.linkBreedsSingular,
-               { case a:AgentSet => a.isUndirected
-                case s:String => s == "UNDIRECTED-LINK-BREED" } )
+               _.linkBreeds, _.linkBreeds.map(l => l._2.singular -> l._2).toMap,
+               (b: Breed) => ! b.isDirected)
   private val handlers2D = handlers(false)
   private val handlers3D = handlers(true)
   private def handlers(is3D:Boolean) = List(
@@ -76,8 +75,8 @@ private object BreedIdentifierHandler {
   )
   class Helper
     (patternString:String,tokenType:TokenType,singular:Boolean,primClass:Class[_ <: Instruction],
-     breeds:(Program)=>java.util.Map[String,Object],singularMap:(Program)=>java.util.Map[String,String],
-     isValidBreed:(AnyRef)=>Boolean)
+     breeds:(Program)=>Map[String,Breed],singularMap:(Program)=>Map[String,Breed],
+     isValidBreed:(Breed)=>Boolean)
   {
     import java.util.regex.Pattern
     val pattern = Pattern.compile("\\A"+patternString.replaceAll("\\?","\\\\?").replaceAll("\\*","(.+)")+"\\Z")
@@ -85,14 +84,17 @@ private object BreedIdentifierHandler {
       val matcher = pattern.matcher(tok.value.asInstanceOf[String])
       if(!matcher.matches()) return None
       val name = matcher.group(1)
-      val map = if(singular) singularMap(program) else breeds(program)
-      if(!map.containsKey(name)) return None
-      val breedName = if(singular) map.get(name) else name
-      if(!isValidBreed(breeds(program).get(breedName))) return None
-      val instr = Instantiator.newInstance[Instruction](primClass,breedName)
-      val tok2 = new Token(tok.value.asInstanceOf[String],tokenType,instr)(tok.start,tok.end,tok.filename)
-      instr.token_=(tok2)
-      Some(tok2)
+      val map: Map[String, Breed] = if (singular) singularMap(program) else breeds(program)
+
+      map.get(name).flatMap { breed =>
+        if (isValidBreed(breed)) {
+          val instr = Instantiator.newInstance[Instruction](primClass,breed.name)
+          val tok2 = new Token(tok.value.asInstanceOf[String],tokenType,instr)(tok.start,tok.end,tok.filename)
+          instr.token_=(tok2)
+          Some(tok2)
+        } else
+          None
+      }
     }
   }
 }

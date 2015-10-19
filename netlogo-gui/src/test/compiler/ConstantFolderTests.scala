@@ -11,7 +11,7 @@ import org.nlogo.nvm.Procedure
 class ConstantFolderTests extends FunSuite {
 
   def compile(source: String): String = {
-    val program = new Program(false)
+    val program = Program.empty()
     val results = TestHelper.structureParse(s"to-report __test report $source \nend", program)
     assertResult(1)(results.procedures.size)
     val procedure = results.procedures.values.iterator.next()

@@ -16,11 +16,11 @@ class DefaultCompilerServices(compiler: CompilerInterface) extends CompilerServi
   def readNumberFromString(source: String) =
     compiler.readNumberFromString(source, null, null, false)
   def checkReporterSyntax(source: String) =
-    compiler.checkReporterSyntax(source, new Program(false),
+    compiler.checkReporterSyntax(source, Program.empty(),
                                  new java.util.HashMap[String,Procedure],
                                  null, false, new DummyCompilationEnvironment())
   def checkCommandSyntax(source: String) =
-    compiler.checkCommandSyntax(source, new Program(false),
+    compiler.checkCommandSyntax(source, Program.empty(),
                                 new java.util.HashMap[String,Procedure],
                                 null, true, new DummyCompilationEnvironment())
   def readFromString(source: String) =
@@ -30,7 +30,7 @@ class DefaultCompilerServices(compiler: CompilerInterface) extends CompilerServi
   def isValidIdentifier(s: String) =
     compiler.isValidIdentifier(s, false)
   def isReporter(s: String) =
-    compiler.isReporter(s, new Program(false), new java.util.HashMap[String, Procedure],
+    compiler.isReporter(s, Program.empty(), new java.util.HashMap[String, Procedure],
                         new org.nlogo.api.DummyExtensionManager, new DummyCompilationEnvironment())
   def tokenizeForColorization(source: String) =
     compiler.tokenizeForColorization(

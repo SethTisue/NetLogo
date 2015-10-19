@@ -247,7 +247,7 @@ private class ConstantParser(world:World,extensionManager:ExtensionManager) {
         agentset.add(world.observer)
         agentset
       }
-      else if(world.program.breedsSingular.containsKey(agentsetTypeString.toUpperCase)) {
+      else if(world.program.breeds.values.map(_.singular).toSeq.contains(agentsetTypeString.toUpperCase)) {
         val token = tokens.next()
         if(token.tpe != TokenType.Literal || !token.value.isInstanceOf[java.lang.Double])
           exception(BAD_TURTLE_ARG,token)
@@ -255,14 +255,14 @@ private class ConstantParser(world:World,extensionManager:ExtensionManager) {
         cAssert(closeBrace.tpe == TokenType.CloseBrace,EXPECTED_CloseBrace,closeBrace)
         world.getOrCreateTurtle(token.value.asInstanceOf[java.lang.Double].intValue)
       }
-      else if(world.program.linkBreedsSingular.containsKey(agentsetTypeString.toUpperCase)) {
+      else if(world.program.linkBreeds.values.map(_.singular).toSeq.contains(agentsetTypeString.toUpperCase)) {
         val end1 = parseEnd(tokens)
         val end2 = parseEnd(tokens)
         val closeBrace = tokens.next()
         cAssert(closeBrace.tpe == TokenType.CloseBrace,EXPECTED_CloseBrace,closeBrace)
-        world.getOrCreateLink(end1, end2,
-                              world.getLinkBreed(
-                                world.program.linkBreedsSingular.get(agentsetTypeString.toUpperCase)))
+        // I don't know whether this is right, but this will soon be deleted, so it's fine for now
+        val linkBreed = world.program.linkBreeds.values.find(_.singular == agentsetTypeString.toUpperCase)
+        world.getOrCreateLink(end1, end2, world.getLinkBreed(linkBreed.get.name))
       }
       else exception(agentsetTypeString + NOT_AN_AGENTSET,token)
     }

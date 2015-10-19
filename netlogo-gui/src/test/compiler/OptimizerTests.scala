@@ -16,7 +16,7 @@ class OptimizerTests extends FunSuite {
     compile("globals [glob1] breed [frogs frog] to __test [x] " + source + "\nend")
       .statements.body.head.toString
   private def compile(source:String):ProcedureDefinition = {
-    val program = new Program(false)
+    val program = Program.empty()
     val results = TestHelper.structureParse(source, program)
     assertResult(1)(results.procedures.size)
     val procedure = results.procedures.values.iterator.next()

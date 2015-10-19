@@ -56,7 +56,7 @@ object Compiler extends CompilerInterface {
   // that we don't know about.
   @throws(classOf[CompilerException])
   private def checkSyntax(source: String, subprogram: Boolean, program: Program, oldProcedures: ProceduresMap, extensionManager: ExtensionManager, parse: Boolean, compilationEnv: CompilationEnvironment) {
-    implicit val t = tokenizer(program.is3D)
+    implicit val t = tokenizer(program.dialect.is3D)
     val results = new StructureParser(t.tokenizeRobustly(source), None,
                                       program, oldProcedures, extensionManager, compilationEnv)
       .parse(subprogram)
@@ -114,7 +114,7 @@ object Compiler extends CompilerInterface {
   def readFromFile(currFile: org.nlogo.api.File, world: World, extensionManager: ExtensionManager): AnyRef = {
     val tokens: Iterator[Token] =
       Femto.get(classOf[TokenReaderInterface], "org.nlogo.lex.TokenReader",
-                Array(currFile, tokenizer(world.program.is3D)))
+                Array(currFile, tokenizer(world.program.dialect.is3D)))
     val result = new ConstantParser(world.asInstanceOf[org.nlogo.agent.World], extensionManager)
       .getConstantFromFile(tokens)
     // now skip whitespace, so that the model can use file-at-end? to see whether there are any
@@ -148,7 +148,7 @@ object Compiler extends CompilerInterface {
   // used by CommandLine
   def isReporter(s: String, program: Program, procedures: ProceduresMap, extensionManager: ExtensionManager, compilationEnv: CompilationEnvironment) =
     try {
-      implicit val t = tokenizer(program.is3D)
+      implicit val t = tokenizer(program.dialect.is3D)
       val results =
         new StructureParser(t.tokenize("to __is-reporter? report " + s + "\nend"),
                             None, program, procedures, extensionManager, compilationEnv)

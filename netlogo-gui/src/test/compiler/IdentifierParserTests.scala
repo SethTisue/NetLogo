@@ -12,12 +12,12 @@ import org.nlogo.nvm.Procedure
 class IdentifierParserTests extends FunSuite {
 
   def compile(source: String): Iterator[Token] = {
+    import collection.JavaConverters._
     val wrappedSource = "to __test " + source + "\nend"
     val interfaceGlobals = {
-      import collection.JavaConverters._
       List("X").asJava
     }
-    val program = new Program(interfaceGlobals, false)
+    val program = Program.empty().copy(interfaceGlobals = interfaceGlobals.asScala)
     implicit val tokenizer = Compiler.Tokenizer2D
     val results = TestHelper.structureParse(tokenizer.tokenizeAllowingRemovedPrims(wrappedSource), program)
     assertResult(1)(results.procedures.size)

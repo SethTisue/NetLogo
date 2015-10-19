@@ -3,6 +3,7 @@
 package org.nlogo.compiler
 
 import org.scalatest.FunSuite
+import org.nlogo.core.Breed
 import org.nlogo.core.Program
 import org.nlogo.core.Token
 import org.nlogo.core.TokenType
@@ -10,13 +11,13 @@ import org.nlogo.prim._
 
 class BreedIdentifierHandlerTests extends FunSuite {
   def tester(handler: BreedIdentifierHandler.Helper, code: String, tokenString: String): Token = {
-    val program = new Program(false)
-    program.breeds.put("FROGS", "FROGS")
-    program.breedsSingular.put("FROG", "FROGS")
-    program.linkBreeds.put("AS", "DIRECTED-LINK-BREED")
-    program.linkBreedsSingular.put("A", "AS")
-    program.linkBreeds.put("BS", "UNDIRECTED-LINK-BREED")
-    program.linkBreedsSingular.put("B", "BS")
+    val p= Program.empty()
+    val program = p.copy(
+      breeds = scala.collection.immutable.ListMap(
+        "FROGS" -> Breed("FROGS", "FROG")),
+      linkBreeds = scala.collection.immutable.ListMap(
+        "AS" -> Breed("AS", "A", isLinkBreed = true, isDirected = true),
+        "BS" -> Breed("BS", "B", isLinkBreed = true, isDirected = false)))
     handler.process(
       Compiler.Tokenizer2D.tokenize(code).find(_.text.equalsIgnoreCase(tokenString)).orNull,
       program)

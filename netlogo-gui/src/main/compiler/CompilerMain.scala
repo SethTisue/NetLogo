@@ -25,9 +25,9 @@ private object CompilerMain {
               oldProcedures: java.util.Map[String, Procedure],
               extensionManager: ExtensionManager, compilationEnv: CompilationEnvironment): Seq[Procedure] = {
 
-    val oldProgram = program.toCoreProgram
+    val oldProgram = program.copy()
 
-    implicit val tokenizer = if(program.is3D) Compiler.Tokenizer3D else Compiler.Tokenizer2D
+    implicit val tokenizer = if(program.dialect.is3D) Compiler.Tokenizer3D else Compiler.Tokenizer2D
     val structureResults = new StructureParser(tokenizer.tokenize(source), // tokenize
                                                displayName, program, oldProcedures, extensionManager, compilationEnv)
       .parse(subprogram)  // process declarations
@@ -37,7 +37,7 @@ private object CompilerMain {
     for(procedure <- structureResults.procedures.values.asScala) {
       procedure.topLevel = subprogram
       val tokens =
-        new IdentifierParser(program, oldProcedures, structureResults.procedures, false)
+        new IdentifierParser(structureResults.program, oldProcedures, structureResults.procedures, false)
         .process(structureResults.tokens(procedure).iterator, procedure)  // resolve references
       defs ++= new ExpressionParser(procedure, taskNumbers).parse(tokens) // parse
     }
@@ -58,7 +58,7 @@ private object CompilerMain {
       procdef.accept(new LocalsVisitor)  // convert _let/_repeat to _locals
       procdef.accept(new SetVisitor)   // convert _set to specific setters
       procdef.accept(new CarefullyVisitor)  // connect _carefully to _errormessage
-      procdef.accept(new Optimizer(program.is3D))   // do various code-improving rewrites
+      procdef.accept(new Optimizer(structureResults.program.dialect.is3D))   // do various code-improving rewrites
     }
     new AgentTypeChecker(defs).parse()  // catch agent type inconsistencies
     for(procdef <- defs) {

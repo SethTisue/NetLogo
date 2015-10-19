@@ -10,7 +10,7 @@ class _moviegrabinterface extends Command {
   override def syntax =
     Syntax.commandSyntax
   override def perform(context: Context) {
-    if (world.program.is3D)
+    if (world.program.dialect.is3D)
       throw new EngineException(
           context, this, token.text + " is not supported in NetLogo 3D")
     workspace match {

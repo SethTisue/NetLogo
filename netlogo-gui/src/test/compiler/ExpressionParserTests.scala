@@ -3,7 +3,8 @@
 package org.nlogo.compiler
 
 import org.scalatest.FunSuite
-import org.nlogo.api.{ DummyExtensionManager}
+import org.nlogo.api.{ DummyExtensionManager, ThreeDProgram }
+import org.nlogo.core.NetLogoCore
 import org.nlogo.core.Program
 import org.nlogo.core.CompilerException
 import org.nlogo.nvm.Procedure
@@ -18,7 +19,7 @@ class ExpressionParserTests extends FunSuite {
   /// helpers
   private def compile(source: String, is3D: Boolean): Seq[Statements] = { // must be private
     val wrappedSource = PREAMBLE + source + POSTAMBLE
-    val program = new Program(is3D)
+    val program = Program.fromDialect(if (is3D) ThreeDProgram else NetLogoCore)
     implicit val tokenizer = if (is3D) Compiler.Tokenizer3D else Compiler.Tokenizer2D
     val results = TestHelper.structureParse(tokenizer.tokenizeAllowingRemovedPrims(wrappedSource), program)
     assertResult(1)(results.procedures.size)

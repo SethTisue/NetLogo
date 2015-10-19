@@ -12,7 +12,7 @@ class TestGenerator extends FunSuite {
 
   val program = {
     import collection.JavaConverters._
-    new Program(List("glob1").asJava, false)
+    Program.empty().copy(userGlobals = Seq("glob1"))
   }
   def condense(disassembly: String) =
     disassembly.split("\n").map(_.trim).mkString("\n")
@@ -133,7 +133,7 @@ class TestGenerator extends FunSuite {
       test("Correctly generates custom code for or") {
         val emptyProgram = {
           import collection.JavaConverters._
-          new Program(List().asJava, false)
+          Program.empty()
         }
         Compiler.compileProgram(
           """

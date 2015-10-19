@@ -184,7 +184,7 @@ class Evaluator(workspace: AbstractWorkspace) {
   def readFromString(string: String) =
     workspace.compiler.readFromString(
       string, workspace.world, workspace.getExtensionManager,
-      workspace.world.program.is3D)
+      workspace.world.program.dialect.is3D)
 }
 
 

@@ -92,7 +92,7 @@ class ProceduresTab(val workspace: AbstractWorkspace) extends JPanel
           return None
       }
     }
-    workspace.compiler.findIncludes(path, getText, workspace.world.program.is3D)
+    workspace.compiler.findIncludes(path, getText, workspace.world.program.dialect.is3D)
   }
 
   def agentClass = classOf[Observer]
