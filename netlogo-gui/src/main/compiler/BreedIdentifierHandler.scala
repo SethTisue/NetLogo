@@ -2,7 +2,8 @@
 
 package org.nlogo.compiler
 import org.nlogo.agent.AgentSet
-import org.nlogo.api.{Program}
+
+import org.nlogo.core.Program
 import org.nlogo.core.Token
 import org.nlogo.core.TokenType
 import org.nlogo.nvm.Instruction

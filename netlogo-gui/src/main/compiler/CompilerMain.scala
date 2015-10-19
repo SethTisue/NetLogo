@@ -7,7 +7,8 @@ package org.nlogo.compiler
 // big exception to that principle, though, which is that the ExtensionManager gets side-effected in
 // StructureParser. - ST 2/21/08, 1/21/09
 
-import org.nlogo.api.{ Program, Version }
+import org.nlogo.api.{ Version }
+import org.nlogo.core.Program
 import org.nlogo.nvm.{GeneratorInterface, Procedure}
 import org.nlogo.core.CompilationEnvironment
 import org.nlogo.core.{ ExtensionManager, FrontEndInterface, FrontEndProcedure, Femto }

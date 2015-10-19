@@ -3,7 +3,8 @@
 package org.nlogo.compiler
 
 import org.nlogo.compiler.CompilerExceptionThrowers.{cAssert,exception}
-import org.nlogo.api.{Let,Program}
+import org.nlogo.api.{Let}
+import org.nlogo.core.Program
 import org.nlogo.core.CompilerException
 import org.nlogo.core.Token
 import org.nlogo.core.TokenType

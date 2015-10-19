@@ -2,8 +2,9 @@
 
 package org.nlogo.compiler
 
-import org.nlogo.api.{ NumberParser, Program, TokenizerInterface,
+import org.nlogo.api.{ NumberParser, TokenizerInterface,
                         TokenReaderInterface, TokenMapperInterface, World }
+import org.nlogo.core.Program
 import org.nlogo.core.CompilerException
 import org.nlogo.core.Token
 import org.nlogo.core.TokenType

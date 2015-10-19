@@ -2,7 +2,8 @@
 
 package org.nlogo.compiler
 
-import org.nlogo.api.{ Program, TokenizerInterface  }
+import org.nlogo.api.{ TokenizerInterface  }
+import org.nlogo.core.Program
 import org.nlogo.core.{ DummyExtensionManager, DummyCompilationEnvironment, Token }
 import org.nlogo.nvm.Procedure
 

@@ -4,7 +4,7 @@ package org.nlogo.window;
 
 import org.nlogo.core.CompilerException;
 import org.nlogo.api.JobOwner;
-import org.nlogo.api.Program;
+import org.nlogo.core.Program;
 import org.nlogo.nvm.CompilerResults;
 import org.nlogo.nvm.Procedure;
 import org.nlogo.workspace.AbstractWorkspace;

@@ -739,7 +739,7 @@ public strictfp class ClientWorld
     throw new UnsupportedOperationException();
   }
 
-  public org.nlogo.api.Program program() {
+  public org.nlogo.core.Program program() {
     throw new UnsupportedOperationException();
   }
 

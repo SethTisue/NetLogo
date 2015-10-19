@@ -4,7 +4,8 @@ package org.nlogo.compiler
 
 import CompilerExceptionThrowers.{ cAssert, exception }
 import org.nlogo.agent.{ Agent, Link, Turtle }
-import org.nlogo.api.{ Let, Program, TokenizerInterface}
+import org.nlogo.api.{ Let, TokenizerInterface}
+import org.nlogo.core.Program
 import org.nlogo.core.ErrorSource
 import org.nlogo.core.Token
 import org.nlogo.core.TokenType
