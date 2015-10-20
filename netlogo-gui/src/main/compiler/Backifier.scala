@@ -10,8 +10,18 @@ class Backifier(program: Program,
   extensionManager: core.ExtensionManager,
   procedures: ListMap[String, nvm.Procedure]) {
 
-  private def backifyName(name: String): String =
-    name.replaceFirst("\\.core\\.", ".")
+  val replacements = Map[String, String](
+    "org.nlogo.prim.etc._plus"      -> "org.nlogo.prim._plus",
+    "org.nlogo.prim.etc._breedhere" -> "org.nlogo.prim._breedhere"
+  )
+
+  private def backifyName(name: String): String = {
+    val alteredName = name.replaceFirst("\\.core\\.", ".")
+    if (replacements.contains(alteredName))
+      replacements(alteredName)
+    else
+      alteredName
+  }
 
   private def fallback[T1 <: core.Instruction, T2 <: nvm.Instruction](i: T1): T2 =
     BreedIdentifierHandler.process(i.token.copy(value = i.token.text.toUpperCase), program) match {
@@ -19,8 +29,10 @@ class Backifier(program: Program,
         Instantiator.newInstance[T2](
           Class.forName(backifyName(i.getClass.getName)))
       case Some((className, breedName, _)) =>
+        val name = "org.nlogo.prim." + className
+        val primName = if (replacements.contains(name)) replacements(name) else name
         Instantiator.newInstance[T2](
-          Class.forName("org.nlogo.prim." + className), breedName)
+          Class.forName(primName), breedName)
     }
 
   def apply(c: core.Command): nvm.Command = {
@@ -63,6 +75,7 @@ class Backifier(program: Program,
           case l: core.LogoList      =>
             val ll = api.LogoList(l: _*)
             new prim._constlist(ll)
+          case core.Nobody           => new prim._nobody()
           case s: String             => new prim._conststring(s)
         }
 
