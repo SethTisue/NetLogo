@@ -52,6 +52,8 @@ trait World {
   def turtlesOwnNameAt(i: Int): String
   def breedsOwnNameAt(breed: AgentSet, i: Int): String
   def allStoredValues: Iterator[AnyRef]
+  def getBreeds(): java.util.Map[String, _ <: AgentSet]
+  def getLinkBreeds(): java.util.Map[String, _ <: AgentSet]
 
   /**
    * Returns true if there is at least one partially transparent turtle, patch, link, or 3D stamp

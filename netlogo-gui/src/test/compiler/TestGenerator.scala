@@ -12,7 +12,7 @@ class TestGenerator extends FunSuite {
 
   val program = {
     import collection.JavaConverters._
-    Program.empty().copy(userGlobals = Seq("glob1"))
+    Program.empty().copy(userGlobals = Seq("GLOB1"))
   }
   def condense(disassembly: String) =
     disassembly.split("\n").map(_.trim).mkString("\n")

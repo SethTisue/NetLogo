@@ -23,7 +23,7 @@ private object CompilerMain {
 
   def compile(source: String, displayName: Option[String], program: Program, subprogram: Boolean,
               oldProcedures: java.util.Map[String, Procedure],
-              extensionManager: ExtensionManager, compilationEnv: CompilationEnvironment): Seq[Procedure] = {
+              extensionManager: ExtensionManager, compilationEnv: CompilationEnvironment): (Seq[Procedure], Program) = {
 
     val oldProgram = program.copy()
 
@@ -73,6 +73,6 @@ private object CompilerMain {
     }
     // only return top level procedures.
     // task procedures can be reached via the children field on Procedure.
-    defs.map(_.procedure).filterNot(_.isTask)
+    (defs.map(_.procedure).filterNot(_.isTask), structureResults.program)
   }
 }

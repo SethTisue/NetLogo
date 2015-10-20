@@ -688,6 +688,25 @@ public strictfp class World
     createPatches(dim.minPxcor(), dim.maxPxcor(), dim.minPycor(), dim.maxPycor());
   }
 
+  private void createBreeds(
+      scala.collection.Map<String, Breed> programBreeds,
+      java.util.Map<String, AgentSet> worldBreeds) {
+    scala.collection.Iterator<scala.Tuple2<String, Breed>> breedIterator =
+      programBreeds.iterator();
+
+    if (breedIterator.hasNext()) {
+      while (breedIterator.hasNext()) {
+        scala.Tuple2<String, Breed> b = breedIterator.next();
+        Class<? extends Agent> agentClass = Turtle.class;
+        if (b._2.isLinkBreed()) {
+          agentClass = Link.class;
+        }
+        AgentSet agentset = new TreeAgentSet(agentClass, b._2.name(), this);
+        worldBreeds.put(b._1.toUpperCase(), agentset);
+      }
+    }
+  }
+
   public void createPatches(int minPxcor, int maxPxcor,
                             int minPycor, int maxPycor) {
     patchScratch = null;
@@ -708,28 +727,10 @@ public strictfp class World
     _maxPycorBoxed = Double.valueOf(_maxPycor);
 
     breeds.clear();
-
-    scala.collection.Iterator<scala.Tuple2<String, Breed>> breedIterator =
-      _program.breeds().iterator();
-
-    if (breedIterator.hasNext()) {
-      for (scala.Tuple2<String, Breed> b = breedIterator.next(); breedIterator.hasNext();) {
-        AgentSet agentset = new TreeAgentSet(Turtle.class, b._2.name(), this);
-        breeds.put(b._1.toUpperCase(), agentset);
-      }
-    }
+    createBreeds(_program.breeds(), breeds);
 
     linkBreeds.clear();
-
-    scala.collection.Iterator<scala.Tuple2<String, Breed>> linkBreedIterator =
-      _program.breeds().iterator();
-
-    if (linkBreedIterator.hasNext()) {
-      for (scala.Tuple2<String, Breed> b = linkBreedIterator.next(); linkBreedIterator.hasNext();) {
-        AgentSet linkAgentSet = new TreeAgentSet(Link.class, b._2.name(), this);
-        linkBreeds.put(b._1.toUpperCase(), linkAgentSet);
-      }
-    }
+    createBreeds(_program.linkBreeds(), linkBreeds);
 
     if (_turtles != null) _turtles.clear(); // so a SimpleChangeEvent is published
     _turtles = new TreeAgentSet(Turtle.class, "TURTLES", this);
@@ -888,10 +889,10 @@ public strictfp class World
     // we create new agentsets for.  (if this is a first compile, all
     // the breeds will be created.)  any breeds that no longer exist
     // are dropped.
-    scala.collection.Iterator<String> breedNameIterator = _program.breeds().keys().iterator();
+    scala.collection.Iterator<String> breedNameIterator = _program.breeds().keysIterator();
     if (breedNameIterator.hasNext()) {
-      for (String breedName = breedNameIterator.next().toUpperCase();
-          breedNameIterator.hasNext();) {
+      while (breedNameIterator.hasNext()) {
+        String breedName = breedNameIterator.next().toUpperCase();
         AgentSet breedSet = oldBreeds.get(breedName);
         if (breedSet == null) {
           breeds.put(breedName, new TreeAgentSet(Turtle.class, breedName, this));
@@ -905,8 +906,8 @@ public strictfp class World
 
     scala.collection.Iterator<Breed> linkBreedIterator = _program.linkBreeds().values().iterator();
     if (linkBreedIterator.hasNext()) {
-      for (Breed breed = linkBreedIterator.next();
-          linkBreedIterator.hasNext();) {
+      while (linkBreedIterator.hasNext()) {
+        Breed breed = linkBreedIterator.next();
         String breedName  = breed.name().toUpperCase();
         boolean directed  = breed.isDirected();
         AgentSet breedSet = oldLinkBreeds.get(breedName);
@@ -927,7 +928,7 @@ public strictfp class World
     try {
       if (_turtles != null) {
         for (AgentSet.Iterator iter = _turtles.iterator(); iter.hasNext();) {
-          Agent agt = iter.next().realloc(true);
+          Agent agt = iter.next().realloc(_oldProgram != null);
           if (agt != null) {
             doomedAgents.add(agt);
           }
@@ -944,7 +945,7 @@ public strictfp class World
     try {
       if (_links != null) {
         for (AgentSet.Iterator iter = _links.iterator(); iter.hasNext();) {
-          Agent agt = iter.next().realloc(true);
+          Agent agt = iter.next().realloc(_oldProgram != null);
           if (agt != null) {
             doomedAgents.add(agt);
           }
@@ -961,19 +962,21 @@ public strictfp class World
     try {
       // Note: we only need to realloc() if the patch variables have changed.
       //  ~Forrest ( 5/2/2007)
-      if (_patches != null && _oldProgram != null && !_program.patchesOwn().equals(_oldProgram.patchesOwn())) {
+      if (_patches != null &&
+          (_oldProgram == null || !_program.patchesOwn().equals(_oldProgram.patchesOwn()))) {
         for (AgentSet.Iterator iter = _patches.iterator(); iter.hasNext();) {
-          iter.next().realloc(true);
+          iter.next().realloc(_oldProgram != null);
         }
       }
     } catch (AgentException ex) {
       throw new IllegalStateException(ex);
     }
     // call Agent.realloc() on the observer
-    _observer.realloc(true);
+    _observer.realloc(_oldProgram != null);
     // and finally...
     turtleBreedShapes.setUpBreedShapes(false, breeds);
     linkBreedShapes.setUpBreedShapes(false, linkBreeds);
+    _oldProgram = null;
   }
 
   /// patch scratch
@@ -1060,8 +1063,11 @@ public strictfp class World
   }
 
   public int breedsOwnIndexOf(AgentSet breed, String name) {
-    Breed b = _program.breeds().apply(breed.printName());
-    int result = b.owns().indexOf(name);
+    scala.Option<Breed> b = _program.breeds().get(breed.printName());
+    if (b.isEmpty()) {
+      return -1;
+    }
+    int result = b.get().owns().indexOf(name);
     if (result == -1) {
       return -1;
     }
@@ -1076,8 +1082,11 @@ public strictfp class World
   }
 
   public int linkBreedsOwnIndexOf(AgentSet breed, String name) {
-    Breed b = _program.linkBreeds().apply(breed.printName());
-    int result = b.owns().indexOf(name);
+    scala.Option<Breed> b = _program.linkBreeds().get(breed.printName());
+    if (b.isEmpty()) {
+      return -1;
+    }
+    int result = b.get().owns().indexOf(name);
     if (result == -1) {
       return -1;
     }
@@ -1150,7 +1159,7 @@ public strictfp class World
     String breedName = breed.printName();
     scala.Option<Breed> entry = _program.breeds().get(breedName);
     if (entry.nonEmpty()) {
-      return entry.get().name();
+      return entry.get().singular();
     } else {
       return "TURTLE";
     }
@@ -1164,7 +1173,7 @@ public strictfp class World
     String breedName = breed.printName();
     scala.Option<Breed> entry = _program.linkBreeds().get(breedName);
     if (entry.nonEmpty()) {
-      return entry.get().name();
+      return entry.get().singular();
     } else {
       return "LINK";
     }
@@ -1197,8 +1206,9 @@ public strictfp class World
     if (breed == _turtles) {
       return _program.turtlesOwn().size();
     } else {
-      scala.collection.Seq<String> breedOwns =
-          _program.breeds().apply(breed.printName()).owns();
+      String breedName = breed.printName();
+      Breed b = _program.breeds().apply(breedName);
+      scala.collection.Seq<String> breedOwns = b.owns();
       return _program.turtlesOwn().size() + breedOwns.size();
     }
   }
@@ -1245,9 +1255,11 @@ public strictfp class World
     return _linkShapeList.shape(name);
   }
 
-  // use of this method by other classes is discouraged
-  // since that's poor information-hiding
-  public Map<String, AgentSet> getBreeds() {
+  Map<String, AgentSet> getAgentBreeds() {
+    return breeds;
+  }
+
+  public Map<String, ? extends org.nlogo.api.AgentSet> getBreeds() {
     return breeds;
   }
 
@@ -1260,7 +1272,11 @@ public strictfp class World
     return breedOwns.contains(name);
   }
 
-  public Map<String, AgentSet> getLinkBreeds() {
+  Map<String, AgentSet> getLinkAgentBreeds() {
+    return linkBreeds;
+  }
+
+  public Map<String, ? extends org.nlogo.api.AgentSet> getLinkBreeds() {
     return linkBreeds;
   }
 
@@ -1298,6 +1314,9 @@ public strictfp class World
           ("World.program cannot be set to null");
     }
     _program = program;
+
+    createBreeds(_program.breeds(), breeds);
+    createBreeds(_program.linkBreeds(), linkBreeds);
   }
 
   public Program newProgram() {
@@ -1442,6 +1461,11 @@ public strictfp class World
         }
       }
     }
+  }
+
+  public void setUpShapes(boolean clearOld) {
+    turtleBreedShapes.setUpBreedShapes(clearOld, breeds);
+    linkBreedShapes.setUpBreedShapes(clearOld, linkBreeds);
   }
 
 }

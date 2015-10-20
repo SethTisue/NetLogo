@@ -643,7 +643,7 @@ public strictfp class Link
       return 0;
     }
     int j = 1;
-    for (Iterator<AgentSet> iter = world.getLinkBreeds().values().iterator(); iter.hasNext();) {
+    for (Iterator<AgentSet> iter = world.getLinkAgentBreeds().values().iterator(); iter.hasNext();) {
       if (mybreed == iter.next()) {
         return j;
       }

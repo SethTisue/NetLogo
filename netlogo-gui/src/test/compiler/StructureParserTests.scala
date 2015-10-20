@@ -25,9 +25,7 @@ class StructureParserTests extends FunSuite {
       "patches-own [PXCOR PYCOR PCOLOR PLABEL PLABEL-COLOR]\n" +
       "links-own [END1 END2 COLOR LABEL LABEL-COLOR HIDDEN? BREED THICKNESS SHAPE TIE-MODE]\n" +
       "breeds \n" +
-      "breeds-own \n" +
-      "link-breeds \n" +
-      "link-breeds-own \n")(program.dump)
+      "link-breeds \n")(results.program.dump)
   }
   test("missing procedure name") {  // ticket #1183
     intercept[CompilerException] {
@@ -52,25 +50,21 @@ class StructureParserTests extends FunSuite {
       "patches-own [PXCOR PYCOR PCOLOR PLABEL PLABEL-COLOR P1 P2]\n" +
       "links-own [END1 END2 COLOR LABEL LABEL-COLOR HIDDEN? BREED THICKNESS SHAPE TIE-MODE]\n" +
       "breeds \n" +
-      "breeds-own \n" +
-      "link-breeds \n" +
-      "link-breeds-own \n")(program.dump)
+      "link-breeds \n")(results.program.dump)
   }
   test("declarations2") {
     val program = Program.empty()
     val results = compile("breed [b1s b1] b1s-own [b11 b12] breed [b2s b2] b2s-own [b21 b22]", program)
     assert(results.procedures.isEmpty)
-    assertResult("globals []\n" +
-      "interfaceGlobals []\n" +
-      "turtles-own [WHO COLOR HEADING XCOR YCOR SHAPE LABEL LABEL-COLOR BREED HIDDEN? SIZE PEN-SIZE PEN-MODE]\n" +
-      "patches-own [PXCOR PYCOR PCOLOR PLABEL PLABEL-COLOR]\n" +
-      "links-own [END1 END2 COLOR LABEL LABEL-COLOR HIDDEN? BREED THICKNESS SHAPE TIE-MODE]\n" +
-      "breeds B1S = B1S\n" +
-      "B2S = B2S\n" +
-      "breeds-own B1S = [B11, B12]\n" +
-      "B2S = [B21, B22]\n" +
-      "link-breeds \n" +
-      "link-breeds-own \n")(program.dump)
+    assertResult(
+      """|globals []
+         |interfaceGlobals []
+         |turtles-own [WHO COLOR HEADING XCOR YCOR SHAPE LABEL LABEL-COLOR BREED HIDDEN? SIZE PEN-SIZE PEN-MODE]
+         |patches-own [PXCOR PYCOR PCOLOR PLABEL PLABEL-COLOR]
+         |links-own [END1 END2 COLOR LABEL LABEL-COLOR HIDDEN? BREED THICKNESS SHAPE TIE-MODE]
+         |breeds B1S = Breed(B1S, B1, B11 B12, false)
+         |B2S = Breed(B2S, B2, B21 B22, false)
+         |link-breeds """.stripMargin + "\n")(results.program.dump)
   }
   test("missing end 1") {
     val e = intercept[CompilerException] {

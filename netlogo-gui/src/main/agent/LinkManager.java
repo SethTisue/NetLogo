@@ -106,7 +106,7 @@ public strictfp class LinkManager {
     Link link = (Link) world.links().getAgent(new DummyLink
         (world, src, dest, breed));
     if (link == null && includeAllLinks && breed == world.links()) {
-      for (Iterator<AgentSet> iter = world.getLinkBreeds().values().iterator();
+      for (Iterator<AgentSet> iter = world.getLinkAgentBreeds().values().iterator();
            iter.hasNext();) {
         link = (Link) world.links().getAgent
             (new DummyLink(world, src, dest, iter.next()));

@@ -178,7 +178,7 @@ private class StructureParser(
             haveGlobals = true
             val globalsList = new java.util.ArrayList[String]
             parseVarList(globalsList, null, null)
-            program = program.copy(userGlobals = program.userGlobals ++ globalsList)
+            program = program.copy(userGlobals = program.userGlobals ++ globalsList.map(_.toUpperCase))
           }
           else if(keyword.endsWith("-OWN")) {
             val breedName = keyword.substring(0, keyword.length - 4)
@@ -196,13 +196,12 @@ private class StructureParser(
               linkbreed = true
             }
             val vars = new java.util.ArrayList[String]
-            if(linkbreed) {
+            if (linkbreed) {
               parseVarList(vars, classOf[Link], null)
               val oldLinkBreed = program.linkBreeds(breedName)
               val newLinkBreed = oldLinkBreed.copy(owns = vars)
               program = program.copy(linkBreeds = program.linkBreeds.updated(breedName, newLinkBreed))
-            }
-            else {
+            } else {
               parseVarList(vars, classOf[Turtle], null)
               val oldBreed = program.breeds(breedName)
               val newBreed = oldBreed.copy(owns = vars)

@@ -21,7 +21,7 @@ class OptimizerTests extends FunSuite {
     assertResult(1)(results.procedures.size)
     val procedure = results.procedures.values.iterator.next()
     val tokens =
-      new IdentifierParser(program,java.util.Collections.emptyMap[String,Procedure],
+      new IdentifierParser(results.program,java.util.Collections.emptyMap[String,Procedure],
                            results.procedures,false)
       .process(results.tokens(procedure).iterator, procedure)
     val procdef = new ExpressionParser(procedure).parse(tokens).head

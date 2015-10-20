@@ -961,7 +961,7 @@ public strictfp class Importer
   //returns a List containing all the breed variables for this model
   List<String> getAllBreedVars() {
     List<String> allBreedOwns = new ArrayList<String>();
-    Map<String, AgentSet> breeds = world.getBreeds();
+    Map<String, AgentSet> breeds = world.getAgentBreeds();
     if (breeds != null) {
       for (Iterator<AgentSet> breedElt = breeds.values().iterator();
            breedElt.hasNext();) {
@@ -980,7 +980,7 @@ public strictfp class Importer
 
   List<String> getAllLinkBreedVars() {
     List<String> allBreedOwns = new ArrayList<String>();
-    Map<String, AgentSet> breeds = world.getLinkBreeds();
+    Map<String, AgentSet> breeds = world.getLinkAgentBreeds();
     if (breeds != null) {
       for (Iterator<AgentSet> breedElt = breeds.values().iterator();
            breedElt.hasNext();) {

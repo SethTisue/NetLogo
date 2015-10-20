@@ -1135,7 +1135,7 @@ public strictfp class Turtle
       return 0;
     }
     int j = 0;
-    for (Iterator<AgentSet> iter = world.getBreeds().values().iterator(); iter.hasNext(); j++) {
+    for (Iterator<AgentSet> iter = world.getAgentBreeds().values().iterator(); iter.hasNext(); j++) {
       if (mybreed == iter.next()) {
         return j;
       }

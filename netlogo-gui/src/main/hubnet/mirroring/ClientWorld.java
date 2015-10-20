@@ -835,4 +835,12 @@ public strictfp class ClientWorld
     return false;
   }
 
+  public Map<String, ? extends org.nlogo.api.AgentSet> getBreeds() {
+    throw new UnsupportedOperationException();
+  }
+
+  public Map<String, ? extends org.nlogo.api.AgentSet> getLinkBreeds() {
+    throw new UnsupportedOperationException();
+  }
+
 }
