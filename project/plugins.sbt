@@ -4,8 +4,6 @@ resolvers += "Typesafe Public Repo" at "http://repo.typesafe.com/typesafe/releas
 
 resolvers += "sonatype-releases" at "https://oss.sonatype.org/content/repositories/releases/"
 
-addSbtPlugin("org.ensime" % "ensime-sbt" % "0.1.6")
-
 addSbtPlugin("com.typesafe.sbt" % "sbt-git" % "0.8.4")
 
 // so we can use native2ascii on Linux.
@@ -31,6 +29,8 @@ resolvers += Resolver.url(
   "bintray-sbt-plugin-releases",
     url("http://dl.bintray.com/content/sbt/sbt-plugin-releases"))(
         Resolver.ivyStylePatterns)
+
+addSbtPlugin("org.scala-js" % "sbt-scalajs" % "0.6.5")
 
 addSbtPlugin("me.lessis" % "bintray-sbt" % "0.1.2")
 
