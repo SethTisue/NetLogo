@@ -7,7 +7,7 @@ import org.nlogo.api.Color;
 import org.nlogo.api.CompilerServices;
 import org.nlogo.api.ImporterUser;
 import org.nlogo.api.LogoException;
-import org.nlogo.api.Nobody$;
+import org.nlogo.core.Nobody$;
 import org.nlogo.core.Breed;
 import org.nlogo.core.Program;
 import org.nlogo.api.Shape;

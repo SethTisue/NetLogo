@@ -3,7 +3,8 @@
 package org.nlogo.lex
 
 import org.nlogo.util.Utils
-import org.nlogo.api.{ Color, TokenMapperInterface, Nobody, AgentVariables }
+import org.nlogo.api.{ Color, TokenMapperInterface, AgentVariables }
+import org.nlogo.core.Nobody
 import org.nlogo.core.Token
 import org.nlogo.core.TokenHolder
 

@@ -3,7 +3,8 @@
 package org.nlogo.prim
 
 import org.nlogo.agent.{ AgentSet, Turtle }
-import org.nlogo.api.{ Nobody, Syntax }
+import org.nlogo.api.Syntax
+import org.nlogo.core.Nobody
 import org.nlogo.nvm.{ Context, EngineException, Reporter }
 
 class _breedsingular(breedName: String) extends Reporter {

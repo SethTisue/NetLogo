@@ -29,7 +29,7 @@ public final strictfp class _oneof
       AgentSet agents = (AgentSet) obj;
       int count = agents.count();
       if (count == 0) {
-        return org.nlogo.api.Nobody$.MODULE$;
+        return org.nlogo.core.Nobody$.MODULE$;
       } else {
         return agents.randomOne(count, context.job.random.nextInt(count));
       }
@@ -49,7 +49,7 @@ public final strictfp class _oneof
   public Object report_1(Context context, AgentSet agents) {
     int count = agents.count();
     if (count == 0) {
-      return org.nlogo.api.Nobody$.MODULE$;
+      return org.nlogo.core.Nobody$.MODULE$;
     } else {
       return agents.randomOne(count, context.job.random.nextInt(count));
     }
@@ -77,7 +77,7 @@ public final strictfp class _oneof
       AgentSet agents = (AgentSet) obj;
       int count = agents.count();
       if (count == 0) {
-        return org.nlogo.api.Nobody$.MODULE$;
+        return org.nlogo.core.Nobody$.MODULE$;
       } else {
         return agents.randomOne(count, context.job.random.nextInt(count));
       }

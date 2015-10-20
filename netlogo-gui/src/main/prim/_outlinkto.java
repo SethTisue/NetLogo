@@ -42,7 +42,7 @@ public final strictfp class _outlinkto
     Turtle target = argEvalTurtle(context, 0);
     Link link = linkManager.findLinkFrom(parent, target, breed, true);
     if (link == null) {
-      return org.nlogo.api.Nobody$.MODULE$;
+      return org.nlogo.core.Nobody$.MODULE$;
     }
     return link;
   }

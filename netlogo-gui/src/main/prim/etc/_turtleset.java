@@ -50,7 +50,7 @@ public final strictfp class _turtleset
         descendList(context, (LogoList) elt, resultSet);
       } else if (elt instanceof Turtle) {
         resultSet.add((Turtle) elt);
-      } else if (elt != org.nlogo.api.Nobody$.MODULE$) {
+      } else if (elt != org.nlogo.core.Nobody$.MODULE$) {
         throw new ArgumentTypeException
             (context, this, i, Syntax.TurtleType() | Syntax.TurtlesetType(), elt);
       }
@@ -81,7 +81,7 @@ public final strictfp class _turtleset
         }
       } else if (obj instanceof LogoList) {
         descendList(context, (LogoList) obj, result);
-      } else if (obj != org.nlogo.api.Nobody$.MODULE$) {
+      } else if (obj != org.nlogo.core.Nobody$.MODULE$) {
         throw new EngineException(context, this,
             I18N.errorsJ().getN("org.nlogo.prim.etc._turtleset.incorrectInputType",
                 this.displayName(), Dump.logoObject(tempList, true, false), Dump.logoObject(obj, true, false)));

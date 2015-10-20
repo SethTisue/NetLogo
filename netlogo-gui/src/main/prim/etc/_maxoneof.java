@@ -46,7 +46,7 @@ public final strictfp class _maxoneof
       }
     }
     if (winners.isEmpty()) {
-      return org.nlogo.api.Nobody$.MODULE$;
+      return org.nlogo.core.Nobody$.MODULE$;
     } else {
       return winners.get(context.job.random.nextInt(winners.size()));
     }

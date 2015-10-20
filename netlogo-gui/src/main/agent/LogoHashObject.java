@@ -13,7 +13,7 @@ package org.nlogo.agent;
 
 import org.nlogo.api.Equality;
 import org.nlogo.api.LogoList;
-import org.nlogo.api.Nobody$;
+import org.nlogo.core.Nobody$;
 
 import java.util.Iterator;
 

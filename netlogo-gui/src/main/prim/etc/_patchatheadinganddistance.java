@@ -29,7 +29,7 @@ public final strictfp class _patchatheadinganddistance
               heading,
               argEvalDoubleValue(context, 1));
     } catch (org.nlogo.api.AgentException exc) {
-      return org.nlogo.api.Nobody$.MODULE$;
+      return org.nlogo.core.Nobody$.MODULE$;
     }
   }
 }

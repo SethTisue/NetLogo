@@ -6,8 +6,9 @@ import java.io.PrintWriter
 import java.util.{ ArrayList, Collections, HashMap => JHashMap, List => JList, Map => JMap }
 import java.lang.{ Integer => JInteger, Long => JLong }
 import org.nlogo.{ core, api },
-  api.{ Dump, Nobody },
-    Dump.csv
+  api.Dump,
+    Dump.csv,
+  core.Nobody
 import collection.JavaConverters._
 
 // I converted this from Java without (for now, at least) making any effort to clean it up and make

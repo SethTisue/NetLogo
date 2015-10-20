@@ -2,6 +2,7 @@
 
 package org.nlogo.api
 
+import org.nlogo.core.Nobody
 import org.nlogo.core.ExtensionObject
 import java.{lang => jl}
 import scala.language.implicitConversions

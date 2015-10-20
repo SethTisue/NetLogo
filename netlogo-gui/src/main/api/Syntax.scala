@@ -2,6 +2,7 @@
 
 package org.nlogo.api
 
+import org.nlogo.core.Nobody
 import org.nlogo.core.{ Syntax => CoreSyntax }
 /**
  * Specifies the arguments accepted by a primitive.
