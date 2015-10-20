@@ -2,6 +2,7 @@
 
 package org.nlogo.api
 
+import org.nlogo.core.LogoList
 import org.nlogo.core.Nobody
 import Syntax._
 

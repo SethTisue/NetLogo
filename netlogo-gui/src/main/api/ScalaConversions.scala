@@ -2,6 +2,7 @@
 
 package org.nlogo.api
 
+import org.nlogo.core.LogoList
 import org.nlogo.core.Nobody
 import org.nlogo.core.ExtensionObject
 import java.{lang => jl}
@@ -29,7 +30,7 @@ object ScalaConversions {
     toLogoList(arr: Seq[T]) // trigger implicit conversion
 
   def toLogoList(ll: LogoList): LogoList =
-    LogoList.fromIterator(ll.map(toLogoObject))
+    LogoList.fromVector(ll.toVector.map(toLogoObject))
 
   def toLogoObject(a: Any): AnyRef = a match {
 
@@ -55,11 +56,11 @@ object ScalaConversions {
     case x: AgentSet => x
     case Nobody => Nobody
 
+    case ll: LogoList => toLogoList(ll)
     // Seqs turn into LogoList. their elements are recursively converted.
     // also recurse into LogoLists.
     case a: Array[_] => toLogoList(a)
     case s: Seq[_] => toLogoList(s)
-    case ll: LogoList => toLogoList(ll)
 
     // unconvertible type
     case _ => sys.error("don't know how to convert: " + a)

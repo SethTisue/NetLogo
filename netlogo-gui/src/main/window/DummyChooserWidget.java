@@ -7,7 +7,7 @@ import org.nlogo.api.CompilerServices;
 import org.nlogo.api.Dump;
 import org.nlogo.api.Editable;
 import org.nlogo.api.I18N;
-import org.nlogo.api.LogoList;
+import org.nlogo.core.LogoList;
 import org.nlogo.api.Property;
 
 import java.util.Iterator;
@@ -45,7 +45,7 @@ public strictfp class DummyChooserWidget
 
   public String choicesWrapper() {
     StringBuilder buf = new StringBuilder();
-    for (Iterator<Object> it = constraint.acceptedValues().iterator(); it.hasNext();) {
+    for (Iterator<Object> it = constraint.acceptedValues().javaIterator(); it.hasNext();) {
       buf.append
           (Dump.logoObject(it.next(), true, false));
       buf.append('\n');

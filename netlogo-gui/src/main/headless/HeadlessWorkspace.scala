@@ -567,7 +567,7 @@ with org.nlogo.api.ViewSettings {
    *
    * @param source The reporter to run
    * @return the result reported; may be of type java.lang.Integer, java.lang.Double,
-   *         java.lang.Boolean, java.lang.String, {@link org.nlogo.api.LogoList},
+   *         java.lang.Boolean, java.lang.String, {@link org.nlogo.core.LogoList},
    *         {@link org.nlogo.api.Agent}, AgentSet, or Nobody
    * @throws org.nlogo.core.CompilerException
    *                       if the code fails to compile

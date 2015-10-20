@@ -3,7 +3,8 @@
 package org.nlogo.tools
 
 import java.awt.BorderLayout
-import org.nlogo.api.{ NetLogoListener,  StringUtils }
+import org.nlogo.api.{ NetLogoListener, StringUtils }
+import org.nlogo.core.LogoList
 import org.nlogo.core.CompilerException
 import org.nlogo.lite.InterfaceComponent
 import org.nlogo.util.SysInfo

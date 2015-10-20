@@ -7,7 +7,7 @@ import org.nlogo.agent.Link;
 import org.nlogo.api.Dump;
 import org.nlogo.api.I18N;
 import org.nlogo.api.LogoException;
-import org.nlogo.api.LogoList;
+import org.nlogo.core.LogoList;
 import org.nlogo.api.Syntax;
 import org.nlogo.nvm.ArgumentTypeException;
 import org.nlogo.nvm.Context;
@@ -60,7 +60,7 @@ public final strictfp class _linkset
 
   private void descendList(Context context, LogoList tempList, Set<Link> result)
       throws LogoException {
-    for (Object obj : tempList) {
+    for (Object obj : tempList.javaIterable()) {
       if (obj instanceof Link) {
         result.add((Link) obj);
       } else if (obj instanceof AgentSet) {

@@ -10,7 +10,7 @@ import org.nlogo.agent.Patch;
 import org.nlogo.agent.Turtle;
 import org.nlogo.api.I18N;
 import org.nlogo.api.LogoException;
-import org.nlogo.api.LogoList;
+import org.nlogo.core.LogoList;
 import org.nlogo.core.Syntax;
 import org.nlogo.util.Thunk;
 
@@ -421,7 +421,7 @@ public abstract strictfp class Instruction
     return argEvalDouble(context, argIndex).intValue();
   }
 
-  public org.nlogo.api.LogoList argEvalList(Context context, int argIndex) throws LogoException {
+  public org.nlogo.core.LogoList argEvalList(Context context, int argIndex) throws LogoException {
     Object obj = args[argIndex].report(context);
     try {
       return (LogoList) obj;

@@ -3,7 +3,8 @@
 package org.nlogo.compiler
 import org.nlogo.compiler.CompilerExceptionThrowers.{cAssert,exception}
 import org.nlogo.agent.{AgentSet,ArrayAgentSet,Link,Observer,Patch,Turtle,World,World3D}
-import org.nlogo.api.{LogoList}
+
+import org.nlogo.core.LogoList
 import org.nlogo.core.Nobody
 import org.nlogo.core.Token
 import org.nlogo.core.TokenType

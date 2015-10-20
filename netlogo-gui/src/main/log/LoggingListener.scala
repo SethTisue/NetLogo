@@ -3,6 +3,7 @@
 package org.nlogo.log
 
 import org.nlogo.api.{ NetLogoListener }
+import org.nlogo.core.LogoList
 import org.nlogo.core.CompilerException
 import Logger._
 

@@ -250,7 +250,7 @@ public strictfp class ClientWorld
 
     // otherwise, perform the update...
     bufPatch.updateFrom(patch);
-    patchColors[(int) patch.id()] = org.nlogo.api.Color.getARGBIntByRGBAList((org.nlogo.api.LogoList) bufPatch.pcolor());
+    patchColors[(int) patch.id()] = org.nlogo.api.Color.getARGBIntByRGBAList((org.nlogo.core.LogoList) bufPatch.pcolor());
   }
 
   void updateTurtle(TurtleData turtle) {

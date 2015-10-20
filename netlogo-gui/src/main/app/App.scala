@@ -4,6 +4,8 @@ package org.nlogo.app
 
 import org.nlogo.agent.{Agent, World3D, World}
 import org.nlogo.api._
+import org.nlogo.core.LogoList
+import org.nlogo.core.LogoList
 import org.nlogo.core.Nobody
 import org.nlogo.core.CompilerException
 import org.nlogo.core.Token
@@ -864,7 +866,7 @@ class App extends
    * It is an error to do so.
    * @param source The reporter to run
    * @return the result reported; may be of type java.lang.Integer, java.lang.Double,
-   *         java.lang.Boolean, java.lang.String, {@link org.nlogo.api.LogoList},
+   *         java.lang.Boolean, java.lang.String, {@link org.nlogo.core.LogoList},
    *         {@link org.nlogo.api.Agent}, AgentSet, or Nobody
    * @throws org.nlogo.core.CompilerException if the code fails to compile
    * @throws IllegalStateException if called from the AWT event queue thread

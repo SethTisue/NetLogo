@@ -89,9 +89,7 @@ class Backifier(program: Program,
         value match {
           case d: java.lang.Double   => new prim._constdouble(d)
           case b: java.lang.Boolean  => new prim._constboolean(b)
-          case l: core.LogoList      =>
-            val ll = api.LogoList(l: _*)
-            new prim._constlist(ll)
+          case l: core.LogoList      => new prim._constlist(l)
           case core.Nobody           => new prim._nobody()
           case s: String             => new prim._conststring(s)
         }

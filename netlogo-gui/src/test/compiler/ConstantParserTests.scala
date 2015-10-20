@@ -4,7 +4,8 @@ package org.nlogo.compiler
 
 import org.scalatest.FunSuite
 import org.nlogo.agent.{AgentSet, Patch, Turtle, World}
-import org.nlogo.api.{ Dump, LogoList}
+import org.nlogo.api.{ Dump}
+import org.nlogo.core.LogoList
 import org.nlogo.core.CompilerException
 import org.nlogo.core.ExtensionObject
 import org.nlogo.core.ExtensionManager

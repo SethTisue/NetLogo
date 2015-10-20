@@ -7,7 +7,7 @@ import org.nlogo.agent.Patch;
 import org.nlogo.api.Dump;
 import org.nlogo.api.I18N;
 import org.nlogo.api.LogoException;
-import org.nlogo.api.LogoList;
+import org.nlogo.core.LogoList;
 import org.nlogo.api.Syntax;
 import org.nlogo.nvm.ArgumentTypeException;
 import org.nlogo.nvm.Context;
@@ -62,7 +62,7 @@ public final strictfp class _patchset
 
   private void descendList(Context context, LogoList tempList, Set<Patch> result)
       throws LogoException {
-    for (Iterator<Object> iter = tempList.iterator();
+    for (Iterator<Object> iter = tempList.javaIterator();
          iter.hasNext();) {
       Object obj = iter.next();
       if (obj instanceof Patch) {

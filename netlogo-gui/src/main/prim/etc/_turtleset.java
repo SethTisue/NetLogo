@@ -7,7 +7,7 @@ import org.nlogo.agent.Turtle;
 import org.nlogo.api.Dump;
 import org.nlogo.api.I18N;
 import org.nlogo.api.LogoException;
-import org.nlogo.api.LogoList;
+import org.nlogo.core.LogoList;
 import org.nlogo.api.Syntax;
 import org.nlogo.nvm.ArgumentTypeException;
 import org.nlogo.nvm.Context;
@@ -63,7 +63,7 @@ public final strictfp class _turtleset
 
   private void descendList(Context context, LogoList tempList, Set<Turtle> result)
       throws LogoException {
-    for (Iterator<Object> iter = tempList.iterator();
+    for (Iterator<Object> iter = tempList.javaIterator();
          iter.hasNext();) {
       Object obj = iter.next();
       if (obj instanceof Turtle) {

@@ -101,11 +101,11 @@ public strictfp class Argument
     }
   }
 
-  public org.nlogo.api.LogoList getList()
+  public org.nlogo.core.LogoList getList()
       throws org.nlogo.api.ExtensionException, org.nlogo.api.LogoException {
     Object obj = get();
     try {
-      return (org.nlogo.api.LogoList) obj;
+      return (org.nlogo.core.LogoList) obj;
     } catch (ClassCastException ex) {
       throw new org.nlogo.api.ExtensionException(
         getExceptionMessage(Syntax.ListType(), obj));

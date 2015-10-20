@@ -4,7 +4,8 @@ package org.nlogo.lab.gui
 
 import org.nlogo.lab.{EnumeratedValueSet,Protocol,SteppedValueSet,ValueSet}
 import java.awt.{GridBagConstraints,Window}
-import org.nlogo.api.{I18N, Dump, CompilerServices, Editable, LogoList, Property}
+import org.nlogo.api.{I18N, Dump, CompilerServices, Editable, Property}
+import org.nlogo.core.LogoList
 import org.nlogo.core.CompilerException
 import collection.JavaConverters._
 
@@ -87,7 +88,7 @@ class ProtocolEditable(protocol: Protocol,
             compiler.readFromString("[" + valueSets + "]").asInstanceOf[LogoList]
           } }
         catch{ case ex: CompilerException => complain(ex.getMessage); return None }
-        for(o <- list.asScala.toList) yield {
+        for(o <- list.toList) yield {
           o.asInstanceOf[LogoList].toList match {
             case List(variableName: String, more: LogoList) =>
               more.toList match {
