@@ -12,12 +12,12 @@ class Procedure(
   val name: String,
   _displayName: Option[String],
   val parent: Procedure,
+  val argTokens: Seq[Token] = Seq(),
   initialArgs: Vector[String] = Vector[String]()) extends FrontEndProcedure {
 
   args = initialArgs
   val fileName = nameToken.filename // used by cities include-file stuff
   val filename = fileName // alias, may not be needed
-  override def argTokens = Seq()
   override def procedureDeclaration = null
 
   val displayName = buildDisplayName(_displayName)

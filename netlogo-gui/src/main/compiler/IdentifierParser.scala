@@ -4,7 +4,9 @@ package org.nlogo.compiler
 
 import org.nlogo.compiler.CompilerExceptionThrowers.{cAssert,exception}
 import org.nlogo.api.{Let}
+import org.nlogo.core.BreedIdentifierHandler
 import org.nlogo.core.Program
+import org.nlogo.core.Instantiator
 import org.nlogo.core.CompilerException
 import org.nlogo.core.Token
 import org.nlogo.core.TokenType
@@ -69,7 +71,9 @@ private class IdentifierParser(program:Program,
                ident,TokenType.Reporter,tok.start,tok.end,tok.filename)
     else {
       // go thru our identifierHandlers, if one triggers, return the result
-      BreedIdentifierHandler.process(tok,program).getOrElse{
+      // BreedIdentifierHandler.process(tok,program).map {
+      //   case Some((name, breed, tokenType)) =>
+      //   }.getOrElse {
         val callproc =
           if(oldProcedures.get(ident) != null)
             oldProcedures.get(ident)
@@ -84,7 +88,6 @@ private class IdentifierParser(program:Program,
         else
           newToken(new _call(callproc),
                      ident,TokenType.Command,tok.start,tok.end,tok.filename)
-      }
     }
   }
 

@@ -2,6 +2,7 @@
 
 package org.nlogo.compiler
 
+import org.nlogo.core.Instantiator
 import org.nlogo.agent.Patch
 import org.nlogo.api.{ LogoException, Version }
 import org.nlogo.nvm.{ Command, Instruction, Reporter }

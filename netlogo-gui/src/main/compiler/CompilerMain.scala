@@ -27,6 +27,7 @@ private object CompilerMain {
 
     val oldProgram = program.copy()
 
+    /*
     implicit val tokenizer = if(program.dialect.is3D) Compiler.Tokenizer3D else Compiler.Tokenizer2D
     val structureResults = new StructureParser(tokenizer.tokenize(source), // tokenize
                                                displayName, program, oldProcedures, extensionManager, compilationEnv)
@@ -41,11 +42,14 @@ private object CompilerMain {
         .process(structureResults.tokens(procedure).iterator, procedure)  // resolve references
       defs ++= new ExpressionParser(procedure, taskNumbers).parse(tokens) // parse
     }
+    */
 
     val oldProceduresListMap =
       ListMap[String, FrontEndProcedure](oldProcedures.toSeq: _*)
     val (topLevelDefs, feStructureResults) =
       frontEnd.frontEnd(source, displayName, oldProgram, subprogram, oldProceduresListMap, extensionManager)
+
+    val defs = CompilerBridge(feStructureResults, extensionManager, oldProcedures, topLevelDefs)
 
     // StructureParser found the top level Procedures for us.  ExpressionParser
     // finds command tasks and makes Procedures out of them, too.  the remaining
@@ -58,7 +62,7 @@ private object CompilerMain {
       procdef.accept(new LocalsVisitor)  // convert _let/_repeat to _locals
       procdef.accept(new SetVisitor)   // convert _set to specific setters
       procdef.accept(new CarefullyVisitor)  // connect _carefully to _errormessage
-      procdef.accept(new Optimizer(structureResults.program.dialect.is3D))   // do various code-improving rewrites
+      procdef.accept(new Optimizer(feStructureResults.program.dialect.is3D))   // do various code-improving rewrites
     }
     new AgentTypeChecker(defs).parse()  // catch agent type inconsistencies
     for(procdef <- defs) {
@@ -73,6 +77,6 @@ private object CompilerMain {
     }
     // only return top level procedures.
     // task procedures can be reached via the children field on Procedure.
-    (defs.map(_.procedure).filterNot(_.isTask), structureResults.program)
+    (defs.map(_.procedure).filterNot(_.isTask), feStructureResults.program)
   }
 }
