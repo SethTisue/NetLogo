@@ -11,8 +11,25 @@ class Backifier(program: Program,
   procedures: ListMap[String, nvm.Procedure]) {
 
   val replacements = Map[String, String](
-    "org.nlogo.prim.etc._plus"      -> "org.nlogo.prim._plus",
-    "org.nlogo.prim.etc._breedhere" -> "org.nlogo.prim._breedhere"
+    "org.nlogo.prim.etc._plus"            -> "org.nlogo.prim._plus",
+    "org.nlogo.prim.etc._links"           -> "org.nlogo.prim._links",
+    "org.nlogo.prim.etc._patch"           -> "org.nlogo.prim._patch",
+    "org.nlogo.prim.etc._breedhere"       -> "org.nlogo.prim._breedhere",
+    "org.nlogo.prim.etc._breedsingular"   -> "org.nlogo.prim._breedsingular",
+    "org.nlogo.prim.etc._createlinkwith"  -> "org.nlogo.prim._createlinkwith",
+    "org.nlogo.prim.etc._fileexists"      -> "org.nlogo.prim.file._fileexists",
+    "org.nlogo.prim.etc._filedelete"      -> "org.nlogo.prim.file._filedelete",
+    "org.nlogo.prim.etc._fileopen"        -> "org.nlogo.prim.file._fileopen",
+    "org.nlogo.prim.etc._filewrite"       -> "org.nlogo.prim.file._filewrite",
+    "org.nlogo.prim.etc._fileprint"       -> "org.nlogo.prim.file._fileprint",
+    "org.nlogo.prim.etc._fileclose"       -> "org.nlogo.prim.file._fileclose",
+    "org.nlogo.prim.etc._fileread"        -> "org.nlogo.prim.file._fileread",
+    "org.nlogo.prim.etc._filereadline"    -> "org.nlogo.prim.file._filereadline",
+    "org.nlogo.prim.etc._clearallplots"   -> "org.nlogo.prim.plot._clearallplots",
+    "org.nlogo.prim.etc._updateplots"     -> "org.nlogo.prim.plot._updateplots",
+    "org.nlogo.prim.etc._plot"            -> "org.nlogo.prim.plot._plot",
+    "org.nlogo.prim.etc._setupplots"      -> "org.nlogo.prim.plot._setupplots",
+    "org.nlogo.prim.etc._createlinkswith" -> "org.nlogo.prim._createlinkswith"
   )
 
   private def backifyName(name: String): String = {

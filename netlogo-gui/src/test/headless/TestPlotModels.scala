@@ -190,21 +190,21 @@ class TestPlotModels extends AbstractTestModels {
 
   testModelCompileError("Plot With Bad Update Code Should Throw Exception on Load (headless only)",
     Model(modelCode, Plot(updateCode="weijefwef"))){ ex =>
-    assert("Nothing named WEIJEFWEF has been defined" === ex.getMessage)
+    assert("Nothing named WEIJEFWEF has been defined." === ex.getMessage)
   }
 
   testModelCompileError("Plot With Bad Setup Code Should Throw Exception on Load (headless only)",
     Model(modelCode, Plot(setupCode="weijefwef"))){ ex =>
-    assert("Nothing named WEIJEFWEF has been defined" === ex.getMessage)
+    assert("Nothing named WEIJEFWEF has been defined." === ex.getMessage)
   }
 
   testModelCompileError("Plot With Bad Pen Setup Code Should Throw Exception on Load (headless only)",
     Model(modelCode, Plot(pens = Pens(Pen(setupCode = "create-fails 8"))))){ ex =>
-    assert("Nothing named CREATE-FAILS has been defined" === ex.getMessage)
+    assert("Nothing named CREATE-FAILS has been defined." === ex.getMessage)
   }
 
   testModelCompileError("Plot With Bad Pen Update Code Should Throw Exception on Load (headless only)",
     Model(modelCode, Plot(pens = Pens(Pen(updateCode = "create-fails 8"))))){ ex =>
-    assert("Nothing named CREATE-FAILS has been defined" === ex.getMessage)
+    assert("Nothing named CREATE-FAILS has been defined." === ex.getMessage)
   }
 }

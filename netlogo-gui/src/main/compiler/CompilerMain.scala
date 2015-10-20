@@ -25,29 +25,10 @@ private object CompilerMain {
               oldProcedures: java.util.Map[String, Procedure],
               extensionManager: ExtensionManager, compilationEnv: CompilationEnvironment): (Seq[Procedure], Program) = {
 
-    val oldProgram = program.copy()
-
-    /*
-    implicit val tokenizer = if(program.dialect.is3D) Compiler.Tokenizer3D else Compiler.Tokenizer2D
-    val structureResults = new StructureParser(tokenizer.tokenize(source), // tokenize
-                                               displayName, program, oldProcedures, extensionManager, compilationEnv)
-      .parse(subprogram)  // process declarations
-    val defs = new collection.mutable.ArrayBuffer[ProcedureDefinition]
-    import collection.JavaConverters._  // structureResults.procedures.values is a java.util.Collection
-    val taskNumbers = Iterator.from(1)
-    for(procedure <- structureResults.procedures.values.asScala) {
-      procedure.topLevel = subprogram
-      val tokens =
-        new IdentifierParser(structureResults.program, oldProcedures, structureResults.procedures, false)
-        .process(structureResults.tokens(procedure).iterator, procedure)  // resolve references
-      defs ++= new ExpressionParser(procedure, taskNumbers).parse(tokens) // parse
-    }
-    */
-
     val oldProceduresListMap =
       ListMap[String, FrontEndProcedure](oldProcedures.toSeq: _*)
     val (topLevelDefs, feStructureResults) =
-      frontEnd.frontEnd(source, displayName, oldProgram, subprogram, oldProceduresListMap, extensionManager)
+      frontEnd.frontEnd(source, displayName, program, subprogram, oldProceduresListMap, extensionManager)
 
     val defs = CompilerBridge(feStructureResults, extensionManager, oldProcedures, topLevelDefs)
 
@@ -64,7 +45,6 @@ private object CompilerMain {
       procdef.accept(new CarefullyVisitor)  // connect _carefully to _errormessage
       procdef.accept(new Optimizer(feStructureResults.program.dialect.is3D))   // do various code-improving rewrites
     }
-    new AgentTypeChecker(defs).parse()  // catch agent type inconsistencies
     for(procdef <- defs) {
       procdef.accept(new ArgumentStuffer) // fill args arrays in Commands & Reporters
       new Assembler().assemble(procdef)     // flatten tree to command array
