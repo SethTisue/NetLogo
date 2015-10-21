@@ -7,8 +7,9 @@ import org.nlogo.api.LogoException;
 import org.nlogo.api.Syntax;
 import org.nlogo.nvm.Context;
 import org.nlogo.nvm.EngineException;
-import org.nlogo.nvm.Reference;
-import org.nlogo.nvm.Referenceable;
+import org.nlogo.core.Reference;
+import org.nlogo.core.AgentKindJ;
+import org.nlogo.core.Referenceable;
 import org.nlogo.nvm.Reporter;
 
 public final strictfp class _patchvariable
@@ -37,7 +38,7 @@ public final strictfp class _patchvariable
   }
 
   public Reference makeReference() {
-    return new Reference(Patch.class, vn, this);
+    return new Reference(AgentKindJ.Patch(), vn, this);
   }
 
   @Override
