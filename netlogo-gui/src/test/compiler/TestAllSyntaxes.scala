@@ -406,7 +406,7 @@ class TestAllSyntaxes extends FunSuite {
                     |_layoutspring turtle agentset/link agentset/number/number/number,OTPL,None,0,5,5
                     |_layouttutte turtle agentset/link agentset/number,OTPL,None,0,3,3
                     |_left number,-T--,None,0,1,1
-                    |_let anything/anything,OTPL,None,0,2,2
+                    |_let anything,OTPL,None,0,1,1
                     |_life ,O---,None,0,0,0
                     |_linkcode ,---L,None,0,0,0
                     |_load3Dshapes string,O---,None,0,1,1

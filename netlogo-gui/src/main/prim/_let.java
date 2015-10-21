@@ -19,13 +19,13 @@ public final strictfp class _let
   @Override
   public org.nlogo.core.Syntax syntax() {
     return Syntax.commandSyntax
-        (new int[]{Syntax.WildcardType(), Syntax.WildcardType()});
+        (new int[]{Syntax.WildcardType()});
   }
 
   @Override
   public void perform(final Context context)
       throws LogoException {
-    context.let(let, args[1].report(context));
+    context.let(let, args[0].report(context));
     context.ip = next;
   }
 }
