@@ -4,9 +4,7 @@ turtles-own [WHO COLOR HEADING XCOR YCOR SHAPE LABEL LABEL-COLOR BREED HIDDEN? S
 patches-own [PXCOR PYCOR PCOLOR PLABEL PLABEL-COLOR ELEVATION WATER DRAIN?]
 links-own [END1 END2 COLOR LABEL LABEL-COLOR HIDDEN? BREED THICKNESS SHAPE TIE-MODE]
 breeds 
-breeds-own 
 link-breeds 
-link-breeds-own 
 
 procedure GO:[]{O---}:
 [0]_asm_procedurego_ask_0 "ask land" Object => void
@@ -1230,7 +1228,7 @@ procedure RECOLOR:[]{-TP-}:
           GETFIELD org/nlogo/prim/_asm_procedurerecolor_setpatchvariable_3.kept7_value : Ljava/lang/Double;
          L10
           INVOKEVIRTUAL org/nlogo/api/LogoListBuilder.add (Ljava/lang/Object;)V
-          INVOKEVIRTUAL org/nlogo/api/LogoListBuilder.toLogoList ()Lorg/nlogo/api/LogoList;
+          INVOKEVIRTUAL org/nlogo/api/LogoListBuilder.toLogoList ()Lorg/nlogo/core/LogoList;
          L11
           ASTORE 2
           DCONST_0
@@ -1238,10 +1236,11 @@ procedure RECOLOR:[]{-TP-}:
           ACONST_NULL
           ASTORE 5
           ALOAD 2
-          INVOKEVIRTUAL org/nlogo/api/LogoList.iterator ()Ljava/util/Iterator;
+          INVOKEVIRTUAL org/nlogo/core/LogoList.javaIterable ()Ljava/lang/Iterable;
+          INVOKEINTERFACE java/lang/Iterable.iterator ()Ljava/util/Iterator;
           ASTORE 6
          L12
-         FRAME FULL [org/nlogo/prim/_asm_procedurerecolor_setpatchvariable_3 org/nlogo/nvm/Context org/nlogo/api/LogoList D java/lang/Double java/util/Iterator] [D]
+         FRAME FULL [org/nlogo/prim/_asm_procedurerecolor_setpatchvariable_3 org/nlogo/nvm/Context org/nlogo/core/LogoList D java/lang/Double java/util/Iterator] [D]
           ALOAD 6
           INVOKEINTERFACE java/util/Iterator.hasNext ()Z
           IFEQ L13
@@ -1264,16 +1263,16 @@ procedure RECOLOR:[]{-TP-}:
           DCMPG
           IFGE L14
          L15
-         FRAME FULL [org/nlogo/prim/_asm_procedurerecolor_setpatchvariable_3 org/nlogo/nvm/Context org/nlogo/api/LogoList D java/lang/Double java/util/Iterator java/lang/Object java/lang/Double D] [D]
+         FRAME FULL [org/nlogo/prim/_asm_procedurerecolor_setpatchvariable_3 org/nlogo/nvm/Context org/nlogo/core/LogoList D java/lang/Double java/util/Iterator java/lang/Object java/lang/Double D] [D]
           DLOAD 9
           DSTORE 3
           ALOAD 8
           ASTORE 5
          L14
-         FRAME FULL [org/nlogo/prim/_asm_procedurerecolor_setpatchvariable_3 org/nlogo/nvm/Context org/nlogo/api/LogoList D java/lang/Double java/util/Iterator java/lang/Object] [D]
+         FRAME FULL [org/nlogo/prim/_asm_procedurerecolor_setpatchvariable_3 org/nlogo/nvm/Context org/nlogo/core/LogoList D java/lang/Double java/util/Iterator java/lang/Object] [D]
           GOTO L12
          L13
-         FRAME FULL [org/nlogo/prim/_asm_procedurerecolor_setpatchvariable_3 org/nlogo/nvm/Context org/nlogo/api/LogoList D java/lang/Double java/util/Iterator] [D]
+         FRAME FULL [org/nlogo/prim/_asm_procedurerecolor_setpatchvariable_3 org/nlogo/nvm/Context org/nlogo/core/LogoList D java/lang/Double java/util/Iterator] [D]
           ALOAD 5
           IFNONNULL L16
           NEW org/nlogo/nvm/EngineException
@@ -2021,7 +2020,7 @@ procedure FLOW:[TARGET AMOUNT EROSION]{-TP-}:
          L41
          FRAME FULL [org/nlogo/prim/_asm_procedureflow_setprocedurevariable_3 org/nlogo/nvm/Context java/lang/Object org/nlogo/agent/AgentSet org/nlogo/api/LogoListBuilder org/nlogo/agent/AgentSet$Iterator] [org/nlogo/api/LogoListBuilder org/nlogo/api/LogoListBuilder D D]
           ALOAD 4
-          INVOKEVIRTUAL org/nlogo/api/LogoListBuilder.toLogoList ()Lorg/nlogo/api/LogoList;
+          INVOKEVIRTUAL org/nlogo/api/LogoListBuilder.toLogoList ()Lorg/nlogo/core/LogoList;
           GOTO L38
          L39
          FRAME FULL [org/nlogo/prim/_asm_procedureflow_setprocedurevariable_3 org/nlogo/nvm/Context java/lang/Object T D] [org/nlogo/api/LogoListBuilder org/nlogo/api/LogoListBuilder D D]
@@ -2168,7 +2167,7 @@ procedure FLOW:[TARGET AMOUNT EROSION]{-TP-}:
          L49
          FRAME FULL [org/nlogo/prim/_asm_procedureflow_setprocedurevariable_3 org/nlogo/nvm/Context java/lang/Object org/nlogo/agent/AgentSet org/nlogo/api/LogoListBuilder org/nlogo/agent/AgentSet$Iterator] [org/nlogo/api/LogoListBuilder org/nlogo/api/LogoListBuilder D D]
           ALOAD 4
-          INVOKEVIRTUAL org/nlogo/api/LogoListBuilder.toLogoList ()Lorg/nlogo/api/LogoList;
+          INVOKEVIRTUAL org/nlogo/api/LogoListBuilder.toLogoList ()Lorg/nlogo/core/LogoList;
           GOTO L46
          L47
          FRAME FULL [org/nlogo/prim/_asm_procedureflow_setprocedurevariable_3 org/nlogo/nvm/Context java/lang/Object T D] [org/nlogo/api/LogoListBuilder org/nlogo/api/LogoListBuilder D D]
@@ -2227,7 +2226,7 @@ procedure FLOW:[TARGET AMOUNT EROSION]{-TP-}:
           DLOAD 2
           INVOKESPECIAL java/lang/Double.<init> (D)V
           INVOKEVIRTUAL org/nlogo/api/LogoListBuilder.add (Ljava/lang/Object;)V
-          INVOKEVIRTUAL org/nlogo/api/LogoListBuilder.toLogoList ()Lorg/nlogo/api/LogoList;
+          INVOKEVIRTUAL org/nlogo/api/LogoListBuilder.toLogoList ()Lorg/nlogo/core/LogoList;
          L53
           ASTORE 2
           DCONST_0
@@ -2235,10 +2234,11 @@ procedure FLOW:[TARGET AMOUNT EROSION]{-TP-}:
           ACONST_NULL
           ASTORE 5
           ALOAD 2
-          INVOKEVIRTUAL org/nlogo/api/LogoList.iterator ()Ljava/util/Iterator;
+          INVOKEVIRTUAL org/nlogo/core/LogoList.javaIterable ()Ljava/lang/Iterable;
+          INVOKEINTERFACE java/lang/Iterable.iterator ()Ljava/util/Iterator;
           ASTORE 6
          L54
-         FRAME FULL [org/nlogo/prim/_asm_procedureflow_setprocedurevariable_3 org/nlogo/nvm/Context org/nlogo/api/LogoList D java/lang/Double java/util/Iterator] []
+         FRAME FULL [org/nlogo/prim/_asm_procedureflow_setprocedurevariable_3 org/nlogo/nvm/Context org/nlogo/core/LogoList D java/lang/Double java/util/Iterator] []
           ALOAD 6
           INVOKEINTERFACE java/util/Iterator.hasNext ()Z
           IFEQ L55
@@ -2826,7 +2826,7 @@ procedure FLOW:[TARGET AMOUNT EROSION]{-TP-}:
          L41
          FRAME FULL [org/nlogo/prim/_asm_procedureflow_setprocedurevariable_7 org/nlogo/nvm/Context java/lang/Object org/nlogo/agent/AgentSet org/nlogo/api/LogoListBuilder org/nlogo/agent/AgentSet$Iterator] [org/nlogo/api/LogoListBuilder org/nlogo/api/LogoListBuilder D D]
           ALOAD 4
-          INVOKEVIRTUAL org/nlogo/api/LogoListBuilder.toLogoList ()Lorg/nlogo/api/LogoList;
+          INVOKEVIRTUAL org/nlogo/api/LogoListBuilder.toLogoList ()Lorg/nlogo/core/LogoList;
           GOTO L38
          L39
          FRAME FULL [org/nlogo/prim/_asm_procedureflow_setprocedurevariable_7 org/nlogo/nvm/Context java/lang/Object T D] [org/nlogo/api/LogoListBuilder org/nlogo/api/LogoListBuilder D D]
@@ -2973,7 +2973,7 @@ procedure FLOW:[TARGET AMOUNT EROSION]{-TP-}:
          L49
          FRAME FULL [org/nlogo/prim/_asm_procedureflow_setprocedurevariable_7 org/nlogo/nvm/Context java/lang/Object org/nlogo/agent/AgentSet org/nlogo/api/LogoListBuilder org/nlogo/agent/AgentSet$Iterator] [org/nlogo/api/LogoListBuilder org/nlogo/api/LogoListBuilder D D]
           ALOAD 4
-          INVOKEVIRTUAL org/nlogo/api/LogoListBuilder.toLogoList ()Lorg/nlogo/api/LogoList;
+          INVOKEVIRTUAL org/nlogo/api/LogoListBuilder.toLogoList ()Lorg/nlogo/core/LogoList;
           GOTO L46
          L47
          FRAME FULL [org/nlogo/prim/_asm_procedureflow_setprocedurevariable_7 org/nlogo/nvm/Context java/lang/Object T D] [org/nlogo/api/LogoListBuilder org/nlogo/api/LogoListBuilder D D]
@@ -3032,7 +3032,7 @@ procedure FLOW:[TARGET AMOUNT EROSION]{-TP-}:
           DLOAD 2
           INVOKESPECIAL java/lang/Double.<init> (D)V
           INVOKEVIRTUAL org/nlogo/api/LogoListBuilder.add (Ljava/lang/Object;)V
-          INVOKEVIRTUAL org/nlogo/api/LogoListBuilder.toLogoList ()Lorg/nlogo/api/LogoList;
+          INVOKEVIRTUAL org/nlogo/api/LogoListBuilder.toLogoList ()Lorg/nlogo/core/LogoList;
          L53
           ASTORE 2
           DCONST_0
@@ -3040,10 +3040,11 @@ procedure FLOW:[TARGET AMOUNT EROSION]{-TP-}:
           ACONST_NULL
           ASTORE 5
           ALOAD 2
-          INVOKEVIRTUAL org/nlogo/api/LogoList.iterator ()Ljava/util/Iterator;
+          INVOKEVIRTUAL org/nlogo/core/LogoList.javaIterable ()Ljava/lang/Iterable;
+          INVOKEINTERFACE java/lang/Iterable.iterator ()Ljava/util/Iterator;
           ASTORE 6
          L54
-         FRAME FULL [org/nlogo/prim/_asm_procedureflow_setprocedurevariable_7 org/nlogo/nvm/Context org/nlogo/api/LogoList D java/lang/Double java/util/Iterator] []
+         FRAME FULL [org/nlogo/prim/_asm_procedureflow_setprocedurevariable_7 org/nlogo/nvm/Context org/nlogo/core/LogoList D java/lang/Double java/util/Iterator] []
           ALOAD 6
           INVOKEINTERFACE java/util/Iterator.hasNext ()Z
           IFEQ L55

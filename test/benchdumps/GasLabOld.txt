@@ -4,9 +4,7 @@ turtles-own [WHO COLOR HEADING XCOR YCOR SHAPE LABEL LABEL-COLOR BREED HIDDEN? S
 patches-own [PXCOR PYCOR PCOLOR PLABEL PLABEL-COLOR BOX?]
 links-own [END1 END2 COLOR LABEL LABEL-COLOR HIDDEN? BREED THICKNESS SHAPE TIE-MODE]
 breeds 
-breeds-own 
 link-breeds 
-link-breeds-own 
 
 procedure GO:[]{O---}:
 [0]_asm_procedurego_ask_0 "ask turtles" AgentSet => void
@@ -1350,7 +1348,7 @@ procedure CHECK-FOR-COLLISION:[]{-T--}:
           ISTORE 3
           ILOAD 3
           IFNE L11
-          GETSTATIC org/nlogo/api/Nobody$.MODULE$ : Lorg/nlogo/api/Nobody$;
+          GETSTATIC org/nlogo/core/Nobody$.MODULE$ : Lorg/nlogo/core/Nobody$;
           GOTO L12
          L11
          FRAME FULL [org/nlogo/prim/_asm_procedurecheckforcollision_setturtlevariable_1 org/nlogo/nvm/Context org/nlogo/agent/ArrayAgentSet I org/nlogo/agent/AgentSet$Iterator] []
@@ -1525,7 +1523,7 @@ procedure CHECK-FOR-COLLISION:[]{-T--}:
          L21
          FRAME FULL [org/nlogo/prim/_asm_procedurecheckforcollision_if_2 org/nlogo/nvm/Context java/lang/Object org/nlogo/agent/AgentSet org/nlogo/api/LogoListBuilder org/nlogo/agent/AgentSet$Iterator] [D]
           ALOAD 4
-          INVOKEVIRTUAL org/nlogo/api/LogoListBuilder.toLogoList ()Lorg/nlogo/api/LogoList;
+          INVOKEVIRTUAL org/nlogo/api/LogoListBuilder.toLogoList ()Lorg/nlogo/core/LogoList;
           GOTO L18
          L19
          FRAME FULL [org/nlogo/prim/_asm_procedurecheckforcollision_if_2 org/nlogo/nvm/Context java/lang/Object] [D]
@@ -1733,7 +1731,7 @@ procedure CHECK-FOR-COLLISION:[]{-T--}:
           ASTORE 6
           ALOAD 6
           IFNONNULL L4
-          GETSTATIC org/nlogo/api/Nobody$.MODULE$ : Lorg/nlogo/api/Nobody$;
+          GETSTATIC org/nlogo/core/Nobody$.MODULE$ : Lorg/nlogo/core/Nobody$;
           GOTO L5
          L4
          FRAME FULL [org/nlogo/prim/_asm_procedurecheckforcollision_call_4 org/nlogo/nvm/Context D J org/nlogo/agent/Turtle] [org/nlogo/nvm/Activation [Ljava/lang/Object; I]
@@ -1871,7 +1869,7 @@ procedure RECOLOR-TURTLE:[THE-TURTLE]{OTPL}:
          L14
          FRAME APPEND [org/nlogo/agent/AgentSet$Iterator]
           ALOAD 4
-          INVOKEVIRTUAL org/nlogo/api/LogoListBuilder.toLogoList ()Lorg/nlogo/api/LogoList;
+          INVOKEVIRTUAL org/nlogo/api/LogoListBuilder.toLogoList ()Lorg/nlogo/core/LogoList;
           GOTO L11
          L12
          FRAME CHOP 3
@@ -2258,7 +2256,7 @@ procedure RECOLOR-TURTLE:[THE-TURTLE]{OTPL}:
          L14
          FRAME APPEND [org/nlogo/agent/AgentSet$Iterator]
           ALOAD 4
-          INVOKEVIRTUAL org/nlogo/api/LogoListBuilder.toLogoList ()Lorg/nlogo/api/LogoList;
+          INVOKEVIRTUAL org/nlogo/api/LogoListBuilder.toLogoList ()Lorg/nlogo/core/LogoList;
           GOTO L11
          L12
          FRAME CHOP 3
@@ -4257,13 +4255,13 @@ procedure UPDATE-VARIABLES:[]{OTPL}:
          L9
          FRAME APPEND [org/nlogo/agent/AgentSet$Iterator]
           ALOAD 3
-          INVOKEVIRTUAL org/nlogo/api/LogoListBuilder.toLogoList ()Lorg/nlogo/api/LogoList;
+          INVOKEVIRTUAL org/nlogo/api/LogoListBuilder.toLogoList ()Lorg/nlogo/core/LogoList;
          L10
           ASTORE 2
           DCONST_0
           DSTORE 3
           ALOAD 2
-          INVOKEVIRTUAL org/nlogo/api/LogoList.isEmpty ()Z
+          INVOKEVIRTUAL org/nlogo/core/LogoList.isEmpty ()Z
           IFEQ L11
           NEW org/nlogo/nvm/EngineException
           DUP
@@ -4275,9 +4273,9 @@ procedure UPDATE-VARIABLES:[]{OTPL}:
           INVOKESPECIAL org/nlogo/nvm/EngineException.<init> (Lorg/nlogo/nvm/Context;Lorg/nlogo/nvm/Instruction;Ljava/lang/String;)V
           ATHROW
          L11
-         FRAME FULL [org/nlogo/prim/_asm_procedureupdatevariables_setobservervariable_10 org/nlogo/nvm/Context org/nlogo/api/LogoList D] []
+         FRAME FULL [org/nlogo/prim/_asm_procedureupdatevariables_setobservervariable_10 org/nlogo/nvm/Context org/nlogo/core/LogoList D] []
           ALOAD 2
-          INVOKEVIRTUAL org/nlogo/api/LogoList.iterator ()Ljava/util/Iterator;
+          INVOKEVIRTUAL org/nlogo/core/LogoList.javaIterator ()Ljava/util/Iterator;
           ASTORE 5
          L12
          FRAME APPEND [java/util/Iterator]
@@ -4325,7 +4323,7 @@ procedure UPDATE-VARIABLES:[]{OTPL}:
           ALOAD 0
           DLOAD 3
           ALOAD 2
-          INVOKEVIRTUAL org/nlogo/api/LogoList.size ()I
+          INVOKEVIRTUAL org/nlogo/core/LogoList.size ()I
           I2D
           DDIV
           INVOKEVIRTUAL org/nlogo/prim/_asm_procedureupdatevariables_setobservervariable_10.validDouble (D)D
@@ -4414,13 +4412,13 @@ procedure UPDATE-VARIABLES:[]{OTPL}:
          L9
          FRAME APPEND [org/nlogo/agent/AgentSet$Iterator]
           ALOAD 3
-          INVOKEVIRTUAL org/nlogo/api/LogoListBuilder.toLogoList ()Lorg/nlogo/api/LogoList;
+          INVOKEVIRTUAL org/nlogo/api/LogoListBuilder.toLogoList ()Lorg/nlogo/core/LogoList;
          L10
           ASTORE 2
           DCONST_0
           DSTORE 3
           ALOAD 2
-          INVOKEVIRTUAL org/nlogo/api/LogoList.isEmpty ()Z
+          INVOKEVIRTUAL org/nlogo/core/LogoList.isEmpty ()Z
           IFEQ L11
           NEW org/nlogo/nvm/EngineException
           DUP
@@ -4432,9 +4430,9 @@ procedure UPDATE-VARIABLES:[]{OTPL}:
           INVOKESPECIAL org/nlogo/nvm/EngineException.<init> (Lorg/nlogo/nvm/Context;Lorg/nlogo/nvm/Instruction;Ljava/lang/String;)V
           ATHROW
          L11
-         FRAME FULL [org/nlogo/prim/_asm_procedureupdatevariables_setobservervariable_11 org/nlogo/nvm/Context org/nlogo/api/LogoList D] []
+         FRAME FULL [org/nlogo/prim/_asm_procedureupdatevariables_setobservervariable_11 org/nlogo/nvm/Context org/nlogo/core/LogoList D] []
           ALOAD 2
-          INVOKEVIRTUAL org/nlogo/api/LogoList.iterator ()Ljava/util/Iterator;
+          INVOKEVIRTUAL org/nlogo/core/LogoList.javaIterator ()Ljava/util/Iterator;
           ASTORE 5
          L12
          FRAME APPEND [java/util/Iterator]
@@ -4482,7 +4480,7 @@ procedure UPDATE-VARIABLES:[]{OTPL}:
           ALOAD 0
           DLOAD 3
           ALOAD 2
-          INVOKEVIRTUAL org/nlogo/api/LogoList.size ()I
+          INVOKEVIRTUAL org/nlogo/core/LogoList.size ()I
           I2D
           DDIV
           INVOKEVIRTUAL org/nlogo/prim/_asm_procedureupdatevariables_setobservervariable_11.validDouble (D)D
@@ -4626,7 +4624,7 @@ procedure UPDATE-VARIABLES:[]{OTPL}:
                  L12
                  FRAME APPEND [org/nlogo/agent/AgentSet$Iterator]
                   ALOAD 4
-                  INVOKEVIRTUAL org/nlogo/api/LogoListBuilder.toLogoList ()Lorg/nlogo/api/LogoList;
+                  INVOKEVIRTUAL org/nlogo/api/LogoListBuilder.toLogoList ()Lorg/nlogo/core/LogoList;
                   GOTO L9
                  L10
                  FRAME CHOP 3
@@ -5794,7 +5792,7 @@ procedure SETUP:[]{O---}:
           ASTORE 6
           ALOAD 6
           IFNONNULL L4
-          GETSTATIC org/nlogo/api/Nobody$.MODULE$ : Lorg/nlogo/api/Nobody$;
+          GETSTATIC org/nlogo/core/Nobody$.MODULE$ : Lorg/nlogo/core/Nobody$;
           GOTO L5
          L4
          FRAME FULL [org/nlogo/prim/_asm_proceduresetup_call_10 org/nlogo/nvm/Context D J org/nlogo/agent/Turtle] [org/nlogo/nvm/Activation [Ljava/lang/Object; I]
@@ -6766,7 +6764,7 @@ procedure DO-HISTOGRAMS:[]{OTPL}:
            L17
            FRAME FULL [org/nlogo/prim/_asm_proceduredohistograms_turtlevariableof_2 org/nlogo/nvm/Context org/nlogo/agent/ArrayAgentSet org/nlogo/agent/AgentSet org/nlogo/api/LogoListBuilder org/nlogo/agent/AgentSet$Iterator org/nlogo/agent/AgentSet$Iterator] []
             ALOAD 4
-            INVOKEVIRTUAL org/nlogo/api/LogoListBuilder.toLogoList ()Lorg/nlogo/api/LogoList;
+            INVOKEVIRTUAL org/nlogo/api/LogoListBuilder.toLogoList ()Lorg/nlogo/core/LogoList;
             GOTO L14
            L15
            FRAME FULL [org/nlogo/prim/_asm_proceduredohistograms_turtlevariableof_2 org/nlogo/nvm/Context org/nlogo/agent/ArrayAgentSet org/nlogo/nvm/Reporter org/nlogo/nvm/Context java/util/ArrayList org/nlogo/agent/AgentSet$Iterator] []
@@ -7039,7 +7037,7 @@ procedure DO-HISTOGRAMS:[]{OTPL}:
            L17
            FRAME FULL [org/nlogo/prim/_asm_proceduredohistograms_turtlevariableof_5 org/nlogo/nvm/Context org/nlogo/agent/ArrayAgentSet org/nlogo/agent/AgentSet org/nlogo/api/LogoListBuilder org/nlogo/agent/AgentSet$Iterator org/nlogo/agent/AgentSet$Iterator] []
             ALOAD 4
-            INVOKEVIRTUAL org/nlogo/api/LogoListBuilder.toLogoList ()Lorg/nlogo/api/LogoList;
+            INVOKEVIRTUAL org/nlogo/api/LogoListBuilder.toLogoList ()Lorg/nlogo/core/LogoList;
             GOTO L14
            L15
            FRAME FULL [org/nlogo/prim/_asm_proceduredohistograms_turtlevariableof_5 org/nlogo/nvm/Context org/nlogo/agent/ArrayAgentSet org/nlogo/nvm/Reporter org/nlogo/nvm/Context java/util/ArrayList org/nlogo/agent/AgentSet$Iterator] []
@@ -7312,7 +7310,7 @@ procedure DO-HISTOGRAMS:[]{OTPL}:
            L17
            FRAME FULL [org/nlogo/prim/_asm_proceduredohistograms_turtlevariableof_8 org/nlogo/nvm/Context org/nlogo/agent/ArrayAgentSet org/nlogo/agent/AgentSet org/nlogo/api/LogoListBuilder org/nlogo/agent/AgentSet$Iterator org/nlogo/agent/AgentSet$Iterator] []
             ALOAD 4
-            INVOKEVIRTUAL org/nlogo/api/LogoListBuilder.toLogoList ()Lorg/nlogo/api/LogoList;
+            INVOKEVIRTUAL org/nlogo/api/LogoListBuilder.toLogoList ()Lorg/nlogo/core/LogoList;
             GOTO L14
            L15
            FRAME FULL [org/nlogo/prim/_asm_proceduredohistograms_turtlevariableof_8 org/nlogo/nvm/Context org/nlogo/agent/ArrayAgentSet org/nlogo/nvm/Reporter org/nlogo/nvm/Context java/util/ArrayList org/nlogo/agent/AgentSet$Iterator] []
@@ -7674,7 +7672,7 @@ procedure DO-HISTOGRAMS:[]{OTPL}:
            L17
            FRAME FULL [org/nlogo/prim/_asm_proceduredohistograms_turtlevariableof_15 org/nlogo/nvm/Context org/nlogo/agent/ArrayAgentSet org/nlogo/agent/AgentSet org/nlogo/api/LogoListBuilder org/nlogo/agent/AgentSet$Iterator org/nlogo/agent/AgentSet$Iterator] []
             ALOAD 4
-            INVOKEVIRTUAL org/nlogo/api/LogoListBuilder.toLogoList ()Lorg/nlogo/api/LogoList;
+            INVOKEVIRTUAL org/nlogo/api/LogoListBuilder.toLogoList ()Lorg/nlogo/core/LogoList;
             GOTO L14
            L15
            FRAME FULL [org/nlogo/prim/_asm_proceduredohistograms_turtlevariableof_15 org/nlogo/nvm/Context org/nlogo/agent/ArrayAgentSet org/nlogo/nvm/Reporter org/nlogo/nvm/Context java/util/ArrayList org/nlogo/agent/AgentSet$Iterator] []
@@ -7947,7 +7945,7 @@ procedure DO-HISTOGRAMS:[]{OTPL}:
            L17
            FRAME FULL [org/nlogo/prim/_asm_proceduredohistograms_turtlevariableof_18 org/nlogo/nvm/Context org/nlogo/agent/ArrayAgentSet org/nlogo/agent/AgentSet org/nlogo/api/LogoListBuilder org/nlogo/agent/AgentSet$Iterator org/nlogo/agent/AgentSet$Iterator] []
             ALOAD 4
-            INVOKEVIRTUAL org/nlogo/api/LogoListBuilder.toLogoList ()Lorg/nlogo/api/LogoList;
+            INVOKEVIRTUAL org/nlogo/api/LogoListBuilder.toLogoList ()Lorg/nlogo/core/LogoList;
             GOTO L14
            L15
            FRAME FULL [org/nlogo/prim/_asm_proceduredohistograms_turtlevariableof_18 org/nlogo/nvm/Context org/nlogo/agent/ArrayAgentSet org/nlogo/nvm/Reporter org/nlogo/nvm/Context java/util/ArrayList org/nlogo/agent/AgentSet$Iterator] []
@@ -8220,7 +8218,7 @@ procedure DO-HISTOGRAMS:[]{OTPL}:
            L17
            FRAME FULL [org/nlogo/prim/_asm_proceduredohistograms_turtlevariableof_21 org/nlogo/nvm/Context org/nlogo/agent/ArrayAgentSet org/nlogo/agent/AgentSet org/nlogo/api/LogoListBuilder org/nlogo/agent/AgentSet$Iterator org/nlogo/agent/AgentSet$Iterator] []
             ALOAD 4
-            INVOKEVIRTUAL org/nlogo/api/LogoListBuilder.toLogoList ()Lorg/nlogo/api/LogoList;
+            INVOKEVIRTUAL org/nlogo/api/LogoListBuilder.toLogoList ()Lorg/nlogo/core/LogoList;
             GOTO L14
            L15
            FRAME FULL [org/nlogo/prim/_asm_proceduredohistograms_turtlevariableof_21 org/nlogo/nvm/Context org/nlogo/agent/ArrayAgentSet org/nlogo/nvm/Reporter org/nlogo/nvm/Context java/util/ArrayList org/nlogo/agent/AgentSet$Iterator] []
@@ -8883,7 +8881,7 @@ procedure GET-TURTLE2-INFO:[]{-T--}:
          L17
          FRAME APPEND [org/nlogo/agent/AgentSet$Iterator]
           ALOAD 4
-          INVOKEVIRTUAL org/nlogo/api/LogoListBuilder.toLogoList ()Lorg/nlogo/api/LogoList;
+          INVOKEVIRTUAL org/nlogo/api/LogoListBuilder.toLogoList ()Lorg/nlogo/core/LogoList;
           GOTO L14
          L15
          FRAME CHOP 3
@@ -9048,7 +9046,7 @@ procedure GET-TURTLE2-INFO:[]{-T--}:
          L17
          FRAME APPEND [org/nlogo/agent/AgentSet$Iterator]
           ALOAD 4
-          INVOKEVIRTUAL org/nlogo/api/LogoListBuilder.toLogoList ()Lorg/nlogo/api/LogoList;
+          INVOKEVIRTUAL org/nlogo/api/LogoListBuilder.toLogoList ()Lorg/nlogo/core/LogoList;
           GOTO L14
          L15
          FRAME CHOP 3
@@ -9213,7 +9211,7 @@ procedure GET-TURTLE2-INFO:[]{-T--}:
          L17
          FRAME APPEND [org/nlogo/agent/AgentSet$Iterator]
           ALOAD 4
-          INVOKEVIRTUAL org/nlogo/api/LogoListBuilder.toLogoList ()Lorg/nlogo/api/LogoList;
+          INVOKEVIRTUAL org/nlogo/api/LogoListBuilder.toLogoList ()Lorg/nlogo/core/LogoList;
           GOTO L14
          L15
          FRAME CHOP 3

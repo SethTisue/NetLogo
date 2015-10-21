@@ -3,18 +3,9 @@ interfaceGlobals [init-sheep sheep-metabolism sheep-reproduce init-wolves wolf-m
 turtles-own [WHO COLOR HEADING XCOR YCOR SHAPE LABEL LABEL-COLOR BREED HIDDEN? SIZE PEN-SIZE PEN-MODE ENERGY PREY]
 patches-own [PXCOR PYCOR PCOLOR PLABEL PLABEL-COLOR COUNTDOWN]
 links-own [END1 END2 COLOR LABEL LABEL-COLOR HIDDEN? BREED THICKNESS SHAPE TIE-MODE]
-breeds SHEEP = TreeAgentSet
-...... type: class org.nlogo.agent.Turtle
-...... count(): 0
-...... agents: 
-WOLVES = TreeAgentSet
-...... type: class org.nlogo.agent.Turtle
-...... count(): 0
-...... agents:
-breeds-own SHEEP = []
-WOLVES = []
+breeds SHEEP = Breed(SHEEP, A-SHEEP, , false)
+WOLVES = Breed(WOLVES, WOLF, , false)
 link-breeds 
-link-breeds-own 
 
 procedure GO:[]{O---}:
 [0]_asm_procedurego_ask_0 "ask sheep" AgentSet => void
@@ -741,9 +732,8 @@ procedure GO:[]{O---}:
           ALOAD 1
           GETFIELD org/nlogo/nvm/Context.activation : Lorg/nlogo/nvm/Activation;
           GETFIELD org/nlogo/nvm/Activation.procedure : Lorg/nlogo/nvm/Procedure;
-          GETFIELD org/nlogo/nvm/Procedure.tyype : Lorg/nlogo/nvm/Procedure$Type;
-          GETSTATIC org/nlogo/nvm/Procedure$Type.REPORTER : Lorg/nlogo/nvm/Procedure$Type;
-          IF_ACMPEQ L3
+          INVOKEVIRTUAL org/nlogo/nvm/Procedure.isReporter ()Z
+          IFNE L3
           ALOAD 1
           GETFIELD org/nlogo/nvm/Context.activation : Lorg/nlogo/nvm/Activation;
           GETFIELD org/nlogo/nvm/Activation.procedure : Lorg/nlogo/nvm/Procedure;
@@ -752,10 +742,9 @@ procedure GO:[]{O---}:
           ALOAD 1
           GETFIELD org/nlogo/nvm/Context.activation : Lorg/nlogo/nvm/Activation;
           GETFIELD org/nlogo/nvm/Activation.procedure : Lorg/nlogo/nvm/Procedure;
-          GETFIELD org/nlogo/nvm/Procedure.parent : Lorg/nlogo/nvm/Procedure;
-          GETFIELD org/nlogo/nvm/Procedure.tyype : Lorg/nlogo/nvm/Procedure$Type;
-          GETSTATIC org/nlogo/nvm/Procedure$Type.REPORTER : Lorg/nlogo/nvm/Procedure$Type;
-          IF_ACMPNE L4
+          INVOKEVIRTUAL org/nlogo/nvm/Procedure.parent ()Lorg/nlogo/nvm/Procedure;
+          INVOKEVIRTUAL org/nlogo/nvm/Procedure.isReporter ()Z
+          IFEQ L4
          L3
          FRAME SAME
           NEW org/nlogo/nvm/EngineException
@@ -3638,7 +3627,7 @@ procedure CATCH-SHEEP:[]{-T--}:
           ISTORE 3
           ILOAD 3
           IFNE L12
-          GETSTATIC org/nlogo/api/Nobody$.MODULE$ : Lorg/nlogo/api/Nobody$;
+          GETSTATIC org/nlogo/core/Nobody$.MODULE$ : Lorg/nlogo/core/Nobody$;
           GOTO L13
          L12
          FRAME FULL [org/nlogo/prim/_asm_procedurecatchsheep_setturtlevariable_0 org/nlogo/nvm/Context org/nlogo/agent/ArrayAgentSet I T org/nlogo/agent/Patch T org/nlogo/agent/AgentSet org/nlogo/agent/ArrayAgentSet java/util/Iterator] []
@@ -3704,7 +3693,7 @@ procedure CATCH-SHEEP:[]{-T--}:
           ATHROW
          L3
          FRAME SAME1 java/lang/Object
-          GETSTATIC org/nlogo/api/Nobody$.MODULE$ : Lorg/nlogo/api/Nobody$;
+          GETSTATIC org/nlogo/core/Nobody$.MODULE$ : Lorg/nlogo/core/Nobody$;
          L4
           ASTORE 3
           ASTORE 2
@@ -3715,7 +3704,7 @@ procedure CATCH-SHEEP:[]{-T--}:
           ICONST_1
           GOTO L6
          L5
-         FRAME APPEND [java/lang/Object org/nlogo/api/Nobody$]
+         FRAME APPEND [java/lang/Object org/nlogo/core/Nobody$]
           ICONST_0
          L6
          FRAME SAME1 I
@@ -3726,10 +3715,10 @@ procedure CATCH-SHEEP:[]{-T--}:
           ICONST_2
           GOTO L8
          L7
-         FRAME FULL [org/nlogo/prim/_asm_procedurecatchsheep_if_1 org/nlogo/nvm/Context I org/nlogo/api/Nobody$] [org/nlogo/nvm/Context]
+         FRAME FULL [org/nlogo/prim/_asm_procedurecatchsheep_if_1 org/nlogo/nvm/Context I org/nlogo/core/Nobody$] [org/nlogo/nvm/Context]
           BIPUSH 6
          L8
-         FRAME FULL [org/nlogo/prim/_asm_procedurecatchsheep_if_1 org/nlogo/nvm/Context I org/nlogo/api/Nobody$] [org/nlogo/nvm/Context I]
+         FRAME FULL [org/nlogo/prim/_asm_procedurecatchsheep_if_1 org/nlogo/nvm/Context I org/nlogo/core/Nobody$] [org/nlogo/nvm/Context I]
           PUTFIELD org/nlogo/nvm/Context.ip : I
          L9
           RETURN

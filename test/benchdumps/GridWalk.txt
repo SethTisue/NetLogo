@@ -4,9 +4,7 @@ turtles-own [WHO COLOR HEADING XCOR YCOR SHAPE LABEL LABEL-COLOR BREED HIDDEN? S
 patches-own [PXCOR PYCOR PCOLOR PLABEL PLABEL-COLOR]
 links-own [END1 END2 COLOR LABEL LABEL-COLOR HIDDEN? BREED THICKNESS SHAPE TIE-MODE]
 breeds 
-breeds-own 
 link-breeds 
-link-breeds-own 
 
 procedure BENCHMARK:[_repeatlocal:0]{O---}:
 [0]_asm_procedurebenchmark_randomseed_0 "random-seed 362" double => void
@@ -224,7 +222,7 @@ procedure SETUP:[]{O---}:
             ISTORE 3
             ILOAD 3
             IFNE L2
-            GETSTATIC org/nlogo/api/Nobody$.MODULE$ : Lorg/nlogo/api/Nobody$;
+            GETSTATIC org/nlogo/core/Nobody$.MODULE$ : Lorg/nlogo/core/Nobody$;
             GOTO L3
            L2
            FRAME APPEND [org/nlogo/agent/AgentSet I]
@@ -268,7 +266,7 @@ procedure SETUP:[]{O---}:
           ISTORE 3
           ILOAD 3
           IFNE L5
-          GETSTATIC org/nlogo/api/Nobody$.MODULE$ : Lorg/nlogo/api/Nobody$;
+          GETSTATIC org/nlogo/core/Nobody$.MODULE$ : Lorg/nlogo/core/Nobody$;
           GOTO L6
          L5
          FRAME APPEND [org/nlogo/agent/AgentSet I]
@@ -464,7 +462,7 @@ procedure GO:[]{O---}:
           ISTORE 3
           ILOAD 3
           IFNE L5
-          GETSTATIC org/nlogo/api/Nobody$.MODULE$ : Lorg/nlogo/api/Nobody$;
+          GETSTATIC org/nlogo/core/Nobody$.MODULE$ : Lorg/nlogo/core/Nobody$;
           GOTO L6
          L5
          FRAME APPEND [org/nlogo/agent/AgentSet I]
