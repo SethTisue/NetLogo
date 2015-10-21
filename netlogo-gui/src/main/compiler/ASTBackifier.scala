@@ -32,8 +32,7 @@ class ASTBackifier(backifier: Backifier) {
 
   def backify(stmt: core.Statement): Statement = {
     val result =
-      new Statement(backifier(stmt.command),
-        stmt.start, stmt.end, stmt.file)
+      new Statement(stmt.command, backifier(stmt.command), stmt.start, stmt.end, stmt.file)
     stmt.args.map(backify).foreach(result.addArgument)
     result
   }
@@ -48,8 +47,7 @@ class ASTBackifier(backifier: Backifier) {
 
   def backify(ra: core.ReporterApp): ReporterApp = {
     val result =
-      new ReporterApp(backifier(ra.reporter),
-        ra.start, ra.end, ra.file)
+      new ReporterApp(ra.reporter, backifier(ra.reporter), ra.start, ra.end, ra.file)
     ra.args.map(backify).foreach(result.addArgument)
     result
   }

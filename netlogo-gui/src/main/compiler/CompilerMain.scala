@@ -41,7 +41,6 @@ private object CompilerMain {
       procdef.accept(new TaskVisitor)  // handle _reportertask
       procdef.accept(new LocalsVisitor)  // convert _let/_repeat to _locals
       procdef.accept(new SetVisitor)   // convert _set to specific setters
-      procdef.accept(new CarefullyVisitor)  // connect _carefully to _errormessage
       procdef.accept(new Optimizer(feStructureResults.program.dialect.is3D))   // do various code-improving rewrites
     }
     for(procdef <- defs) {
