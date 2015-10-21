@@ -286,6 +286,9 @@ object Syntax {
   def commandSyntax(right: Array[Int], dfault: Int): CoreSyntax =
     CoreSyntax.commandSyntax(right = right.toList, defaultOption = Some(dfault))
 
+  def commandSyntax(agentClassString: String): CoreSyntax =
+    CoreSyntax.commandSyntax(agentClassString = agentClassString)
+
   def commandSyntax(switches: Boolean): CoreSyntax =
     CoreSyntax.commandSyntax()
 
