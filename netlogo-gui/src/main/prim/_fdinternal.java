@@ -4,7 +4,7 @@ package org.nlogo.prim;
 
 import org.nlogo.agent.Turtle;
 import org.nlogo.api.AgentException;
-import org.nlogo.api.Let;
+import org.nlogo.core.Let;
 import org.nlogo.api.Syntax;
 import org.nlogo.nvm.Command;
 import org.nlogo.nvm.Context;

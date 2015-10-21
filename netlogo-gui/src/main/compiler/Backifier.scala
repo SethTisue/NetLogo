@@ -25,6 +25,7 @@ class Backifier(program: Program,
     "org.nlogo.prim.etc._fileclose"       -> "org.nlogo.prim.file._fileclose",
     "org.nlogo.prim.etc._fileread"        -> "org.nlogo.prim.file._fileread",
     "org.nlogo.prim.etc._filereadline"    -> "org.nlogo.prim.file._filereadline",
+    "org.nlogo.prim.etc._setplotyrange"   -> "org.nlogo.prim.plot._setplotyrange",
     "org.nlogo.prim.etc._clearallplots"   -> "org.nlogo.prim.plot._clearallplots",
     "org.nlogo.prim.etc._updateplots"     -> "org.nlogo.prim.plot._updateplots",
     "org.nlogo.prim.etc._plot"            -> "org.nlogo.prim.plot._plot",
@@ -61,14 +62,11 @@ class Backifier(program: Program,
       case core.prim._call(proc) =>
         new prim._call(procedures(proc.name))
       case core.prim._let(let) =>
-        // this probably won't work :P
-        val newLet = new org.nlogo.api.Let(let.name, c.token.start, c.token.end)
         val l = new prim._let()
-        l.let = newLet
+        l.let = let
         l
       case cc: core.prim._carefully =>
-        // this probably won't work :P
-        new prim._carefully()
+        new prim._carefully(cc.let)
       case _ =>
         fallback[core.Command, nvm.Command](c)
     }
@@ -81,9 +79,7 @@ class Backifier(program: Program,
     val result: nvm.Reporter = r match {
 
       case core.prim._letvariable(let) =>
-        // this probably won't work :P
-        val newLet = new org.nlogo.api.Let(let.name, r.token.start, r.token.end)
-        new prim._letvariable(newLet, let.name)
+        new prim._letvariable(let, let.name)
 
       case core.prim._const(value) =>
         value match {
@@ -132,9 +128,7 @@ class Backifier(program: Program,
         new prim._callreport(procedures(proc.name))
 
       case core.prim._errormessage(Some(let)) =>
-        // this probably won't work :P
-        // new prim._errormessage(let)
-        new prim._errormessage()
+        new prim._errormessage(let)
       case core.prim._errormessage(None) =>
         throw new Exception("Parse error - errormessage not matched with carefully")
 

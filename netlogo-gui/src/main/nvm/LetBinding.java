@@ -2,7 +2,7 @@
 
 package org.nlogo.nvm;
 
-import org.nlogo.api.Let;
+import org.nlogo.core.Let;
 
 strictfp class LetBinding {
   final Let let;

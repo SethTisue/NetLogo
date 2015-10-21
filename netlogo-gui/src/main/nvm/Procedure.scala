@@ -3,8 +3,8 @@
 package org.nlogo.nvm
 
 import org.nlogo.api
-import api.{ SourceOwner, Syntax, Let }
-import org.nlogo.core.{ FrontEndProcedure, Token, Syntax => CoreSyntax }
+import api.{ SourceOwner, Syntax }
+import org.nlogo.core.{ Let, FrontEndProcedure, Token, Syntax => CoreSyntax }
 
 class Procedure(
   val isReporter: Boolean,
@@ -46,7 +46,7 @@ class Procedure(
 
   def getTaskFormal(n: Int, token: Token): Let = {
     while (taskFormals.size < n)
-      taskFormals += new Let("?" + n, token.start, token.end)
+      taskFormals += new Let("?" + n)
     taskFormals.last
   }
 
