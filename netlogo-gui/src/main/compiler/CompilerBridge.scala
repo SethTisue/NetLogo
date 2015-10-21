@@ -12,13 +12,13 @@ import scala.collection.JavaConverters._
 object CompilerBridge {
   def apply(structureResults: StructureResults,
     extensionManager: ExtensionManager,
-    oldProcedures: java.util.Map[String, Procedure],
+    oldProcedures: ListMap[String, Procedure],
     topLevelDefs: Seq[core.ProcedureDefinition]): Seq[ProcedureDefinition] = {
       val newProcedures = structureResults.procedures.map {
         case (k, p) => k -> fromApiProcedure(p)
       }
       val backifier = new Backifier(
-        structureResults.program, extensionManager, ListMap(oldProcedures.asScala.toSeq: _*) ++ newProcedures)
+        structureResults.program, extensionManager, oldProcedures ++ newProcedures)
       val astBackifier = new ASTBackifier(backifier)
       (newProcedures.values, topLevelDefs).zipped.map(astBackifier.backify).toSeq
   }
