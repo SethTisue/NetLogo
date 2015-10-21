@@ -109,8 +109,7 @@ class Backifier(program: Program,
         }
 
       case core.prim._commandtask(argcount) =>
-        // this won't work until we have LambdaLifter :P
-        new prim._commandtask(null)  // LambdaLifter will fill in
+        new prim._commandtask(argcount)  // LambdaLifter will fill in
 
       case core.prim._reportertask(argcount) =>
         new prim._reportertask()

@@ -20,7 +20,17 @@ object CompilerBridge {
       val backifier = new Backifier(
         structureResults.program, extensionManager, oldProcedures ++ newProcedures)
       val astBackifier = new ASTBackifier(backifier)
-      (newProcedures.values, topLevelDefs).zipped.map(astBackifier.backify).toSeq
+      val procedures = (newProcedures.values, topLevelDefs).zipped.map(astBackifier.backify).toSeq
+      // lambda-lift
+      val allDefs = {
+        val taskNumbers = Iterator.from(1)
+        procedures.flatMap{procdef =>
+          val lifter = new LambdaLifter(taskNumbers)
+          procdef.accept(lifter)
+          procdef +: lifter.children
+        }
+      }
+      allDefs
   }
 
   private def fromApiProcedure(p: FrontEndProcedure): nvm.Procedure = {
