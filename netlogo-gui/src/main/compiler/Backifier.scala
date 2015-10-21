@@ -12,11 +12,26 @@ class Backifier(program: Program,
 
   val replacements = Map[String, String](
     "org.nlogo.prim.etc._plus"            -> "org.nlogo.prim._plus",
+    "org.nlogo.prim.etc._breedon"         -> "org.nlogo.prim._breedon",
+    "org.nlogo.prim.etc._isbreed"         -> "org.nlogo.prim._isbreed",
+    "org.nlogo.prim.etc._link"            -> "org.nlogo.prim._link",
+    "org.nlogo.prim.etc._linkwith"        -> "org.nlogo.prim._linkwith",
+    "org.nlogo.prim.etc._linkbreed"       -> "org.nlogo.prim._linkbreed",
     "org.nlogo.prim.etc._links"           -> "org.nlogo.prim._links",
     "org.nlogo.prim.etc._patch"           -> "org.nlogo.prim._patch",
     "org.nlogo.prim.etc._breedhere"       -> "org.nlogo.prim._breedhere",
     "org.nlogo.prim.etc._breedsingular"   -> "org.nlogo.prim._breedsingular",
+    "org.nlogo.prim.etc._createlinkfrom"  -> "org.nlogo.prim._createlinkfrom",
+    "org.nlogo.prim.etc._createlinkto"    -> "org.nlogo.prim._createlinkto",
     "org.nlogo.prim.etc._createlinkwith"  -> "org.nlogo.prim._createlinkwith",
+    "org.nlogo.prim.etc._createlinksto"   -> "org.nlogo.prim._createlinksto",
+    "org.nlogo.prim.etc._createlinksfrom" -> "org.nlogo.prim._createlinksfrom",
+    "org.nlogo.prim.etc._createlinkfrom"  -> "org.nlogo.prim._createlinkfrom",
+    "org.nlogo.prim.etc._mylinks"         -> "org.nlogo.prim._mylinks",
+    "org.nlogo.prim.etc._myinlinks"       -> "org.nlogo.prim._myinlinks",
+    "org.nlogo.prim.etc._myoutlinks"      -> "org.nlogo.prim._myoutlinks",
+    "org.nlogo.prim.etc._inlinkneighbors" -> "org.nlogo.prim._inlinkneighbors",
+    "org.nlogo.prim.etc._inradius"        -> "org.nlogo.prim._inradius",
     "org.nlogo.prim.etc._fileexists"      -> "org.nlogo.prim.file._fileexists",
     "org.nlogo.prim.etc._filedelete"      -> "org.nlogo.prim.file._filedelete",
     "org.nlogo.prim.etc._fileopen"        -> "org.nlogo.prim.file._fileopen",
@@ -30,7 +45,10 @@ class Backifier(program: Program,
     "org.nlogo.prim.etc._updateplots"     -> "org.nlogo.prim.plot._updateplots",
     "org.nlogo.prim.etc._plot"            -> "org.nlogo.prim.plot._plot",
     "org.nlogo.prim.etc._setupplots"      -> "org.nlogo.prim.plot._setupplots",
-    "org.nlogo.prim.etc._createlinkswith" -> "org.nlogo.prim._createlinkswith"
+    "org.nlogo.prim.etc._setcurrentplot"  -> "org.nlogo.prim.plot._setcurrentplot",
+    "org.nlogo.prim.etc._createlinkswith" -> "org.nlogo.prim._createlinkswith",
+    "org.nlogo.prim.etc._useryesorno"     -> "org.nlogo.prim.gui._useryesorno",
+    "org.nlogo.prim.etc._useroneof"       -> "org.nlogo.prim.gui._useroneof"
   )
 
   private def backifyName(name: String): String = {
