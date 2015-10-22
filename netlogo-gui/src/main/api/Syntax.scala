@@ -289,31 +289,16 @@ object Syntax {
   def commandSyntax(agentClassString: String): CoreSyntax =
     CoreSyntax.commandSyntax(agentClassString = agentClassString)
 
-  def commandSyntax(switches: Boolean): CoreSyntax =
-    CoreSyntax.commandSyntax()
-
-  def commandSyntax(agentClassString: String, switches: Boolean): CoreSyntax =
-    CoreSyntax.commandSyntax(agentClassString = agentClassString)
-
-  // for use by commands
-  def commandSyntax(right: Array[Int], switches: Boolean): CoreSyntax =
-    CoreSyntax.commandSyntax(right = right.toList)
-
   // for use by commands
   def commandSyntax(right: Array[Int], agentClassString: String): CoreSyntax =
     CoreSyntax.commandSyntax(right = right.toList, agentClassString = agentClassString)
 
   // for use by commands
-  def commandSyntax(right: Array[Int], agentClassString: String, switches: Boolean): CoreSyntax =
-    CoreSyntax.commandSyntax(right = right.toList, agentClassString = agentClassString)
-
-  // for use by commands
-  def commandSyntax(right: Array[Int], agentClassString: String, blockAgentClassString: String, switches: Boolean): CoreSyntax =
+  def commandSyntax(right: Array[Int], agentClassString: String, blockAgentClassString: String): CoreSyntax =
     CoreSyntax.commandSyntax(right = right.toList, agentClassString = agentClassString, blockAgentClassString = Option(blockAgentClassString))
 
   // for use by commands
-  def commandSyntax(right: Array[Int], dfault: Int, agentClassString: String,
-                    blockAgentClassString: String, switches: Boolean): CoreSyntax =
+  def commandSyntax(right: Array[Int], dfault: Int, agentClassString: String, blockAgentClassString: String): CoreSyntax =
     CoreSyntax.commandSyntax(right = right.toList, defaultOption = Some(dfault), agentClassString = agentClassString,
            blockAgentClassString = Option(blockAgentClassString))
 

@@ -13,11 +13,12 @@ public final strictfp class _waitinternal extends Command {
 
   public _waitinternal(Let let) {
     this.let = let;
+    this.switches = true;
   }
 
   @Override
   public org.nlogo.core.Syntax syntax() {
-    return Syntax.commandSyntax(true);
+    return Syntax.commandSyntax();
   }
 
   @Override

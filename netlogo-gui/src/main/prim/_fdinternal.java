@@ -18,15 +18,17 @@ public final strictfp class _fdinternal
 
   public _fdinternal(_fd original) {
     let = original.let;
+    this.switches = true;
   }
 
   public _fdinternal(_bk original) {
     let = original.let;
+    this.switches = true;
   }
 
   @Override
   public org.nlogo.core.Syntax syntax() {
-    return Syntax.commandSyntax("-T--", true);
+    return Syntax.commandSyntax("-T--");
   }
 
   @Override
