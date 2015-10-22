@@ -3,16 +3,17 @@
 package org.nlogo.compiler
 
 import org.scalatest.FunSuite
-import org.nlogo.api.{ DummyExtensionManager, Version }
+import org.nlogo.api.{ DummyExtensionManager, Version, ThreeDProgram }
 import org.nlogo.core.Program
 import org.nlogo.nvm.Procedure
-import org.nlogo.core.DummyCompilationEnvironment
+import org.nlogo.core.{ DummyCompilationEnvironment, NetLogoCore }
 
 class TestGenerator extends FunSuite {
 
   val program = {
     import collection.JavaConverters._
-    Program.empty().copy(userGlobals = Seq("GLOB1"))
+    val d = if (Version.is3D) ThreeDProgram else NetLogoCore
+    Program.fromDialect(d).copy(userGlobals = Seq("GLOB1"))
   }
   def condense(disassembly: String) =
     disassembly.split("\n").map(_.trim).mkString("\n")
