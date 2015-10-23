@@ -43,6 +43,5 @@ trait FrontEndInterface {
         subprogram: Boolean = true,
         oldProcedures: ProceduresMap = NoProcedures,
         extensionManager: ExtensionManager = new DummyExtensionManager,
-        compilationEnvironment: CompilationEnvironment = new DummyCompilationEnvironment)
-      : FrontEndInterface.FrontEndResults
+        compilationEnvironment: CompilationEnvironment = new DummyCompilationEnvironment): FrontEndInterface.FrontEndResults
 }

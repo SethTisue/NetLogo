@@ -341,5 +341,4 @@ class FrontEndTests extends FunSuite {
     duplicateName("to a6 [b] let b 5 end",
       "There is already a local variable here called B")
   }
-
 }

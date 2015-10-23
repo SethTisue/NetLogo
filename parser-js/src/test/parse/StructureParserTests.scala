@@ -19,8 +19,7 @@ object StructureParserTests extends TestSuite {
 
     def compile(source: String): StructureResults =
       new StructureParser(tokenizer.tokenizeString(source).map(Namer0),
-        None, core.StructureResults.empty)
-        .parse(false)
+        None, core.StructureResults.empty).parse(false)
 
     def expectError(source: String, error: String) {
       val e = intercept[CompilerException] {
