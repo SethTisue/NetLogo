@@ -197,7 +197,7 @@ public final strictfp class World3D
 
   @Override
   public Program newProgram() {
-    return org.nlogo.core.Program$.MODULE$.fromDialect(org.nlogo.api.ThreeDProgram$.MODULE$);
+    return org.nlogo.core.Program$.MODULE$.fromDialect(org.nlogo.api.NetLogoThreeDDialect$.MODULE$);
   }
 
   @Override

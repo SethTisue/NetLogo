@@ -1,0 +1,11 @@
+C beep gui._beep
+C face-nowrap etc._facenowrap
+C facexy-nowrap etc._facexynowrap
+R behaviorspace-experiment-name etc._behaviorspaceexperimentname
+R behaviorspace-run-number etc._behaviorspacerunnumber
+R distance-nowrap etc._distancenowrap
+R distancexy-nowrap etc._distancexynowrap
+R in-cone-nowrap etc._inconenowrap
+R in-radius-nowrap etc._inradiusnowrap
+R towards-nowrap etc._towardsnowrap
+R towardsxy-nowrap etc._towardsxynowrap
