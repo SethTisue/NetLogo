@@ -34,7 +34,7 @@ import scala.language.postfixOps
  * <p>See the "Controlling" section of the NetLogo User Manual
  * for example code.
  */
-object App{
+object App extends scala.App {
 
   private val pico = new Pico()
   // all these guys are assigned in main. yuck
@@ -45,6 +45,8 @@ object App{
   private var commandLineMagic: String = null
   private var commandLineURL: String = null
   private var loggingName: String = null
+
+  nlMain(args)
 
   /**
    * Should be called once at startup to create the application and
@@ -58,7 +60,7 @@ object App{
    * @param args Should be empty. (Passing non-empty arguments
    *             is not currently documented.)
    */
-  def main(args:Array[String]){
+  def nlMain(args:Array[String]){
     // on Mac OS X 10.5, we have to explicitly ask for the Quartz
     // renderer. perhaps we should eventually switch to the Sun
     // renderer since that's the new default, but for now, the
