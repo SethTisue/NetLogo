@@ -128,19 +128,6 @@ do
   fi
 done
 
-# fail early if JLink.jar is missing
-if [ ! -f Mathematica-Link/Makefile ]; then
-  git submodule update --init Mathematica-Link
-fi
-if [ -f ~/nl.41/Mathematica\ Link/JLink.jar ]; then
-  cp ~/nl.41/Mathematica\ Link/JLink.jar Mathematica-Link
-fi
-if [ ! -f Mathematica-Link/JLink.jar ]; then
-  echo "Mathematica-Link/JLink.jar missing. copy it from a Mathematica installation (or the 4.1 branch, if you're a CCL'er)"
-  echo "(it's needed to compile the link, but we don't have a license to distribute it)"
-  exit 1
-fi
-
 # compile, build jars etc.
 cd extensions
 for FOO in *
@@ -199,11 +186,6 @@ $CP -p \
   ../../lib_managed/jars/org.apache.httpcomponents/httpmime/httpmime-4.2.jar \
   lib
 $CP -p $SCALA_JAR lib/scala-library.jar
-
-# Mathematica link stuff
-$CP -rp ../../Mathematica-Link Mathematica\ Link
-(cd Mathematica\ Link; NETLOGO=.. $MAKE) || exit 1
-$RM Mathematica\ Link/JLink.jar
 
 # stuff version number etc. into readme
 $PERL -pi -e "s/\@\@\@VERSION\@\@\@/$VERSION/g" readme.md
@@ -495,7 +477,6 @@ $FIND $COMPRESSEDVERSION/applet \( -name .DS_Store -or -name .gitignore -or -pat
   | $XARGS -0 $RM -rf
 $RM -rf $COMPRESSEDVERSION/applet/*/classes
 $CP -rp ../models/Code\ Examples/GIS/data $COMPRESSEDVERSION/applet
-$CP -p ../Mathematica-Link/NetLogo-Mathematica\ Tutorial.pdf $COMPRESSEDVERSION/docs
 $CP -rp ../docs/scaladoc $COMPRESSEDVERSION/docs
 
 # stuff version number and date into web page

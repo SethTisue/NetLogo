@@ -48,7 +48,6 @@ for{path <- Process("find src -name *.java").lines
   // this isn't the absolutely correct check to be doing, but it seems like a good enough heuristic
   // for now - ST 5/8/03
   if(io.Source.fromFile(path).getLines
-     .filter(!_.containsSlice("Mathematica"))
      .filter(!_.containsSlice("DummyMath"))
      .exists(_.matches(""".*[^t]Math.*""")))
     println("needs StrictMath: " + path)

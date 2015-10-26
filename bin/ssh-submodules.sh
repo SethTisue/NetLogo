@@ -9,8 +9,6 @@
 
 git config submodule.models.url git@github.com:/NetLogo/models.git
 
-git config submodule.Mathematica-Link.url git@github.com:/NetLogo/Mathematica-Link.git
-
 git config submodule.extensions/array.url git@github.com:/NetLogo/Array-Extension.git
 git config submodule.extensions/bitmap.url git@github.com:/NetLogo/Bitmap-Extension.git
 git config submodule.extensions/gis.url git@github.com:/NetLogo/GIS-Extension.git
@@ -28,8 +26,6 @@ git config submodule.extensions/table.url git@github.com:/NetLogo/Table-Extensio
 # which is hard to remember to do.  So we bring out the big hammer:
 
 ( cd models; git remote set-url origin git@github.com:/NetLogo/models.git )
-
-( cd Mathematica-Link; git remote set-url origin git@github.com:/NetLogo/Mathematica-Link.git )
 
 ( cd extensions/array; git remote set-url origin git@github.com:/NetLogo/Array-Extension.git )
 ( cd extensions/bitmap; git remote set-url origin git@github.com:/NetLogo/Bitmap-Extension.git )

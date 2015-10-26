@@ -32,7 +32,6 @@ htmldoc \
   modelingcommons.html \
   logging.html \
   controlling.html \
-  mathematica.html \
   3d.html \
   extensions.html \
   arraystables.html \
